@@ -1,0 +1,768 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.NavigationViewPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <!--<VisualStateManager.VisualStateGroups>
+        <VisualStateGroup>
+            --><!-- Default --><!--
+            <VisualState x:Name="NarrowState">
+                <VisualState.Setters>
+                    <Setter Target="OrientationSwitchNavView.PaneDisplayMode"
+                        Value="LeftMinimal"/>
+                </VisualState.Setters>
+            </VisualState>
+
+            --><!-- Wide --><!--
+            <VisualState x:Name="WideState">
+                <VisualState.StateTriggers>
+                    <AdaptiveTrigger MinWindowWidth="640"/>
+                </VisualState.StateTriggers>
+                <VisualState.Setters>
+                    <Setter Target="OrientationSwitchNavView.PaneDisplayMode"
+                        Value="Top"/>
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>-->
+
+    <StackPanel Spacing="6">
+        <controls:GallerySample HeaderTitle="Left NavigationView" MinHeight="500">
+            <controls:GallerySample.Sample>
+                <Grid RowSpacing="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock TextWrapping="WrapWholeWords">If you have five or more equally important navigation categories that should prominently appear on larger window widths, consider using a left navigation pane.</TextBlock>
+                    <NavigationView Grid.Row="1" x:Name="LeftNavView" SelectionChanged="LeftNavView_SelectionChanged" PaneDisplayMode="Auto">
+                        <NavigationView.MenuItems>
+                            <NavigationViewItem Icon="Home" IsSelected="True" Content="Home"/>
+                            <NavigationViewItem Icon="BrowsePhotos" Content="Photos"/>
+                            <NavigationViewItem Icon="Document" Content="Documents"/>
+                            <NavigationViewItem Icon="AllApps" Content="Applications"/>
+                            <NavigationViewItem Icon="Video" Content="Videos"/>
+                        </NavigationView.MenuItems>
+                    </NavigationView>
+                </Grid>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Grid RowSpacing="6"&gt;
+    &lt;Grid.RowDefinitions&gt;
+        &lt;RowDefinition Height="Auto"/&gt;
+        &lt;RowDefinition Height="*"/&gt;
+    &lt;/Grid.RowDefinitions&gt;
+                    
+    &lt;TextBlock TextWrapping="WrapWholeWords"&gt;If you have five or more equally important navigation categories that should prominently appear on larger window widths, consider using a left navigation pane.&lt;/TextBlock&gt;
+    &lt;NavigationView Grid.Row="1" x:Name="LeftNavView" SelectionChanged="LeftNavView_SelectionChanged"&gt;
+        &lt;NavigationView.MenuItems&gt;
+            &lt;NavigationViewItem Icon="Home" IsSelected="True" Content="Home"/&gt;
+            &lt;NavigationViewItem Icon="BrowsePhotos" Content="Photos"/&gt;
+            &lt;NavigationViewItem Icon="Document" Content="Documents"/&gt;
+            &lt;NavigationViewItem Icon="AllApps" Content="Applications"/&gt;
+            &lt;NavigationViewItem Icon="Video" Content="Videos"/&gt;
+        &lt;/NavigationView.MenuItems&gt;
+    &lt;/NavigationView&gt;
+&lt;/Grid&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private void LeftNavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+{
+    LeftNavView.Header = (LeftNavView.SelectedItem as NavigationViewItem)!.Content.ToString() + " Page";
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="Top NavigationView" MinHeight="300">
+            <controls:GallerySample.Sample>
+                <Grid RowSpacing="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock TextWrapping="WrapWholeWords">If you have equally important navigation categories that should be de-emphasized relative to the content of your app, consider using a top navigation pane.</TextBlock>
+                    <NavigationView Grid.Row="1" x:Name="TopNavView" SelectionChanged="TopNavView_SelectionChanged" PaneDisplayMode="Top">
+                        <NavigationView.MenuItems>
+                            <NavigationViewItem Icon="ViewAll" IsSelected="True" Content="All"/>
+                            <NavigationViewItem Icon="Mail" Content="Unread"/>
+                            <NavigationViewItem Icon="Important" Content="Important"/>
+                        </NavigationView.MenuItems>
+                    </NavigationView>
+                </Grid>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Grid RowSpacing="6"&gt;
+    &lt;Grid.RowDefinitions&gt;
+        &lt;RowDefinition Height="Auto"/&gt;
+        &lt;RowDefinition Height="*"/&gt;
+    &lt;/Grid.RowDefinitions&gt;
+                    
+    &lt;TextBlock TextWrapping="WrapWholeWords"&gt;If you have equally important navigation categories that should be de-emphasized relative to the content of your app, consider using a top navigation pane.&lt;/TextBlock&gt;
+    &lt;NavigationView Grid.Row="1" x:Name="TopNavView" SelectionChanged="TopNavView_SelectionChanged" PaneDisplayMode="Top"&gt;
+        &lt;NavigationView.MenuItems&gt;
+            &lt;NavigationViewItem Icon="ViewAll" IsSelected="True" Content="All"/&gt;
+            &lt;NavigationViewItem Icon="Mail" Content="Unread"/&gt;
+            &lt;NavigationViewItem Icon="Important" Content="Important"/&gt;
+        &lt;/NavigationView.MenuItems&gt;
+    &lt;/NavigationView&gt;
+&lt;/Grid&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private void TopNavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+{
+    if (args.IsSettingsSelected)
+        TopNavView.Header = "Settings Page";
+    else
+        TopNavView.Header = (TopNavView.SelectedItem as NavigationViewItem)!.Content.ToString() + " Mail";
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+
+        <!--<controls:GallerySample HeaderTitle="NavigationView that switches pane orientation based on window width" MinHeight="500">
+            <controls:GallerySample.Sample>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock TextWrapping="WrapWholeWords" 
+               Margin="0,0,0,12"
+               Text="If you have equally important navigation categories and limited app content space, consider using a top navigation pane on larger window widths and a minimal left navigation pane on smaller window widths." />
+
+                    <NavigationView x:Name="OrientationSwitchNavView" Grid.Row="1">
+                        <NavigationView.MenuItems>
+                            <NavigationViewItem Icon="ViewAll" IsSelected="True" Content="All"/>
+                            <NavigationViewItem Icon="Mail" Content="Unread"/>
+                            <NavigationViewItem Icon="Important" Content="Important"/>
+                        </NavigationView.MenuItems>
+                    </NavigationView>
+                </Grid>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Grid&gt;
+    &lt;Grid.RowDefinitions&gt;
+        &lt;RowDefinition Height="Auto" /&gt;
+        &lt;RowDefinition Height="*" /&gt;
+    &lt;/Grid.RowDefinitions&gt;
+                    
+    &lt;VisualStateManager.VisualStateGroups&gt;
+        &lt;VisualStateGroup&gt;
+             &lt;VisualState.StateTriggers&gt;
+                &lt;AdaptiveTrigger MinWindowWidth="{x:Bind OrientationSwitchNavView.CompactModeThresholdWidth}" /&gt;
+            &lt;/VisualState.StateTriggers&gt;
+                    
+            &lt;VisualState.Setters&gt;
+                &lt;Setter Target="OrientationSwitchNavView.PaneDisplayMode" Value="Top"/&gt;
+            &lt;/VisualState.Setters&gt;
+        &lt;/VisualStateGroup&gt;
+    &lt;/VisualStateManager.VisualStateGroups&gt;
+    
+    &lt;TextBlock TextWrapping=WrapWholeWords"
+        Margin="0,0,0,12"
+        Text="If you have equally important navigation categories and limited app content space, consider using a top navigation pane on larger window widths and a minimal left navigation pane on smaller window widths."/&gt;
+                    
+    &lt;NavigationView x:Name="OrientationSwitchNavView" Grid.Row="1"&gt;
+        &lt;NavigationView.MenuItems&gt;
+            &lt;NavigationViewItem Icon="ViewAll" IsSelected="True" Content="All"/&gt;
+            &lt;NavigationViewItem Icon="Mail" Content="Unread"/&gt;
+            &lt;NavigationViewItem Icon="Important" Content="Important"/&gt;
+        &lt;/NavigationView.MenuItems&gt;
+    &lt;/NavigationView&gt;
+&lt;/Grid&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>-->
+
+        <controls:GallerySample HeaderTitle="Tying selection and focus - Tabs" MinHeight="600" UrlNameOverride="tying-selection-and-focus-tabs">
+            <controls:GallerySample.Sample>
+                <Grid RowSpacing="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock TextWrapping="WrapWholeWords"
+           Text="For the tabs pattern, ensure that you unify selection and focus by setting the SelectionFollowsFocus property to Enabled. If using a Frame to swap out content, then navigating between items shouldn't be recorded into the Frame's navigation stack. Please see the C# source code (by clicking the Source button) to understand how to do this." />
+
+                    <NavigationView Grid.Row="1" PaneDisplayMode="Top" SelectionFollowsFocus="Enabled" x:Name="TabsNavViewSample"
+                                    SelectionChanged="TabsNavViewSample_SelectionChanged" IsBackButtonVisible="Collapsed">
+                        <NavigationView.MenuItems>
+                            <NavigationViewItem Content="Page 1" Icon="Home" Tag="SamplePage1"/>
+                            <NavigationViewItem Content="Page 2" Icon="Account" Tag="SamplePage2"/>
+                            <NavigationViewItem Content="Page 3" Icon="Bookmarks" Tag="SamplePage3"/>
+                        </NavigationView.MenuItems>
+
+                        <Frame x:Name="TabsNavViewSampleFrame"/>
+                    </NavigationView>
+                </Grid>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Grid RowSpacing="6"&gt;
+    &lt;Grid.RowDefinitions&gt;
+        &lt;RowDefinition Height="Auto"/&gt;
+        &lt;RowDefinition Height="*"/&gt;
+    &lt;/Grid.RowDefinitions&gt;
+                    
+    &lt;TextBlock TextWrapping="WrapWholeWords" 
+        Text="For the tabs pattern, ensure that you unify selection and focus by setting the SelectionFollowsFocus property to Enabled. If using a Frame to swap out content, then navigating between items shouldn't be recorded into the Frame's navigation stack. Please see the C# source code (by clicking the Source button) to understand how to do this." /&gt;
+                    
+    &lt;NavigationView Grid.Row="1" PaneDisplayMode="Top" SelectionFollowsFocus="Enabled" x:Name="TabsNavViewSample"
+        SelectionChanged="TabsNavViewSample_SelectionChanged" IsBackButtonVisible="Collapsed"&gt;
+        &lt;NavigationView.MenuItems&gt;
+            &lt;NavigationViewItem Content="Page 1" Icon="Home" Tag="SamplePage1"/&gt;
+            &lt;NavigationViewItem Content="Page 2" Icon="Account" Tag="SamplePage2"/&gt;
+            &lt;NavigationViewItem Content="Page 3" Icon="Bookmarks" Tag="SamplePage3"/&gt;
+        &lt;/NavigationView.MenuItems&gt;
+                    
+        &lt;Frame x:Name="TabsNavViewSampleFrame"/&gt;
+    &lt;/NavigationView&gt;
+&lt;/Grid&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private void TabsNavViewSample_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+{
+    var options = new FrameNavigationOptions();
+    options.TransitionInfoOverride = args.RecommendedNavigationTransitionInfo;
+    options.IsNavigationStackEnabled = false; // DON'T ADD THE PAGE TO THE NAVIGATION STACK
+
+    Type? pageType = null;
+
+    if (args.IsSettingsSelected)
+        pageType = typeof(SampleSettingsPage);
+    else
+    {
+        var navItem = TabsNavViewSample.SelectedItem as NavigationViewItem;
+
+        if (navItem != null)
+        {
+            if (navItem.Tag is string s)
+            {
+                pageType = Type.GetType("UWPGallery.SamplePages." + s);
+            }
+        }
+    }
+
+    if (pageType != null)
+    {
+        TabsNavViewSampleFrame.NavigateToType(pageType, null, options);
+    }
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="Data Binding" MinHeight="550">
+            <controls:GallerySample.Sample>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock TextWrapping="WrapWholeWords" 
+                           Margin="0,0,0,12"
+                           Text="When data binding, use the MenuItemsSource property to bind to an observable collection of items, and do not set the MenuItems property. In addition, set the MenuItemTemplate property and use a NavigationViewItem as the data template. If you wish to bind to the header content as well, use data template selectors via the MenuItemTemplateSelector property." />
+
+                    <NavigationView x:Name="DataBindNavViewSample" Grid.Row="1"
+                                            MenuItemsSource="{x:Bind NavViewDataBindCollection, Mode=OneWay}" 
+                                            IsTabStop="False" SelectionChanged="DataBindNavViewSample_SelectionChanged">
+                        <NavigationView.MenuItemTemplate>
+                            <DataTemplate x:DataType="local:MyNavViewDataBindItem">
+                                <NavigationViewItem Content="{x:Bind Text}" Icon="{x:Bind GetRandomIcon(), Mode=OneTime}"/>
+                            </DataTemplate>
+                        </NavigationView.MenuItemTemplate>
+                        
+                        <Frame Margin="0,0,0,0" x:Name="contentFrame4" />
+                    </NavigationView>
+                </Grid>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Grid&gt;
+    &lt;Grid.RowDefinitions&gt;
+        &lt;RowDefinition Height="Auto" /&gt;
+        &lt;RowDefinition Height="*" /&gt;
+    &lt;/Grid.RowDefinitions&gt;
+
+    &lt;TextBlock TextWrapping="WrapWholeWords" 
+            Margin="0,0,0,12"
+            Text="When data binding, use the MenuItemsSource property to bind to an observable collection of items, and do not set the MenuItems property. In addition, set the MenuItemTemplate property and use a NavigationViewItem as the data template. If you wish to bind to the header content as well, use data template selectors via the MenuItemTemplateSelector property." /&gt;
+
+    &lt;NavigationView x:Name="DataBindNavViewSample" Grid.Row="1"
+                            MenuItemsSource="{x:Bind NavViewDataBindCollection, Mode=OneWay}" 
+                            IsTabStop="False" SelectionChanged="DataBindNavViewSample_SelectionChanged"&gt;
+        &lt;NavigationView.MenuItemTemplate&gt;
+            &lt;DataTemplate x:DataType="local:MyNavViewDataBindItem"&gt;
+                &lt;NavigationViewItem Content="{x:Bind Text}" Icon="{x:Bind GetRandomIcon(), Mode=OneTime}"/&gt;
+            &lt;/DataTemplate&gt;
+        &lt;/NavigationView.MenuItemTemplate&gt;
+                        
+        &lt;Frame Margin="0,0,0,0" x:Name="contentFrame4" /&gt;
+    &lt;/NavigationView&gt;
+&lt;/Grid&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+            
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+             
+public ObservableCollection&lt;MyNavViewDataBindItem&gt; NavViewDataBindCollection { get; set; } = [];
+
+public NavigationViewPage()
+{
+    InitializeComponent();
+
+    for (int i = 1; i &lt; 6; i++)
+    {
+        var item = new MyNavViewDataBindItem();
+        item.Text = $"Data-Bound Item {i}";
+        item.Index = i;
+
+        NavViewDataBindCollection.Add(item);
+    }
+}
+                    
+private void DataBindNavViewSample_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+{
+    if (args.IsSettingsSelected)
+    {
+        contentFrame4.Navigate(typeof(SampleSettingsPage));
+    }
+    else
+    {
+        var selectedItem = (MyNavViewDataBindItem)args.SelectedItem;
+        string pageName = "UWPGallery.SamplePages." + $"SamplePage{selectedItem.Index}";
+        Type? pageType = Type.GetType(pageName);
+        contentFrame4.Navigate(pageType);
+    }
+}
+                    
+public class MyNavViewDataBindItem
+{
+    public string Text;
+    public int Index;
+
+    public SymbolIcon GetRandomIcon()
+    {
+        var icons = Enum.GetValues&lt;Symbol&gt;();
+
+        var index = Random.Shared.Next(0, icons.Length);
+
+        return new SymbolIcon(icons.ElementAt(index));
+    }
+
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="Item Headers" MinHeight="500">
+            <controls:GallerySample.Sample>
+                <Grid RowSpacing="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock TextWrapping="WrapWholeWords">NavigationView supports item headers. Item headers only show either when the NavigationView's PaneDisplayMode is set to Top, or when the NavigationView is on the left and the pane is open. When the pane is collapsed in Left mode, the item headers still act as "spacers", but they don't show their label.</TextBlock>
+
+                    <NavigationView x:Name="ItemHeadersSampleNavView" Grid.Row="1" IsSettingsVisible="False"
+                                    SelectionChanged="ItemHeadersSampleNavView_SelectionChanged" ItemInvoked="ItemHeadersSampleNavView_ItemInvoked">
+                        <NavigationView.MenuItems>
+                            <NavigationViewItem Content="Home" Icon="Home" Tag="SamplePage5"/>
+                            <NavigationViewItem Content="My Account" Icon="Account" Tag="SamplePage2"/>
+                            <NavigationViewItemHeader Content="Tools"/>
+                            <NavigationViewItem Content="Settings" Icon="Setting" Tag="SampleSettingsPage"/>
+                            <NavigationViewItem Content="Move to Top" Icon="Up" x:Name="ItemHeadersSampleNavViewRotateItem" SelectsOnInvoked="False" Tag="NavViewRotate"/>
+                            <NavigationViewItemHeader Content="My Item Header"/>
+                            <NavigationViewItem Content="My Item" Icon="Audio" Tag="SamplePage3"/>
+                        </NavigationView.MenuItems>
+
+                        <Frame x:Name="ItemHeadersSampleNavViewFrame"/>
+                    </NavigationView>
+                </Grid>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Grid RowSpacing="6"&gt;
+    &lt;Grid.RowDefinitions&gt;
+        &lt;RowDefinition Height="Auto"/&gt;
+        &lt;RowDefinition Height="*"/&gt;
+    &lt;/Grid.RowDefinitions&gt;
+
+    &lt;TextBlock TextWrapping="WrapWholeWords"&gt;NavigationView supports item headers. Item headers only show either when the NavigationView's PaneDisplayMode is set to Top, or when the NavigationView is on the left and the pane is open. When the pane is collapsed in Left mode, the item headers still act as "spacers", but they don't show their label.&lt;/TextBlock&gt;
+
+    &lt;NavigationView x:Name="ItemHeadersSampleNavView" Grid.Row="1" IsSettingsVisible="False"
+                    SelectionChanged="ItemHeadersSampleNavView_SelectionChanged" ItemInvoked="ItemHeadersSampleNavView_ItemInvoked"&gt;
+        &lt;NavigationView.MenuItems&gt;
+            &lt;NavigationViewItem Content="Home" Icon="Home" Tag="SamplePage5"/&gt;
+            &lt;NavigationViewItem Content="My Account" Icon="Account" Tag="SamplePage2"/&gt;
+            &lt;NavigationViewItemHeader Content="Tools"/&gt;
+            &lt;NavigationViewItem Content="Settings" Icon="Setting" Tag="SampleSettingsPage"/&gt;
+            &lt;NavigationViewItem Content="Move to Top" Icon="Up" x:Name="ItemHeadersSampleNavViewRotateItem" SelectsOnInvoked="False" Tag="NavViewRotate"/&gt;
+            &lt;NavigationViewItemHeader Content="My Item Header"/&gt;
+            &lt;NavigationViewItem Content="My Item" Icon="Audio" Tag="SamplePage3"/&gt;
+        &lt;/NavigationView.MenuItems&gt;
+
+        &lt;Frame x:Name="ItemHeadersSampleNavViewFrame"/&gt;
+    &lt;/NavigationView&gt;
+&lt;/Grid&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private void ItemHeadersSampleNavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+{
+    if (ItemHeadersSampleNavView.SelectedItem is NavigationViewItem item)
+    {
+        if (item.Tag is string s)
+        {
+            string pageName = "UWPGallery.SamplePages." + s;
+            Type? pageType = Type.GetType(pageName);
+
+            if (pageType != null)
+            {
+                ItemHeadersSampleNavViewFrame.Navigate(pageType, null, args.RecommendedNavigationTransitionInfo);
+            }
+        }
+    }
+}
+                    
+private void ItemHeadersSampleNavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+{
+    if (args.InvokedItemContainer.Tag.ToString() == "NavViewRotate")
+    {
+        if (ItemHeadersSampleNavView.PaneDisplayMode == NavigationViewPaneDisplayMode.Top)
+        {
+            ItemHeadersSampleNavViewRotateItem.Content = "Move to Top";
+            ItemHeadersSampleNavViewRotateItem.Icon = new SymbolIcon(Symbol.Up);
+
+            ItemHeadersSampleNavView.PaneDisplayMode = NavigationViewPaneDisplayMode.Auto;
+        }
+        else
+        {
+            ItemHeadersSampleNavViewRotateItem.Content = "Move to Left";
+            ItemHeadersSampleNavViewRotateItem.Icon = new SymbolIcon(Symbol.Back);
+
+            ItemHeadersSampleNavView.PaneDisplayMode = NavigationViewPaneDisplayMode.Top;
+        }
+    }
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="Back Navigation" MinHeight="500">
+            <controls:GallerySample.Sample>
+                <Grid RowSpacing="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock TextWrapping="WrapWholeWords">NavigationView provides a built-in back button by default. You can disable this button with the IsBackEnabled property, or hide it using the IsBackButtonVisible property. When using a Frame to swap out content, you should bind the IsBackEnabled property to the CanGoBack property of the Frame and, inside the BackRequested event, call Frame.GoBack. Then, in the Frame.Navigated event, reselect the appropirate item in the NavigationView and make sure to prevent the SelectionChanged event from firing while doing so.</TextBlock>
+
+                    <NavigationView Grid.Row="1" x:Name="BackNavigSampleNavView"
+                                    IsBackEnabled="{x:Bind BackNavigSampleNavViewFrame.CanGoBack, Mode=OneWay}"
+                                    BackRequested="BackNavigSampleNavView_BackRequested"
+                                    SelectionChanged="BackNavigSampleNavView_SelectionChanged">
+
+                        <NavigationView.MenuItems>
+                            <NavigationViewItem Icon="Home" x:Name="BackNavigSampleHomeItem" Content="Home" Tag="1"/>
+                            <NavigationViewItem Icon="Account" x:Name="BackNavigSampleAccountItem" Content="My Account" Tag="2"/>
+                            <NavigationViewItem Icon="Edit" Content="Tools" x:Name="BackNavigSampleToolsItem" Tag="5"/>
+                        </NavigationView.MenuItems>
+                        
+                        <Frame x:Name="BackNavigSampleNavViewFrame" Navigated="BackNavigSampleNavViewFrame_Navigated"/>
+                    </NavigationView>
+                </Grid>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Grid RowSpacing="6"&gt;
+    &lt;Grid.RowDefinitions&gt;
+        &lt;RowDefinition Height="Auto"/&gt;
+        &lt;RowDefinition Height="*"/&gt;
+    &lt;/Grid.RowDefinitions&gt;
+    &lt;TextBlock TextWrapping="WrapWholeWords">NavigationView provides a built-in back button by default. You can disable this button with the IsBackEnabled property, or hide it using the IsBackButtonVisible property. When using a Frame to swap out content, you should bind the IsBackEnabled property to the CanGoBack property of the Frame and, inside the BackRequested event, call Frame.GoBack. Then, in the Frame.Navigated event, reselect the appropirate item in the NavigationView and make sure to prevent the SelectionChanged event from firing while doing so.&lt;/TextBlock&gt;
+
+    &lt;NavigationView Grid.Row="1" x:Name="BackNavigSampleNavView"
+                    IsBackEnabled="{x:Bind BackNavigSampleNavViewFrame.CanGoBack, Mode=OneWay}"
+                    BackRequested="BackNavigSampleNavView_BackRequested"
+                    SelectionChanged="BackNavigSampleNavView_SelectionChanged"&gt;
+
+        &lt;NavigationView.MenuItems&gt;
+            &lt;NavigationViewItem Icon="Home" x:Name="BackNavigSampleHomeItem" Content="Home" Tag="1"/&gt;
+            &lt;NavigationViewItem Icon="Account" x:Name="BackNavigSampleAccountItem" Content="My Account" Tag="2"/&gt;
+            &lt;NavigationViewItem Icon="Edit" Content="Tools" x:Name="BackNavigSampleToolsItem" Tag="5"/&gt;
+        &lt;/NavigationView.MenuItems&gt;
+                        
+        &lt;Frame x:Name="BackNavigSampleNavViewFrame" Navigated="BackNavigSampleNavViewFrame_Navigated"/&gt;
+    &lt;/NavigationView&gt;
+&lt;/Grid&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+            
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private void BackNavigSampleNavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+{
+    BackNavigSampleNavViewFrame.GoBack();
+}
+
+private void BackNavigSampleNavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+{
+    // prevent the rest of the code from running if the lock is set
+    if (BackNavigNavViewNavigLock) return;
+
+    if (args.IsSettingsSelected)
+        BackNavigSampleNavViewFrame.Navigate(typeof(SampleSettingsPage), null, args.RecommendedNavigationTransitionInfo);
+    else
+    {
+        if (BackNavigSampleNavView.SelectedItem is NavigationViewItem item)
+        {
+            if (item.Tag is string s)
+            {
+                Type? pageType = Type.GetType("UWPGallery.SamplePages.SamplePage" + s);
+
+                if (pageType != null)
+                {
+                    BackNavigSampleNavViewFrame.Navigate(pageType, null, args.RecommendedNavigationTransitionInfo);
+                }
+            }
+        }
+    }
+}
+
+private void BackNavigSampleNavViewFrame_Navigated(object sender, NavigationEventArgs e)
+{
+    // lock to prevent the navview from triggering SelectionChanged and navigating again
+    BackNavigNavViewNavigLock = true;
+
+    BackNavigSampleNavView.SelectedItem = e.Content switch // Use Content so that we can switch directly because you can only use constants in switch so using SourcePageType with typeof wouldn't work
+    {
+        SamplePage1 => BackNavigSampleHomeItem,
+        SamplePage2 => BackNavigSampleAccountItem,
+        SamplePage5 => BackNavigSampleToolsItem,
+        SampleSettingsPage => BackNavigSampleNavView.SettingsItem, // remove this if using a navigationview with IsSettingsVisible = false
+        _ => null
+    };
+
+    // revert the lock back
+    BackNavigNavViewNavigLock = false;
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="NavigationView Search Box" MinHeight="500">
+            <controls:GallerySample.Sample>
+                <Grid RowSpacing="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock TextWrapping="WrapWholeWords">NavigationView allows you to add an AutoSuggestBox as a search box within the NavigationView. To add a search box, create an AutoSuggestBox and assign it to the NavigationView.AutoSuggestBox property.</TextBlock>
+
+                    <NavigationView Grid.Row="1" x:Name="NavViewSearchBoxSample" Loaded="NavViewSearchBoxSample_Loaded"
+                                    SelectionChanged="NavViewSearchBoxSample_SelectionChanged">
+                        <NavigationView.AutoSuggestBox>
+                            <AutoSuggestBox
+                                x:Name="SearchBox"
+                                MinWidth="200"
+                                VerticalAlignment="Center"
+                                PlaceholderText="Search..."
+                                QueryIcon="Find"
+                                TextChanged="SearchBox_TextChanged"
+                                QuerySubmitted="SearchBox_QuerySubmitted"/>
+                        </NavigationView.AutoSuggestBox>
+
+                        <NavigationView.MenuItems>
+                            <NavigationViewItem Content="People" Icon="OtherUser" Tag="1"/>
+                            <NavigationViewItem Content="Globe" Icon="Globe" Tag="2"/>
+                            <NavigationViewItem Content="Messages" Icon="Message" Tag="3"/>
+                            <NavigationViewItem Content="Mail" Icon="Mail" Tag="4"/>
+                            <NavigationViewItem Content="Phone" Icon="Phone" Tag="5"/>
+                        </NavigationView.MenuItems>
+
+                        <Frame x:Name="NavViewSearchBoxSampleFrame"/>
+                    </NavigationView>
+                </Grid>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Grid RowSpacing="6"&gt;
+    &lt;Grid.RowDefinitions&gt;
+        &lt;RowDefinition Height="Auto"/&gt;
+        &lt;RowDefinition Height="*"/&gt;
+    &lt;/Grid.RowDefinitions&gt;
+
+    &lt;TextBlock TextWrapping="WrapWholeWords"&gt;NavigationView allows you to add an AutoSuggestBox as a search box within the NavigationView. To add a search box, create an AutoSuggestBox and assign it to the NavigationView.AutoSuggestBox property.&lt;/TextBlock&gt;
+
+    &lt;NavigationView Grid.Row="1" x:Name="NavViewSearchBoxSample" Loaded="NavViewSearchBoxSample_Loaded"
+                    SelectionChanged="NavViewSearchBoxSample_SelectionChanged"&gt;
+        &lt;NavigationView.AutoSuggestBox&gt;
+            &lt;AutoSuggestBox
+                x:Name="SearchBox"
+                MinWidth="200"
+                VerticalAlignment="Center"
+                PlaceholderText="Search..."
+                QueryIcon="Find"
+                TextChanged="SearchBox_TextChanged"
+                QuerySubmitted="SearchBox_QuerySubmitted"/&gt;
+        &lt;/NavigationView.AutoSuggestBox&gt;
+
+        &lt;NavigationView.MenuItems&gt;
+            &lt;NavigationViewItem Content="People" Icon="OtherUser" Tag="1"/&gt;
+            &lt;NavigationViewItem Content="Globe" Icon="Globe" Tag="2"/&gt;
+            &lt;NavigationViewItem Content="Messages" Icon="Message" Tag="3"/&gt;
+            &lt;NavigationViewItem Content="Mail" Icon="Mail" Tag="4"/&gt;
+            &lt;NavigationViewItem Content="Phone" Icon="Phone" Tag="5"/&gt;
+        &lt;/NavigationView.MenuItems&gt;
+
+        &lt;Frame x:Name="NavViewSearchBoxSampleFrame"/&gt;
+    &lt;/NavigationView&gt;
+&lt;/Grid&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+            
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private void NavViewSearchBoxSample_Loaded(object sender, RoutedEventArgs e)
+{
+    var items = NavViewSearchBoxSample.MenuItems.Select(string (object navItem) =>
+    {
+        if (navItem is NavigationViewItem item)
+        {
+            return item.Content.ToString() ?? string.Empty;
+        }
+
+        return string.Empty;
+    }).ToList();
+
+    items.Add("Settings");
+
+    SearchBox.ItemsSource = items;
+}
+
+private void NavViewSearchBoxSample_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+{
+    if (args.IsSettingsSelected)
+        NavViewSearchBoxSampleFrame.Navigate(typeof(SampleSettingsPage), null, args.RecommendedNavigationTransitionInfo);
+    else
+    {
+        if (NavViewSearchBoxSample.SelectedItem is NavigationViewItem item)
+        {
+            if (item.Tag is string s)
+            {
+                Type? pageType = Type.GetType("UWPGallery.SamplePages.SamplePage" + s);
+
+                if (pageType != null)
+                {
+                    NavViewSearchBoxSampleFrame.Navigate(pageType, null, args.RecommendedNavigationTransitionInfo);
+                }
+            }
+        }
+    }
+}
+
+private void SearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+{
+    var querySplit = SearchBox.Text.ToLower().Split(" ");
+
+    var items = NavViewSearchBoxSample.MenuItems.Select(string (object navItem) =>
+    {
+        if (navItem is NavigationViewItem item)
+        {
+            return item.Content.ToString() ?? string.Empty;
+        }
+
+        return string.Empty;
+    }).ToList();
+
+    items.Add("Settings");
+
+    SearchBox.ItemsSource = items.Where(x =>
+    {
+        // Idea: check for every word entered (separated by space) if it is in the name,
+        // e.g. for query "split button" the only result should "SplitButton" since its the only query to contain "split" and "button"
+        // If any of the sub tokens is not in the string, we ignore the item. So the search gets more precise with more words
+        bool flag = true;
+        foreach (string queryToken in querySplit)
+        {
+            // Check if token is in name
+            if (!x.Contains(queryToken, StringComparison.OrdinalIgnoreCase))
+            {
+                // The title doesn't contain one of the tokens so we discard this item!
+                flag = false;
+            }
+        }
+        return flag;
+    }).ToList();
+}
+
+private void SearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+{
+    if (args.ChosenSuggestion is string s)
+    {
+        if (s.Equals("Settings", StringComparison.Ordinal))
+        {
+            NavViewSearchBoxSample.SelectedItem = NavViewSearchBoxSample.SettingsItem;
+        }
+        else
+        {
+            foreach (var item in NavViewSearchBoxSample.MenuItems)
+            {
+                if (item is NavigationViewItem navItem)
+                {
+                    if (navItem.Content is string ss)
+                    {
+                        if (s.Equals(ss, StringComparison.Ordinal))
+                        {
+                            NavViewSearchBoxSample.SelectedItem = navItem;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>

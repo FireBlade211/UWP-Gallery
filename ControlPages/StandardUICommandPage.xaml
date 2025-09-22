@@ -1,0 +1,117 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.StandardUICommandPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <StackPanel Spacing="6">
+        <TextBlock TextWrapping="WrapWholeWords">StandardUICommands are a set of built-in <Hyperlink Click="Hyperlink_Click">XamlUICommands</Hyperlink> represeting commonly used commands. Including the look and feel of a given command, which can be reused across your app and are understood natively by the standard XAML controls, e.g. Save, Open, Copy, Paste, etc.</TextBlock>
+        
+        <controls:GallerySample HeaderTitle="All StandardUICommands - Showcase">
+            <controls:GallerySample.Sample>
+                <StackPanel Spacing="6">
+                    <TextBlock>Click the See more (ellipsis (...)) button below to view the commands.</TextBlock>
+
+                    <CommandBar x:Name="AllCommandsBar" Loaded="AllCommandsBar_Loaded"/>
+                </StackPanel>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;StackPanel Spacing="6"&gt;
+    &lt;TextBlock&gt;Click the See more (ellipsis (...)) button below to view the commands.&lt;/TextBlock&gt;
+                    
+    &lt;CommandBar x:Name="AllCommandsBar" Loaded="AllCommandsBar_Loaded"/&gt;
+&lt;/StackPanel&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private void AllCommandsBar_Loaded(object sender, RoutedEventArgs e)
+{
+    foreach (var kind in Enum.GetValues&lt;StandardUICommandKind&gt;())
+        if (kind != StandardUICommandKind.None)
+            AllCommandsBar.SecondaryCommands.Add(new AppBarButton
+            {
+                Command = new StandardUICommand(kind)
+            });
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="Exposing a command in multiple controls using StandardUICommand" Loaded="ControlExample_Loaded" MinHeight="500">
+            <controls:GallerySample.Sample>
+                <Grid x:Name="rootGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock TextWrapping="Wrap" Margin="0,0,0,12">
+        StandardUICommand allows the sharing of the UX associated with a command.
+        In this instance we are using a StandardUICommand to quickly place 
+        the delete command in multiple controls. The StandardUICommand contains the icon, label, 
+        keyboard shortcut, and a description.
+                    </TextBlock>
+
+                    <MenuBar Grid.Row="1">
+                        <MenuBarItem Title="File">
+                            <MenuFlyoutItem Text="New"/>
+                            <MenuFlyoutItem Text="Open..."/>
+                            <MenuFlyoutItem Text="Save"/>
+                            <MenuFlyoutItem Text="Exit"/>
+                        </MenuBarItem>
+
+                        <MenuBarItem Title="Edit">
+                            <MenuFlyoutItem x:Name="DeleteFlyoutItem"/>
+                        </MenuBarItem>
+
+                        <MenuBarItem Title="Help">
+                            <MenuFlyoutItem Text="About"/>
+                        </MenuBarItem>
+                    </MenuBar>
+
+                    <ListView x:Name="ListViewRight" Grid.Row="2" Loaded="ListView_Loaded" ContainerContentChanging="ListViewRight_ContainerContentChanging" IsItemClickEnabled="True" SelectionMode="Single">
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="local:ListItemData">
+                                <UserControl PointerEntered="ListViewSwipeContainer_PointerEntered" PointerExited="ListViewSwipeContainer_PointerExited">
+                                    <Grid AutomationProperties.Name="{x:Bind Text}">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup x:Name="HoveringStates">
+                                                <VisualState x:Name="HoverButtonsHidden" />
+                                                <VisualState x:Name="HoverButtonsShown">
+                                                    <VisualState.Setters>
+                                                        <Setter Target="HoverButton.Visibility" Value="Visible" />
+                                                    </VisualState.Setters>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <SwipeControl x:Name="ListViewSwipeContainer" >
+                                            <SwipeControl.RightItems>
+                                                <SwipeItems Mode="Execute">
+                                                    <SwipeItem x:Name="DeleteSwipeItem" Background="Red" Command="{x:Bind Command}" CommandParameter="{x:Bind Text}"/>
+                                                </SwipeItems>
+                                            </SwipeControl.RightItems>
+                                            <Grid VerticalAlignment="Center">
+                                                <TextBlock Text="{x:Bind Text}" Margin="10" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                                <AppBarButton x:Name="HoverButton" IsTabStop="False" HorizontalAlignment="Right" Visibility="Collapsed" Command="{x:Bind Command}" CommandParameter="{x:Bind Text}"/>
+                                            </Grid>
+                                        </SwipeControl>
+                                    </Grid>
+                                </UserControl>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </controls:GallerySample.Sample>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>

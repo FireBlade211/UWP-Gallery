@@ -1,0 +1,131 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.TextStylesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <StackPanel Spacing="6">
+        <Grid Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock FontWeight="Bold">Style</TextBlock>
+            <TextBlock FontWeight="Bold" VerticalAlignment="Center" Grid.Column="1">Name</TextBlock>
+        </Grid>
+
+        <Grid Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Style="{StaticResource CaptionTextBlockStyle}">Caption</TextBlock>
+            <TextBlock FontFamily="Consolas" Grid.Column="1" IsTextSelectionEnabled="True" VerticalAlignment="Center">CaptionTextBlockStyle</TextBlock>
+        </Grid>
+
+        <Grid Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}">Body</TextBlock>
+            <TextBlock Grid.Column="1" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">BodyTextBlockStyle</TextBlock>
+        </Grid>
+
+        <Grid Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Style="{StaticResource BaseTextBlockStyle}">Base</TextBlock>
+            <TextBlock Grid.Column="1" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">BaseTextBlockStyle</TextBlock>
+        </Grid>
+
+        <Grid Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Style="{StaticResource SubtitleTextBlockStyle}">Subtitle</TextBlock>
+            <TextBlock Grid.Column="1" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">SubtitleTextBlockStyle</TextBlock>
+        </Grid>
+
+        <Grid Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}">Title</TextBlock>
+            <TextBlock Grid.Column="1" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">TitleTextBlockStyle</TextBlock>
+        </Grid>
+
+        <Grid Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Style="{StaticResource SubheaderTextBlockStyle}">Subheader</TextBlock>
+            <TextBlock Grid.Column="1" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">SubheaderTextBlockStyle</TextBlock>
+        </Grid>
+
+        <Grid Margin="0,15,0,25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Style="{StaticResource HeaderTextBlockStyle}">Header</TextBlock>
+            <TextBlock Grid.Column="1" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">HeaderTextBlockStyle</TextBlock>
+        </Grid>
+
+        <!--<TextBlock Style="{StaticResource SubtitleTextBlockStyle}">Special Text Styles</TextBlock>
+        <TextBlock TextWrapping="WrapWholeWords">The styles below should not be used for your app UI, but are part of built-in UWP controls.</TextBlock>
+
+        <Grid Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock FontWeight="Bold">Style</TextBlock>
+            <TextBlock FontWeight="Bold" VerticalAlignment="Center" Grid.Column="1">Name</TextBlock>
+            <TextBlock FontWeight="Bold" VerticalAlignment="Center" Grid.Column="2">Control</TextBlock>
+        </Grid>
+
+        <Grid Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Style="{StaticResource FlyoutPickerTitleTextBlockStyle}">Flyout Picker</TextBlock>
+            <TextBlock Grid.Column="1" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">FlyoutPickerTextBlockStyle</TextBlock>
+            <TextBlock Grid.Column="2" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">Flyout</TextBlock>
+        </Grid>
+        
+        <Grid Margin="0,15,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="256"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Style="{StaticResource }">InkToolbar Extension Glyph</TextBlock>
+            <TextBlock Grid.Column="1" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">InkToolbarExtensionGlyphStyle</TextBlock>
+            <TextBlock Grid.Column="2" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">InkToolbar</TextBlock>
+        </Grid>-->
+    </StackPanel>
+</Page>

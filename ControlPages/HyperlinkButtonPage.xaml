@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.HyperlinkButtonPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <StackPanel Spacing="6">
+        <TextBlock TextWrapping="WrapWholeWords">
+            A <Bold>HyperlinkButton</Bold> looks like hyperlink text, but works like a button. You can use it in two ways:
+            <LineBreak/>
+            • Set the <Bold>NavigateUri</Bold> property. When a user clicks it, it will automatically open the URI in the default browser.
+            <LineBreak/>
+            • Handle the <Bold>Click</Bold> event. This works just like the <Bold>Click</Bold> event of a standard <Hyperlink Click="Hyperlink_Click">Button</Hyperlink>, and can be used to navigate within your app.
+            <LineBreak/><LineBreak/>
+            Each control page in this app has two sets of hyperlink buttons, one set to open documentation in your browser, and one set to navigate to related control pages in the app.
+        </TextBlock>
+
+        <controls:GallerySample HeaderTitle="HyperlinkButton that navigates to a URI">
+            <controls:GallerySample.Sample>
+                <HyperlinkButton Content="Go to AppBar page" NavigateUri="uwp-gallery:///page/appbar"/>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;HyperlinkButton Content="Go to AppBar page" NavigateUri="uwp-gallery:///page/appbar"/&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="HyperlinkButton that handles a Click event">
+            <controls:GallerySample.Sample>
+                <HyperlinkButton Content="Share this sample" Click="HyperlinkButton_Click"/>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;HyperlinkButton Content="Share this sample" Click="HyperlinkButton_Click"/&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>

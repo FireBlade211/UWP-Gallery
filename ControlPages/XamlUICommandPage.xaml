@@ -1,0 +1,132 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.XamlUICommandPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <Page.Resources>
+        <XamlUICommand Label="Find" x:Key="CustomFindCommand" Description="Search and find content within the page" ExecuteRequested="XamlUICommand_ExecuteRequested">
+            <XamlUICommand.IconSource>
+                <FontIconSource FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE721;"/>
+            </XamlUICommand.IconSource>
+
+            <XamlUICommand.KeyboardAccelerators>
+                <KeyboardAccelerator Modifiers="Control" Key="F" />
+            </XamlUICommand.KeyboardAccelerators>
+        </XamlUICommand>
+    </Page.Resources>
+    
+    <StackPanel Spacing="6">
+        <controls:GallerySample HeaderTitle="Reusing a XamlUICommand accross multiple controls" MinHeight="250">
+            <controls:GallerySample.Sample>
+                <StackPanel Spacing="6">
+                    <TextBlock>This sample reuses a custom Find command across multiple controls.</TextBlock>
+
+                    <MenuBar>
+                        <MenuBarItem Title="File">
+                            <MenuFlyoutItem Text="New"/>
+                            <MenuFlyoutItem Text="Open..."/>
+                            <MenuFlyoutItem Text="Save"/>
+                            <MenuFlyoutItem Text="Save as..."/>
+                        </MenuBarItem>
+
+                        <MenuBarItem Title="Edit">
+                            <MenuFlyoutItem Command="{StaticResource CustomFindCommand}"/>
+                        </MenuBarItem>
+
+                        <MenuBarItem Title="Help">
+                            <MenuFlyoutItem Text="About..."/>
+                        </MenuBarItem>
+                    </MenuBar>
+
+                    <CommandBar>
+                        <CommandBar.PrimaryCommands>
+                            <AppBarButton Label="Open">
+                                <AppBarButton.Icon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8DA;"/>
+                                </AppBarButton.Icon>
+                            </AppBarButton>
+                            <AppBarButton Label="Save">
+                                <AppBarButton.Icon>
+                                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE74E;"/>
+                                </AppBarButton.Icon>
+                            </AppBarButton>
+                            <AppBarButton Command="{StaticResource CustomFindCommand}"/>
+                        </CommandBar.PrimaryCommands>
+                    </CommandBar>
+
+                    <TextBlock x:Name="CommandTextBlock">Trigger the command to change this TextBlock!</TextBlock>
+                </StackPanel>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Page.Resources&gt;
+    &lt;XamlUICommand Label="Find" x:Key="CustomFindCommand" Description="Search and find content within the page" ExecuteRequested="XamlUICommand_ExecuteRequested"&gt;
+        &lt;XamlUICommand.IconSource&gt;
+            &lt;SymbolIconSource Symbol="Find"/&gt;
+        &lt;/XamlUICommand.IconSource&gt;
+                    
+        &lt;XamlUICommand.KeyboardAccelerators&gt;
+            &lt;KeyboardAccelerator Modifiers="Control" Key="F" /&gt;
+        &lt;/XamlUICommand.KeyboardAccelerators&gt;
+    &lt;/XamlUICommand&gt;
+&lt;/Page.Resources&gt;
+                    
+&lt;StackPanel Spacing="6"&gt;
+    &lt;TextBlock&gt;This sample reuses a custom Find command across multiple controls.&lt;/TextBlock&gt;
+
+    &lt;MenuBar&gt;
+        &lt;MenuBarItem Title="File"&gt;
+            &lt;MenuFlyoutItem Text="New"/&gt;
+            &lt;MenuFlyoutItem Text="Open..."/&gt;
+            &lt;MenuFlyoutItem Text="Save"/&gt;
+            &lt;MenuFlyoutItem Text="Save as..."/&gt;
+        &lt;/MenuBarItem&gt;
+
+        &lt;MenuBarItem Title="Edit"&gt;
+            &lt;MenuFlyoutItem Command="{StaticResource CustomFindCommand}"/&gt;
+        &lt;/MenuBarItem&gt;
+
+        &lt;MenuBarItem Title="Help"&gt;
+            &lt;MenuFlyoutItem Text="About..."/&gt;
+        &lt;/MenuBarItem&gt;
+    &lt;/MenuBar&gt;
+
+    &lt;CommandBar&gt;
+        &lt;CommandBar.PrimaryCommands&gt;
+            &lt;AppBarButton Label="Open" Icon="OpenFile"/&gt;
+            &lt;AppBarButton Label="Save" Icon="Save"/&gt;
+            &lt;AppBarButton Command="{StaticResource CustomFindCommand}"/&gt;
+        &lt;/CommandBar.PrimaryCommands&gt;
+    &lt;/CommandBar&gt;
+
+    &lt;TextBlock x:Name="CommandTextBlock"&gt;Trigger the command to change this TextBlock!&lt;/TextBlock&gt;
+&lt;/StackPanel&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private int TriggerCount = 0;
+
+public XamlUICommandPage()
+{
+    InitializeComponent();
+}
+
+private void XamlUICommand_ExecuteRequested(XamlUICommand sender, ExecuteRequestedEventArgs args)
+{
+    TriggerCount++;
+    CommandTextBlock.Text = $"You triggered the command {TriggerCount} times!";
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>

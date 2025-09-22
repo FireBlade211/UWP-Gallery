@@ -1,0 +1,113 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.TextBlockPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <StackPanel Spacing="6">
+        <controls:GallerySample HeaderTitle="A simple TextBlock">
+            <TextBlock>I am a simple TextBlock.</TextBlock>
+
+            <controls:GallerySample.XamlSource>
+                &lt;TextBlock&gt;I am a simple TextBlock.&lt;/TextBlock&gt;
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+        
+        <controls:GallerySample HeaderTitle="TextBlock with custom style">
+            <TextBlock Text="I am a styled TextBlock!">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="FontFamily" Value="Arial"/>
+                        <Setter Property="FontStyle" Value="Italic"/>
+                        <Setter Property="CharacterSpacing" Value="256"/>
+                        <Setter Property="Foreground" Value="BlueViolet"/>
+                        <Setter Property="FontSize" Value="32"/>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;TextBlock Text="I am a styled TextBlock!"&gt;
+    &lt;TextBlock.Style&gt;
+        &lt;Style TargetType="TextBlock"&gt;
+            &lt;Setter Property="FontFamily" Value="Arial"/&gt;
+            &lt;Setter Property="FontStyle" Value="Italic"/&gt;
+            &lt;Setter Property="CharacterSpacing" Value="256"/&gt;
+            &lt;Setter Property="Foreground" Value="BlueViolet"/&gt;
+            &lt;Setter Property="FontSize" Value="32"/&gt;
+        &lt;/Style&gt;
+    &lt;/TextBlock.Style&gt;
+&lt;/TextBlock&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+        
+        <controls:GallerySample HeaderTitle="TextBlock with inline elements">
+            <TextBlock>
+                <Run FontFamily="Times New Roman" FontSize="16" Foreground="DarkGray">
+                    Text in a TextBlock doesn't have to be a simple string.</Run>
+                <LineBreak/>
+                <Span>Text can be <Bold>bold</Bold>,
+                    <Italic>italic</Italic>, or <Underline>underlined</Underline>. </Span>
+                <LineBreak/>
+                <Span>You can add <Hyperlink NavigateUri="uwp-gallery:///page/textblock">hyperlinks</Hyperlink> too!</Span>
+            </TextBlock>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;TextBlock&gt;
+    &lt;Run FontFamily="Times New Roman" FontSize="16" Foreground="DarkGray"&gt;
+        Text in a TextBlock doesn't have to be a simple string.&lt;/Run&gt;
+    &lt;LineBreak/&gt;
+    &lt;Span&gt;Text can be &lt;Bold&gt;bold&lt;/Bold&gt;,
+        &lt;Italic&gt;italic&lt;/Italic&gt;, or &lt;Underline&gt;underlined&lt;/Underline&gt;. &lt;/Span&gt;
+    &lt;LineBreak/&gt;
+    &lt;Span&gt;You can add &lt;Hyperlink NavigateUri="uwp-gallery:///page/textblock"&gt;hyperlinks&lt;/Hyperlink&gt; too!&lt;/Span&gt;
+&lt;/TextBlock&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="Code-style TextBlock">
+            <TextBlock FontFamily="Consolas" IsTextSelectionEnabled="True">
+                <Run xml:space="preserve">
+private void Page_Loaded(object sender, RoutedEventArgs e)
+{
+    Debug.WriteLine("Page loaded!");
+    // Run some code here...
+}
+                </Run>
+            </TextBlock>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;TextBlock FontFamily="Consolas" IsTextSelectionEnabled="True"&gt;
+    &lt;Run xml:space="preserve"&gt;
+private void Page_Loaded(object sender, RoutedEventArgs e)
+{
+    Debug.WriteLine("Page loaded!");
+    // Run some code here...
+}
+    &lt;/Run&gt;
+&lt;/TextBlock&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="TextBlock with custom selection highlight color">
+            <TextBlock SelectionHighlightColor="OrangeRed" IsTextSelectionEnabled="True">Select me to see the color!</TextBlock>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;TextBlock SelectionHighlightColor="OrangeRed" IsTextSelectionEnabled="True"&gt;Select me to see the color!&lt;/TextBlock&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>

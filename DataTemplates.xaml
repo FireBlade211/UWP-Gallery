@@ -1,0 +1,100 @@
+﻿<ResourceDictionary
+    x:Class="UWPGallery.DataTemplates"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:data="using:UWPGallery.DataModel">
+
+    <DataTemplate x:Key="ControlItemTemplate" x:DataType="data:ControlInfoDataItem">
+        <UserControl DataContext="{x:Bind}" Loaded="ControlItemTemplate_Loaded">
+            <UserControl.ContextFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem Text="Open in new window" Tag="OpenNewWindowMenuFlyoutItem">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8A7;"/>
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+
+                    <MenuFlyoutSeparator/>
+                    
+                    <MenuFlyoutItem Text="Copy link to sample" Tag="CopyLinkMenuFlyoutItem">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8C8;"/>
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                    <MenuFlyoutItem Text="Share sample" Tag="ShareMenuFlyoutItem">
+                        <MenuFlyoutItem.Icon>
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE72D;"/>
+                        </MenuFlyoutItem.Icon>
+                    </MenuFlyoutItem>
+                </MenuFlyout>
+            </UserControl.ContextFlyout>
+            <Grid
+            x:Name="controlRoot"
+            Width="360"
+            Height="90"
+            Padding="8"
+            HorizontalAlignment="Stretch"
+            BorderThickness="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid Width="72">
+                    <FontIcon
+                    x:Name="gridImage"
+                    FontSize="48"
+                    VerticalAlignment="Center"
+                    AutomationProperties.Name="{x:Bind Title}"
+                    Glyph="{x:Bind IconGlyph}"
+                    FontFamily="{StaticResource SymbolThemeFontFamily}" />
+                </Grid>
+                <StackPanel
+                Grid.Column="1"
+                Grid.ColumnSpan="2"
+                Margin="16,0,0,0"
+                VerticalAlignment="Center"
+                Orientation="Vertical"
+                Spacing="2">
+                    <TextBlock
+                    x:Name="titleText"
+                    Style="{StaticResource BodyTextBlockStyle}"
+                    Text="{x:Bind Title}"
+                    TextLineBounds="TrimToCapHeight"
+                    TextWrapping="NoWrap" />
+                    <TextBlock
+                    Foreground="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"
+                    RelativePanel.Below="titleText"
+                    Style="{StaticResource CaptionTextBlockStyle}"
+                    Text="{x:Bind Subtitle}"
+                    TextTrimming="CharacterEllipsis" />
+                </StackPanel>
+
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="LayoutVisualStates">
+                        <VisualState x:Name="WideLayout">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="{StaticResource Breakpoint640Plus}" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters />
+                        </VisualState>
+                        <VisualState x:Name="NarrowLayout">
+                            <VisualState.StateTriggers>
+                                <AdaptiveTrigger MinWindowWidth="0" />
+                            </VisualState.StateTriggers>
+                            <VisualState.Setters>
+                                <Setter Target="controlRoot.Width" Value="Auto" />
+                                <Setter Target="controlRoot.Height" Value="120" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Grid>
+        </UserControl>
+    </DataTemplate>
+</ResourceDictionary>

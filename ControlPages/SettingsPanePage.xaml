@@ -1,0 +1,65 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.SettingsPanePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <StackPanel Spacing="6">
+        <controls:GallerySample HeaderTitle="Simple SettingsPane">
+            <controls:GallerySample.Sample>
+                <StackPanel Spacing="6">
+                    <TextBlock TextWrapping="WrapWholeWords">To use SettingsPane, you need to handle the CommandsRequested event to tell the SettingsPane the commands that it should show. Please see the C# sample (by clicking the Source button) to see how to do this.</TextBlock>
+                    <Button Content="Show SettingsPane" Click="Button_Click"/>
+                </StackPanel>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;StackPanel Spacing="6"&gt;
+    &lt;TextBlock TextWrapping="WrapWholeWords"&gt;To use SettingsPane, you need to handle the CommandsRequested event to tell the SettingsPane the commands that it should show. Please see the C# sample (by clicking the Source button) to see how to do this.&lt;/TextBlock&gt;
+    &lt;Button Content="Show SettingsPane" Click="Button_Click"/&gt;
+&lt;/StackPanel&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private void Button_Click(object sender, RoutedEventArgs e)
+{
+    SettingsPane.Show();
+}
+                    
+// Add this inside your App.xaml.cs
+protected override void OnWindowCreated(WindowCreatedEventArgs args)
+{
+    base.OnWindowCreated(args);
+
+    SettingsPane.GetForCurrentView().CommandsRequested += SettingsPane_CommandsRequested;
+}
+
+private void SettingsPane_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+{
+    var generalCmd = new SettingsCommand(0, "General", (IUICommand cmd) =>
+    {
+        _ = new MessageDialog("You clicked the General command!", "Settings Pane").ShowAsync();
+    });
+
+    var aboutCmd = new SettingsCommand(0, "About", (IUICommand cmd) =>
+    {
+        _ = new MessageDialog("You clicked the About command!", "Settings Pane").ShowAsync();
+    });
+
+    args.Request.ApplicationCommands.Add(generalCmd);
+    args.Request.ApplicationCommands.Add(aboutCmd);
+}
+                    
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>

@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="UWPGallery.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded"
+    xmlns:datamodel="using:UWPGallery.DataModel">
+
+    <NavigationView x:Name="NavBar" x:FieldModifier="public" SelectionChanged="NavBar_SelectionChanged"
+                    DisplayModeChanged="NavBar_DisplayModeChanged" IsBackButtonVisible="Collapsed">
+        <NavigationView.AutoSuggestBox>
+            <AutoSuggestBox
+                    x:Name="SearchBox"
+                    MinWidth="200"
+                    VerticalAlignment="Center"
+                    x:FieldModifier="public"
+                    KeyboardAcceleratorPlacementMode="Hidden"
+                    PlaceholderText="Search..."
+                    QueryIcon="Find"
+                    QuerySubmitted="SearchBox_QuerySubmitted"
+                    TextChanged="SearchBox_TextChanged">
+
+                <AutoSuggestBox.ItemTemplate>
+                    <DataTemplate x:DataType="datamodel:ControlInfoDataItem">
+                        <StackPanel Orientation="Horizontal" Spacing="12">
+                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="{x:Bind IconGlyph}" FontSize="16"/>
+                            <TextBlock TextTrimming="CharacterEllipsis" Text="{x:Bind Title}" ToolTipService.ToolTip="{x:Bind Subtitle}"
+                                       AutomationProperties.FullDescription="{x:Bind Description}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </AutoSuggestBox.ItemTemplate>
+            </AutoSuggestBox>
+        </NavigationView.AutoSuggestBox>
+
+        <NavigationView.MenuItems>
+            <NavigationViewItem Tag="HomeItem" Content="Home" IsSelected="True">
+                <NavigationViewItem.Icon>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE80F;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+
+            <NavigationViewItemSeparator/>
+        </NavigationView.MenuItems>
+
+        <Frame x:Name="MainFrame" x:FieldModifier="public" Navigated="MainFrame_Navigated" NavigationFailed="MainFrame_NavigationFailed"/>
+    </NavigationView>
+</Page>

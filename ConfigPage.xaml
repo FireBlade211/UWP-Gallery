@@ -1,0 +1,122 @@
+﻿<Page
+    x:Class="UWPGallery.ConfigPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:datamodel="using:UWPGallery.DataModel">
+
+    <StackPanel Orientation="Horizontal" Margin="6,6,0,0">
+        <Pivot x:Name="MainPivot" Title="SETTINGS">
+            <PivotItem Header="General">
+                <Hub>
+                    <!--<HubSection Header="Starting Page">
+                        <DataTemplate>
+                            <ComboBox MinWidth="164" IsTextSearchEnabled="True" x:Name="StartPageCombo" SelectionChanged="StartPageCombo_SelectionChanged"
+                                      Loaded="StartPageCombo_Loaded">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate x:DataType="datamodel:ControlInfoDataItem">
+                                        <StackPanel Orientation="Horizontal" Spacing="6" ToolTipService.ToolTip="{x:Bind Subtitle}">
+                                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="{x:Bind IconGlyph}"/>
+                                            <TextBlock Text="{x:Bind Title}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                        </DataTemplate>
+                    </HubSection>-->
+                    <HubSection Header="Theme" x:Name="ThemeHubSection">
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="16" Loaded="StackPanel_Loaded">
+                                <RadioButton x:Name="SystemThemeRadio" Tag="SystemThemeRadio" Content="Use system theme" GroupName="ThemeRadioButtons"
+                                             Checked="SystemThemeRadio_Checked"/>
+                                <RadioButton x:Name="LightThemeRadio" Tag="LightThemeRadio" Content="Light" GroupName="ThemeRadioButtons"
+                                             Checked="SystemThemeRadio_Checked"/>
+                                <RadioButton x:Name="DarkThemeRadio" Tag="DarkThemeRadio" Content="Dark" GroupName="ThemeRadioButtons"
+                                             Checked="SystemThemeRadio_Checked"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </HubSection>
+                </Hub>
+            </PivotItem>
+            <PivotItem Header="Other">
+                <Hub>
+                    <HubSection Header="Sound">
+                        <DataTemplate>
+                            <StackPanel Spacing="6" Loaded="StackPanel_Loaded_1">
+                                <ToggleSwitch x:Name="SoundSwitch" OnContent="Enable sound" OffContent="Enable sound" Toggled="SoundSwitch_Toggled"/>
+                                <TextBlock Text="Volume" Style="{StaticResource SubtitleTextBlockStyle}" FontSize="18"/>
+                                <StackPanel Orientation="Horizontal" Spacing="6" MinWidth="160">
+                                    <Slider x:Name="VolumeSlider" MinWidth="160" LostFocus="VolumeSlider_LostFocus"
+                                            Maximum="100" Minimum="0" Value="100" IsEnabled="{Binding IsOn,ElementName=SoundSwitch, Mode=OneWay}"/>
+                                    <TextBlock VerticalAlignment="Center">
+                                        <Run Text="{Binding Value, ElementName=VolumeSlider, Mode=OneWay}"/><Run>%</Run>
+                                    </TextBlock>
+                                </StackPanel>
+                                <CheckBox x:Name="SpatialAudioBox" Content="Use spatial audio" Checked="SpatialAudioBox_Checked" IsChecked="False"
+                                          IsEnabled="{Binding IsOn,ElementName=SoundSwitch, Mode=OneWay}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </HubSection>
+
+                    <HubSection Header="Advanced">
+                        <DataTemplate>
+                            <StackPanel Spacing="6">
+                                <Button Content="Open configuration file" x:Name="ConfigFileButton" Click="ConfigFileButton_Click"/>
+                                <Button Content="Restore defaults" x:Name="RestoreDefaultButton"
+                                        ToolTipService.ToolTip="Restores all settings to defaults. This deletes the settings file, so favorite samples will also get wiped."
+                                        Click="RestoreDefaultButton_Click"/>
+                            </StackPanel>
+
+                        </DataTemplate>
+                    </HubSection>
+                </Hub>
+            </PivotItem>
+            <PivotItem Header="About">
+                <StackPanel Orientation="Horizontal" Spacing="24">
+                    <Image Margin="0,16,0,0" VerticalAlignment="Top" Source="/Assets/StoreLogo.png" Stretch="Uniform" Height="50" Width="50"/>
+                    <StackPanel Spacing="6">
+                        <TextBlock Style="{StaticResource HeaderTextBlockStyle}" AutomationProperties.HeadingLevel="Level1" Text="UWP Gallery"/>
+                        <StackPanel>
+                            <TextBlock Text="Version v1.0"/>
+                            <HyperlinkButton NavigateUri="https://github.com/FireBlade211/UWP-Gallery/issues/new/choose"
+                                             ToolTipService.ToolTip="https://github.com/FireBlade211/UWP-Gallery/issues/new/choose">File a bug or request a sample</HyperlinkButton>
+                            <HyperlinkButton NavigateUri="https://github.com/FireBlade211/UWP-Gallery"
+                                             ToolTipService.ToolTip="https://github.com/FireBlade211/UWP-Gallery">UWP Gallery repository</HyperlinkButton>
+                        </StackPanel>
+
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="MIT License" AutomationProperties.HeadingLevel="Level2" x:Name="licenseHeaderBlock"/>
+                        <TextBlock AutomationProperties.LabeledBy="{x:Bind licenseHeaderBlock}" IsTextSelectionEnabled="True">
+                            <Run xml:space="preserve">Copyright (c) 2025 FireBlade
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+                            </Run>
+                        </TextBlock>
+
+                        <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Clone the Git repository" AutomationProperties.HeadingLevel="Level2" x:Name="gitCloneHeaderBlock"/>
+
+                        <TextBlock FontFamily="Consolas" IsTextSelectionEnabled="True" AutomationProperties.LabeledBy="{x:Bind gitCloneHeaderBlock}" Text="git clone https://github.com/FireBlade211/UWP-Gallery.git"/>
+                    </StackPanel>
+                </StackPanel>
+            </PivotItem>
+        </Pivot>
+    </StackPanel>
+</Page>

@@ -1,0 +1,23 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.SearchPanePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <StackPanel Spacing="6">
+        <TextBlock TextWrapping="WrapWholeWords">Deprecated. Use the <Hyperlink Click="Hyperlink_Click">AutoSuggestBox</Hyperlink> control instead.</TextBlock>
+        <TextBlock TextWrapping="WrapWholeWords">To implement search in an app for Windows 10 or later, use <Hyperlink Click="Hyperlink_Click">AutoSuggestBox</Hyperlink>.</TextBlock>
+        <TextBlock TextWrapping="WrapWholeWords">An app can't use both the <Hyperlink Click="Hyperlink_Click_1">SearchBox</Hyperlink> and the SearchPane. Using both the search box and the search pane in the same app causes the app to throw an exception with this message: "Cannot create instance of type 'Windows.UI.Xaml.Controls.SearchBox.'"</TextBlock>
+
+        <controls:GallerySample HeaderTitle="Simple SearchPane">
+            <controls:GallerySample.Sample>
+                <Button Content="Open SearchPane" x:Name="OpenButtonSample1" Click="OpenButtonSample1_Click"/>
+            </controls:GallerySample.Sample>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>

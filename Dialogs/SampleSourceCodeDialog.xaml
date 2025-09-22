@@ -1,0 +1,44 @@
+﻿<ContentDialog
+    x:Class="UWPGallery.Dialogs.SampleSourceCodeDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.Dialogs"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    CloseButtonText="Close"
+    DefaultButton="Close">
+
+    <Pivot x:Name="SourcePivot" x:FieldModifier="public" MaxWidth="400" Height="500" Title="SOURCE CODE">
+        <PivotItem Header="XAML" x:Name="SourcePivotXamlItem" x:FieldModifier="public">
+            <RichEditBox
+                        x:Name="XamlRichEdit"
+                        IsReadOnly="True"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        FontFamily="Consolas,Courier New,Segoe UI"
+                        TextWrapping="NoWrap"
+                        AcceptsReturn="True"
+                        x:FieldModifier="public"
+                        Style="{StaticResource RichEditBoxColorFixStyle}"
+                        ScrollViewer.HorizontalScrollMode="Enabled"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                        ScrollViewer.VerticalScrollMode="Enabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        </PivotItem>
+        <PivotItem Header="C#" x:Name="SourcePivotCSItem" x:FieldModifier="public">
+            <TextBox
+                        IsReadOnly="True"
+                        AcceptsReturn="True"
+                        TextWrapping="NoWrap"
+                        Text="{x:Bind CSharpSource, Mode=OneWay, Converter={StaticResource nullableConverter}, ConverterParameter={StaticResource EmptyString}}"
+                        FontFamily="Consolas,Courier New,Segoe UI"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
+                        ScrollViewer.HorizontalScrollMode="Enabled"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                        ScrollViewer.VerticalScrollMode="Enabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+        </PivotItem>
+    </Pivot> 
+</ContentDialog>

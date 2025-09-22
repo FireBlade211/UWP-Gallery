@@ -1,0 +1,611 @@
+﻿{
+  "$schema": "ControlPageDataSchema.json",
+  "Groups": [
+    {
+      "UniqueId": "Design",
+      "Title": "Design",
+      "Folder": "Design",
+      "IsSpecialSection": true,
+      "Items": [
+        {
+          "Title": "Brushes",
+          "Description": "Common UWP brushes for use in your app.",
+          "Subtitle": "Common UWP brushes for use in your app.",
+          "UniqueId": "Brushes",
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "UrlName": "brushes"
+        },
+        {
+          "Title": "Text Styles",
+          "Description": "The styles below are built into UWP and can be applied on any TextBlock:",
+          "UniqueId": "TextStyles",
+          "Subtitle": "Styles for use on TextBlocks in your application.",
+          "UrlName": "textstyles",
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "RelatedControls": [
+            "TextBlock"
+          ],
+          "Docs": [
+            {
+              "Title": "Guidelines (Windows 11)",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/signature-experiences/typography"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "UniqueId": "Input",
+      "Title": "Input",
+      "Items": [
+        {
+          "UrlName": "button",
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "UniqueId": "Button",
+          "Title": "Button",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control",
+            "ContentControl",
+            "ButtonBase"
+          ],
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Subtitle": "A control that responds to user input and raises a Click event.",
+          "Description": "The Button control provides a Click event to respond to user input from a touch, mouse, keyboard, stylus, or other input device. You can put different kinds of content in a button, such as text or an image, or you can restyle a button to give it a new look.",
+          "Content": "<p>The main purpose of a <b>Button</b> is to make something happen when a user clicks it. There are two ways you can make something happen:</p><ul><li>Handle the <b>Click</b> event.</li><li>Bind the <b>Command</b> property to an ICommand implementation that describes the command logic.</li></ul><p>Buttons often have only simple string content, but you can use any object as content. You can also change the style and template to give them any look you want.</p>",
+          "Docs": [
+            {
+              "Title": "Button - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.button"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/buttons"
+            }
+          ],
+          "RelatedControls": [
+            "ToggleButton",
+            "RepeatButton",
+            "HyperlinkButton",
+            "AppBarButton"
+          ]
+        },
+        {
+          "UniqueId": "DropDownButton",
+          "Title": "DropDownButton",
+          "UrlName": "dropdownbutton",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control",
+            "ContentControl",
+            "ButtonBase",
+            "Button"
+          ],
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Subtitle": "A button that displays a flyout of choices when clicked.",
+          "Description": "A control that drops down a flyout of choices from which one can be chosen.",
+          "Docs": [
+            {
+              "Title": "DropDownButton - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.dropdownbutton"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/buttons"
+            }
+          ],
+          "RelatedControls": [
+            "SplitButton",
+            "ToggleSplitButton",
+            "ToggleButton",
+            "RepeatButton",
+            "HyperlinkButton",
+            "AppBarButton",
+            "CommandBar",
+            "AppBar"
+          ],
+          "UseGlyph": true,
+          "IconGlyph": ""
+        },
+        {
+          "UniqueId": "HyperlinkButton",
+          "Title": "HyperlinkButton",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control",
+            "ContentControl",
+            "ButtonBase"
+          ],
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Subtitle": "A button that appears as hyperlink text, and can navigate to a URI or handle a Click event.",
+          "Description": "A HyperlinkButton appears as a text hyperlink. When a user clicks it, it opens the page you specify in the NavigateUri property in the default browser. Or you can handle its Click event, typically to navigate within your app.",
+          "Docs": [
+            {
+              "Title": "HyperlinkButton - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.hyperlinkbutton"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/hyperlinks"
+            }
+          ],
+          "RelatedControls": [
+            "Button",
+            "ToggleButton",
+            "RepeatButton",
+            "AppBarButton"
+          ],
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "UrlName": "hyperlinkbutton"
+        }
+      ]
+    },
+    {
+      "UniqueId": "navig",
+      "Title": "Navigation",
+      "Items": [
+        {
+          "UrlName": "navview",
+          "UniqueId": "NavigationView",
+          "Title": "NavigationView",
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Subtitle": "Common vertical layout for top-level areas of your app via a collapsible navigation menu.",
+          "Description": "The navigation view control provides a common vertical layout for top-level areas of your app via a collapsible navigation menu.",
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "Docs": [
+            {
+              "Title": "NavigationView - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.navigationview"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/navigationview"
+            }
+          ],
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control",
+            "ContentControl"
+          ],
+          "RelatedControls": [
+            "SplitView",
+            "Pivot"
+          ]
+        },
+        {
+          "UrlName": "pivot",
+          "UniqueId": "Pivot",
+          "Title": "Pivot",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control",
+            "ItemsControl"
+          ],
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Subtitle": "Presents information from different sources in a tabbed view. Enables touch-swiping between a small set of content sections.",
+          "Description": "A Pivot allows you to show a collection of items from different sources in a tabbed view. The Pivot control enables touch-swiping between a small set of content sections.",
+          "Docs": [
+            {
+              "Title": "Pivot - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.pivot"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/pivot"
+            }
+          ],
+          "RelatedControls": [
+            "NavigationView"
+          ],
+          "UseGlyph": true,
+          "IconGlyph": ""
+        }
+      ]
+    },
+    {
+      "UniqueId": "styles",
+      "Title": "Styles",
+      "Items": [
+        {
+          "UrlName": "reveal",
+          "UniqueId": "Reveal",
+          "Title": "Reveal",
+          "ApiNamespace": "Windows.UI.Xaml",
+          "Subtitle": "A new transparent material introduced in Windows 10.",
+          "Description": "Reveal is a new transparent material introduced in Windows 10.",
+          "Docs": [
+            {
+              "Title": "Application.FocusVisualKind - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.application.focusvisualkind"
+            },
+            {
+              "Title": "FocusVisualKind enum - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.focusvisualkind"
+            },
+            {
+              "Title": "Reveal Focus",
+              "Uri": "https://learn.microsoft.com/windows/uwp/ui-input/reveal-focus"
+            }
+          ],
+          "UseGlyph": true,
+          "IconGlyph": ""
+        }
+      ]
+    },
+    {
+      "UniqueId": "ink",
+      "Title": "Inking",
+      "Items": [
+        {
+          "UrlName": "inkcanvas",
+          "UniqueId": "InkCanvas",
+          "Title": "InkCanvas",
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Subtitle": "Defines an area that receives and displays all pen input.",
+          "Description": "Defines an area that receives and displays all pen input as either an ink stroke or an erase stroke (input from an eraser tip, or the pen tip when modified with an erase button).",
+          "Docs": [
+            {
+              "Title": "InkCanvas - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.inkcanvas"
+            },
+            {
+              "Title": "Inking controls",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/inking-controls"
+            },
+            {
+              "Title": "Pen interactions and Windows Ink in Windows apps",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/input/pen-and-stylus-interactions"
+            },
+            {
+              "Title": "Recognize ink strokes",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/input/convert-ink-to-text"
+            }
+          ],
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control"
+          ]
+        },
+        {
+          "UrlName": "inktoolbar",
+          "UniqueId": "InkToolbar",
+          "Title": "InkToolbar",
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Subtitle": "Contains a customizable and extensible collection of buttons that activate ink-related features in an associated InkCanvas.",
+          "Description": "An InkToolbar control contains a customizable and extensible collection of buttons that activate ink-related features in an associated InkCanvas.",
+          "Docs": [
+            {
+              "Title": "InkToolbar - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.inktoolbar"
+            },
+            {
+              "Title": "Inking controls",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/inking-controls"
+            }
+          ],
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control"
+          ]
+        }
+      ]
+    },
+    {
+      "UniqueId": "dialogs",
+      "Title": "Dialogs",
+      "Items": [
+        {
+          "Title": "SettingsPane",
+          "UniqueId": "SettingsPane",
+          "Description": "A static class that enables the app to control the Settings Charm pane. The app can add or remove commands, receive a notification when the user opens the pane, or open the pane programmatically.",
+          "Subtitle": "A static class that enables the app to control the Settings Charm pane.",
+          "ApiNamespace": "Windows.UI.ApplicationSettings",
+          "UrlName": "settingspane",
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "Docs": [
+            {
+              "Title": "SettingsPane - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.applicationsettings.settingspane"
+            },
+            {
+              "Title": "Quickstart: Add app settings",
+              "Uri": "https://learn.microsoft.com/previous-versions/windows/apps/hh872190(v=win.10)"
+            }
+          ],
+          "BaseClasses": [ "Object" ]
+        }
+        //{
+        //  "Title": "SearchPane",
+        //  "UniqueId": "SearchPane",
+        //  "Subtitle": "Represents and manages the search pane that opens when a user activates the Search charm.",
+        //  "Description": "Represents and manages the search pane that opens when a user activates the Search charm.",
+        //  "ApiNamespace": "Windows.ApplicationModel.Search",
+        //  "IconGlyph": "",
+        //  "UseGlyph": true,
+        //  "UrlName": "searchpane",
+        //  "Docs": [
+        //    {
+        //      "Title": "SearchPane - API",
+        //      "Uri": "https://learn.microsoft.com/uwp/api/windows.applicationmodel.search.searchpane"
+        //    }
+        //  ],
+        //  "RelatedControls": [
+        //    "SearchBox",
+        //    "AutoSuggestBox"
+        //  ]
+        //}
+      ]
+    },
+    {
+      "UniqueId": "text",
+      "Title": "Text",
+      "Items": [
+        {
+          "Title": "SearchBox",
+          "UniqueId": "SearchBox",
+          "UrlName": "searchbox",
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Subtitle": "A control that can be used to enter search query text.",
+          "Description": "A control that can be used to enter search query text.",
+          "IconGlyph": "",
+          "UseGlyph": true,
+          "Docs": [
+            {
+              "Title": "SearchBox - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.searchbox"
+            },
+            {
+              "Title": "Quickstart: Adding search to an app (XAML)",
+              "Uri": "https://learn.microsoft.com/previous-versions/windows/apps/hh868180(v=win.10)"
+            }
+          ],
+          "RelatedControls": [
+            "AutoSuggestBox",
+            "SearchPane"
+          ],
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control"
+          ]
+        },
+        {
+          "Title": "TextBlock",
+          "UniqueId": "TextBlock",
+          "UrlName": "textblock",
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Subtitle": "Provides a lightweight control for displaying small amounts of text.",
+          "Description": "TextBlock is the primary control for displaying read-only text in your app. You typically display text by setting the Text property to a simple string. You can also display a series of strings in Run elements and give each different formatting.",
+          "Docs": [
+            {
+              "Title": "TextBlock - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.textblock"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/text-block"
+            },
+            {
+              "Title": "Typography in Windows",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/signature-experiences/typography"
+            }
+          ],
+          "RelatedControls": [
+            "TextStyles"
+          ],
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement"
+          ]
+        }
+      ]
+    },
+    {
+      "UniqueId": "menustoolbars",
+      "Title": "Menus and Toolbars",
+      "Items": [
+        {
+          "Title": "AppBar",
+          "UniqueId": "AppBar",
+          "UrlName": "appbar",
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Subtitle": "A UI element that's typically used to present commands and tools to the user, but can also be used for navigation.",
+          "Description": "An app bar is a UI element that's typically used to present commands and tools to the user, but can also be used for navigation.",
+          "Docs": [
+            {
+              "Title": "AppBar - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.appbar"
+            },
+            {
+              "Title": "Adding app bars (XAML)",
+              "Uri": "https://learn.microsoft.com/previous-versions/windows/apps/hh781230(v=win.10)"
+            },
+            {
+              "Title": "Quickstart: Adding app bar buttons",
+              "Uri": "https://learn.microsoft.com/previous-versions/windows/apps/jj662743(v=win.10)"
+            },
+            {
+              "Title": "How to share an app bar accross pages (XAML)",
+              "Uri": "https://learn.microsoft.com/previous-versions/windows/apps/jj150604(v=win.10)"
+            }
+          ],
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control",
+            "ContentControl"
+          ]
+        },
+        {
+          "Title": "StandardUICommand",
+          "UniqueId": "StandardUICommand",
+          "UrlName": "stduicmd",
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "ApiNamespace": "Windows.UI.Xaml.Input",
+          "Subtitle": "A StandardUICommand is a built-in 'XamlUICommand' which represents a commonly used command, e.g. 'Save'.",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "XamlUICommand"
+          ],
+          "Docs": [
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/commanding#command-experiences-using-the-standarduicommand-class"
+            },
+            {
+              "Title": "StandardUICommand - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.input.standarduicommand"
+            }
+          ],
+          "RelatedControls": [
+            "XamlUICommand",
+            "AppBarButton",
+            "AppBarToggleButton",
+            "CommandBar",
+            "AppBar"
+          ]
+        },
+        {
+          "Title": "XamlUICommand",
+          "UniqueId": "XamlUICommand",
+          "UrlName": "xamluicmd",
+          "IconGlyph": "",
+          "UseGlyph": true,
+          "ApiNamespace": "Windows.UI.Xaml.Input",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject"
+          ],
+          "Subtitle": "An object which is used to define the look and feel of a given command which can be reused across your app.",
+          "Description": "A XamlUICommand is an object that defines the look and feel of a given command, which can be reused across your app. Most button controls expose a Command property that allows you to assign a XamlUICommand to them.",
+          "Docs": [
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/commanding#command-experiences-using-the-xamluicommand-class"
+            },
+            {
+              "Title": "XamlUICommand - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.input.xamluicommand"
+            }
+          ],
+          "RelatedControls": [
+            "StandardUICommand",
+            "AppBarButton",
+            "AppBarToggleButton",
+            "CommandBar"
+          ]
+        }
+      ]
+    },
+    {
+      "UniqueId": "statusinfo",
+      "Title": "Status & info",
+      "Items": [
+        {
+          "UniqueId": "ProgressBar",
+          "Title": "ProgressBar",
+          "UrlName": "progressbar",
+          "Description": "Shows the apps progress on a task, or that the app is performing ongoing work that doesn't block user interaction.\n\nThe ProgressBar has two different visual representations:\n• Indeterminate - shows that a task is ongoing, but doesn't block user interaction.\n• Determinate - shows how much progress has been made on a known amount of work.",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control",
+            "RangeBase"
+          ],
+          "Subtitle": "Shows the apps progress on a task, or that the app is performing ongoing work that doesn't block user interaction.",
+          "Docs": [
+            {
+              "Title": "ProgressBar - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.progressbar"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/progress-controls"
+            }
+          ],
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "RelatedControls": [
+            "ProgressRing"
+          ]
+        },
+        {
+          "UniqueId": "ProgressRing",
+          "Title": "ProgressRing",
+          "UrlName": "progressring",
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Description": "Shows that the app is performing ongoing work that does block user interaction. In UWP, the ProgressRing is always indeterminate.",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control"
+          ],
+          "Subtitle": "Shows that the app is performing ongoing work that does block user interaction.",
+          "Docs": [
+            {
+              "Title": "ProgressRing - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.progressring"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/progress-controls"
+            }
+          ],
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "RelatedControls": [
+            "ProgressBar"
+          ]
+        }
+      ]
+    }
+  ]
+}

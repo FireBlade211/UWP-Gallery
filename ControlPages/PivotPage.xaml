@@ -1,0 +1,158 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.PivotPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls"
+    xmlns:samples="using:UWPGallery.SamplePages">
+
+    <StackPanel Spacing="6">
+        <controls:GallerySample HeaderTitle="Simple Pivot app UI" MinHeight="250">
+            <controls:GallerySample.Sample>
+                <Pivot Title="COOL EMAIL APP">
+                    <PivotItem Header="All">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="Bold">120 items</TextBlock>
+                            <TextBlock>All emails go here...</TextBlock>
+                        </StackPanel>
+                    </PivotItem>
+                    <PivotItem Header="Unread">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="Bold">60 items</TextBlock>
+                            <TextBlock>Unread emails go here...</TextBlock>
+                        </StackPanel>
+                    </PivotItem>
+                    <PivotItem Header="Flagged">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="Bold">20 items</TextBlock>
+                            <TextBlock>Flagged emails go here...</TextBlock>
+                        </StackPanel>
+                    </PivotItem>
+                    <PivotItem Header="Urgent">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="Bold">40 items</TextBlock>
+                            <TextBlock>Urgent emails go here...</TextBlock>
+                        </StackPanel>
+                    </PivotItem>
+                </Pivot>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Pivot Title="COOL EMAIL APP"&gt;
+    &lt;PivotItem Header="All"&gt;
+        &lt;StackPanel Spacing="6"&gt;
+            &lt;TextBlock FontWeight="Bold"&gt;120 items&lt;/TextBlock&gt;
+            &lt;TextBlock&gt;All emails go here...&lt;/TextBlock&gt;
+        &lt;/StackPanel&gt;
+    &lt;/PivotItem&gt;
+    &lt;PivotItem Header="Unread"&gt;
+        &lt;StackPanel Spacing="6"&gt;
+            &lt;TextBlock FontWeight="Bold"&gt;60 items&lt;/TextBlock&gt;
+            &lt;TextBlock&gt;Unread emails go here...&lt;/TextBlock&gt;
+        &lt;/StackPanel&gt;
+    &lt;/PivotItem&gt;
+    &lt;PivotItem Header="Flagged"&gt;
+        &lt;StackPanel Spacing="6"&gt;
+            &lt;TextBlock FontWeight="Bold"&gt;20 items&lt;/TextBlock&gt;
+            &lt;TextBlock&gt;Flagged emails go here...&lt;/TextBlock&gt;
+        &lt;/StackPanel&gt;
+    &lt;/PivotItem&gt;
+    &lt;PivotItem Header="Urgent"&gt;
+        &lt;StackPanel Spacing="6"&gt;
+            &lt;TextBlock FontWeight="Bold"&gt;40 items&lt;/TextBlock&gt;
+            &lt;TextBlock&gt;Urgent emails go here...&lt;/TextBlock&gt;
+        &lt;/StackPanel&gt;
+    &lt;/PivotItem&gt;
+&lt;/Pivot&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="Simple Pivot app UI with counters" MinHeight="250">
+            <controls:GallerySample.Sample>
+                <Pivot Title="COOL EMAIL APP">
+                    <PivotItem Header="All (120)">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="Bold">120 items</TextBlock>
+                            <TextBlock>All emails go here...</TextBlock>
+                        </StackPanel>
+                    </PivotItem>
+                    <PivotItem Header="Unread (60)">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="Bold">60 items</TextBlock>
+                            <TextBlock>Unread emails go here...</TextBlock>
+                        </StackPanel>
+                    </PivotItem>
+                    <PivotItem Header="Flagged (20)">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="Bold">20 items</TextBlock>
+                            <TextBlock>Flagged emails go here...</TextBlock>
+                        </StackPanel>
+                    </PivotItem>
+                    <PivotItem Header="Urgent (40)">
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="Bold">40 items</TextBlock>
+                            <TextBlock>Urgent emails go here...</TextBlock>
+                        </StackPanel>
+                    </PivotItem>
+                </Pivot>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Pivot Title="COOL EMAIL APP"&gt;
+    &lt;PivotItem Header="All (120)"&gt;
+        &lt;StackPanel Spacing="6"&gt;
+            &lt;TextBlock FontWeight="Bold"&gt;120 items&lt;/TextBlock&gt;
+            &lt;TextBlock&gt;All emails go here...&lt;/TextBlock&gt;
+        &lt;/StackPanel&gt;
+    &lt;/PivotItem&gt;
+    &lt;PivotItem Header="Unread (60)"&gt;
+        &lt;StackPanel Spacing="6"&gt;
+            &lt;TextBlock FontWeight="Bold"&gt;60 items&lt;/TextBlock&gt;
+            &lt;TextBlock&gt;Unread emails go here...&lt;/TextBlock&gt;
+        &lt;/StackPanel&gt;
+    &lt;/PivotItem&gt;
+    &lt;PivotItem Header="Flagged (20)"&gt;
+        &lt;StackPanel Spacing="6"&gt;
+            &lt;TextBlock FontWeight="Bold"&gt;20 items&lt;/TextBlock&gt;
+            &lt;TextBlock&gt;Flagged emails go here...&lt;/TextBlock&gt;
+        &lt;/StackPanel&gt;
+    &lt;/PivotItem&gt;
+    &lt;PivotItem Header="Urgent (40)"&gt;
+        &lt;StackPanel Spacing="6"&gt;
+            &lt;TextBlock FontWeight="Bold"&gt;40 items&lt;/TextBlock&gt;
+            &lt;TextBlock&gt;Urgent emails go here...&lt;/TextBlock&gt;
+        &lt;/StackPanel&gt;
+    &lt;/PivotItem&gt;
+&lt;/Pivot&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="Sample Settings Page" MinHeight="500">
+            <controls:GallerySample.Sample>
+                <samples:SampleSettingsPage/>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Pivot Title="SAMPLE SETTINGS PAGE"&gt;
+    &lt;PivotItem Header="General"&gt;
+        &lt;TextBlock Text="General settings go here..."/&gt;
+    &lt;/PivotItem&gt;
+
+    &lt;PivotItem Header="About"&gt;
+        &lt;TextBlock Text="About information goes here..."/&gt;
+    &lt;/PivotItem&gt;
+&lt;/Pivot&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>

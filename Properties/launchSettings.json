@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "UWPGallery": {
+      "commandName": "MsixPackage"
+    }
+  }
+}

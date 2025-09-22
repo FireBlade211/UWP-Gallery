@@ -1,0 +1,143 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.RevealPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls"
+    Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <Style x:Key="RevealSampleButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
+            <Setter Target="Width" Value="100"/>
+            <Setter Target="Height" Value="100"/>
+            <Setter Target="VerticalAlignment" Value="Center"/>
+            <Setter Target="Margin" Value="10"/>
+        </Style>
+    </Page.Resources>
+    
+    <StackPanel Margin="0,16,0,0" Orientation="Vertical" Spacing="6">
+
+        <TextBlock TextWrapping="WrapWholeWords">
+            <Bold>Reveal</Bold> is a lighting effect for 10-foot experiences, such as game consoles on television screens. It animates
+            the border of focusable elements, such as buttons, when the user moves gamepad or keyboard focus to them.
+        </TextBlock>
+        
+        <controls:GallerySample HeaderTitle="Change the appearance of the focus rectangles" MinHeight="232">
+            <controls:GallerySample.Sample>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Style="{StaticResource RevealSampleButtonStyle}" AutomationProperties.Name="Square button 1" x:Name="Button1"/>
+                        <Button Style="{StaticResource RevealSampleButtonStyle}" AutomationProperties.Name="Square button 2"/>
+                        <Button Style="{StaticResource RevealSampleButtonStyle}" AutomationProperties.Name="Square button 3"/>
+                        <Button Style="{StaticResource RevealSampleButtonStyle}" AutomationProperties.Name="Square button 4"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="16,0,0,0" Text="FocusVisualKind:" VerticalAlignment="Center"/>
+
+                        <RadioButton Margin="16,0,0,0" Content="HighVisibility" GroupName="FocusVisualKindGroup"
+                                     x:Name="HighVisibilityRadio" Checked="HighVisibilityRadio_Checked"/>
+                        <RadioButton Content="RevealFocus" GroupName="FocusVisualKindGroup" x:Name="RevealFocusRadio" Checked="RevealFocusRadio_Checked"/>
+                        <RadioButton Content="DottedLine" GroupName="FocusVisualKindGroup" x:Name="DottedLineRadio" Checked="DottedLineRadio_Checked"/>
+
+                        <Button Margin="16,0,0,0" Content="Move focus to button" Click="Button_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;StackPanel&gt;
+    &lt;StackPanel Orientation="Horizontal"&gt;
+        &lt;Button Style="{StaticResource RevealSampleButtonStyle}" AutomationProperties.Name="Square button 1" x:Name="Button1"/&gt;
+        &lt;Button Style="{StaticResource RevealSampleButtonStyle}" AutomationProperties.Name="Square button 2"/&gt;
+        &lt;Button Style="{StaticResource RevealSampleButtonStyle}" AutomationProperties.Name="Square button 3"/&gt;
+        &lt;Button Style="{StaticResource RevealSampleButtonStyle}" AutomationProperties.Name="Square button 4"/&gt;
+    &lt;/StackPanel&gt;
+
+    &lt;StackPanel Orientation="Horizontal"&gt;
+        &lt;TextBlock Margin="16,0,0,0" Text="FocusVisualKind:" VerticalAlignment="Center"/&gt;
+
+        &lt;RadioButton Margin="16,0,0,0" Content="HighVisibility" GroupName="FocusVisualKindGroup"
+                        x:Name="HighVisibilityRadio" Checked="HighVisibilityRadio_Checked"/&gt;
+        &lt;RadioButton Content="RevealFocus" GroupName="FocusVisualKindGroup" x:Name="RevealFocusRadio" Checked="RevealFocusRadio_Checked"/&gt;
+        &lt;RadioButton Content="DottedLine" GroupName="FocusVisualKindGroup" x:Name="DottedLineRadio" Checked="DottedLineRadio_Checked"/&gt;
+
+        &lt;Button Margin="16,0,0,0" Content="Move focus to button" Click="Button_Click"/&gt;
+    &lt;/StackPanel&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private void Page_Loaded(object sender, RoutedEventArgs e)
+{
+    switch (Application.Current.FocusVisualKind)
+    {
+        case FocusVisualKind.HighVisibility:
+            HighVisibilityRadio.IsChecked = true;
+            break;
+        case FocusVisualKind.Reveal:
+            RevealFocusRadio.IsChecked = true;
+            break;
+        case FocusVisualKind.DottedLine:
+            DottedLineRadio.IsChecked = true;
+            break;
+    }
+}
+
+private void HighVisibilityRadio_Checked(object sender, RoutedEventArgs e)
+{
+    Application.Current.FocusVisualKind = FocusVisualKind.HighVisibility;
+}
+
+private void RevealFocusRadio_Checked(object sender, RoutedEventArgs e)
+{
+    Application.Current.FocusVisualKind = FocusVisualKind.Reveal;
+}
+
+private void DottedLineRadio_Checked(object sender, RoutedEventArgs e)
+{
+    Application.Current.FocusVisualKind = FocusVisualKind.DottedLine;
+}
+
+private void Button_Click(object sender, RoutedEventArgs e)
+{
+    Button1.Focus(FocusState.Keyboard);
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+
+        <TextBlock Margin="0,16,0,0" TextWrapping="WrapWholeWords">
+            <Bold>NOTE:</Bold> Changing the focus visual kind will change the focus visuals that "UseSystemFocusVisuals" in the entire UWP Gallery app.
+            Reveal focus should be used on Xbox only. Apps should use high visibility focus rectangles across all other form factors. Dotted line is obsolete.
+        </TextBlock>
+
+        <controls:GallerySample HeaderTitle="Using Reveal Brushes" MinHeight="210">
+            <controls:GallerySample.Sample>
+                <StackPanel Spacing="6">
+                    <TextBlock TextWrapping="WrapWholeWords">If you're making custom controls, you can use reveal brushes to use the reveal material on your control.</TextBlock>
+
+                    <AppBarButton Width="96" Height="96" Background="{ThemeResource SystemControlBackgroundBaseLowRevealBackgroundBrush}"
+                            BorderBrush="{ThemeResource SystemControlBackgroundBaseLowRevealBorderBrush}"/>
+                </StackPanel>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;StackPanel Spacing="6"&gt;
+    &lt;TextBlock TextWrapping="WrapWholeWords"&gt;If you're making custom controls, you can use reveal brushes to use the reveal material on your control.&lt;/TextBlock&gt;
+
+    &lt;AppBarButton Width="96" Height="96" Background="{ThemeResource SystemControlBackgroundBaseLowRevealBackgroundBrush}"
+            BorderBrush="{ThemeResource SystemControlBackgroundBaseLowRevealBorderBrush}"/&gt;
+&lt;/StackPanel&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>
