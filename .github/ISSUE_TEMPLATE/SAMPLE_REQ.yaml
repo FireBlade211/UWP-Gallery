@@ -18,7 +18,7 @@ body:
       description: "Optionally provide documentation links to the documentation and API pages for this sample."
       placeholder: "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.textbox"
 
-  - type: input
+  - type: textarea
     id: "codesamples"
     attributes:
       label: "Code Samples"
