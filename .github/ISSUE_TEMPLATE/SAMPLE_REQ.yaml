@@ -1,0 +1,29 @@
+name: Feature Request
+description: Request a sample to be added in the next version of the UWP Gallery
+labels: ["enhancement"]
+title: "[SAMPLE]"
+body:
+  - type: input
+    id: "sample"
+    attributes:
+      label: "Sample"
+      description: "Please enter the control or API you'd like a sample for."
+      placeholder: "TextBox"
+    validations:
+      required: true
+  - type: textarea
+    id: "doclinks"
+    attributes:
+      label: "Documentation links"
+      description: "Optionally provide documentation links to the documentation and API pages for this sample."
+      placeholder: "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.textbox"
+
+  - type: input
+    id: "codesamples"
+    attributes:
+      label: "Code Samples"
+      description: "Optionally provide the code samples you'd like to see in the gallery for this control/API."
+      placeholder: |
+        - Simple TextBoxes
+        - Configuring properties
+        - Some other sample you'd like to see...
