@@ -434,6 +434,41 @@
             "UIElement",
             "FrameworkElement"
           ]
+        },
+        {
+          "Title": "TextBox",
+          "UniqueId": "TextBox",
+          "UrlName": "textbox",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control"
+          ],
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Subtitle": "A single-line or multi-line plain text field.",
+          "Description": "Use a TextBox to let a user enter simple text input in your app. You can add a header and placeholder text to let the user know what the TextBox is for, and you can customize it in other ways.",
+          "Docs": [
+            {
+              "Title": "TextBox - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.textbox"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/text-controls"
+            }
+          ],
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "RelatedControls": [
+            "NumberBox",
+            "TextBlock",
+            "RichTextBlock",
+            "PasswordBox",
+            "RichEditBox",
+            "AutoSuggestBox"
+          ]
         }
       ]
     },
