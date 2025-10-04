@@ -150,6 +150,41 @@
           "UseGlyph": true,
           "IconGlyph": "",
           "UrlName": "hyperlinkbutton"
+        },
+        {
+          "Title": "RepeatButton",
+          "UniqueId": "RepeatButton",
+          "UrlName": "repeatbutton",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control",
+            "ContentControl",
+            "ButtonBase"
+          ],
+          "ApiNamespace": "Windows.UI.Xaml.Controls.Primitives",
+          "Subtitle": "A button that raises its Click event repeatedly from the time it's pressed until it's released.",
+          "Description": "The RepeatButton control is like a standard Button, except that the Click event occurs continuously while the user presses the RepeatButton.",
+          "Docs": [
+            {
+              "Title": "RepeatButton - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.primitives.repeatbutton"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/buttons"
+            }
+          ],
+          "RelatedControls": [
+            "Button",
+            "ToggleButton",
+            "HyperlinkButton",
+            "AppBarButton"
+          ],
+          "UseGlyph": true,
+          "IconGlyph": ""
         }
       ]
     },

@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.RepeatButtonPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <StackPanel Spacing="6">
+        <controls:GallerySample HeaderTitle="A simple RepeatButton with click counter">
+            <StackPanel Orientation="Horizontal" Spacing="12">
+                <RepeatButton Content="Click and hold!" Click="RepeatButton_Click"/>
+                <TextBlock Text="Click count: 0" x:Name="clickCountBlock" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;StackPanel Orientation="Horizontal" Spacing="12"&gt;
+    &lt;RepeatButton Content="Click and hold!" Click="RepeatButton_Click"/&gt;
+    &lt;TextBlock Text="Click count: 0" x:Name="clickCountBlock" VerticalAlignment="Center"/&gt;
+&lt;/StackPanel&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private int ClickCount = 0;
+                    
+private void RepeatButton_Click(object sender, RoutedEventArgs e)
+{
+    ClickCount++;
+
+    clickCountBlock.Text = $"Click count: {ClickCount}";
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>
