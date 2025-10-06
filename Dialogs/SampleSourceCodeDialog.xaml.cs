@@ -23,6 +23,7 @@ namespace UWPGallery.Dialogs
         public SampleSourceCodeDialog()
         {
             InitializeComponent();
+            RequestedTheme = MainPage.Current?.RequestedTheme ?? ElementTheme.Default;
         }
     }
 }
