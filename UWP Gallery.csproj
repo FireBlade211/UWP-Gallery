@@ -35,10 +35,17 @@
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Uwp.Controls.Primitives" Version="8.2.250402" />
     <PackageReference Include="CommunityToolkit.Uwp.Converters" Version="8.2.250402" />
+    <PackageReference Include="CommunityToolkit.Uwp.Triggers" Version="8.2.250402" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CsTools">
       <HintPath>..\CsTools\CsTools\bin\Release\net8.0\CsTools.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Piotr\Projects\Visual Studio Repos\UWP Gallery\.editorconfig" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Piotr\Projects\Visual Studio Repos\UWP Gallery\.editorconfig" />
   </ItemGroup>
 </Project>
