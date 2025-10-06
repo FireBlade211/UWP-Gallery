@@ -149,6 +149,8 @@ namespace UWPGallery.ControlPages
                         outputString = "No icon found.";
                     }
 
+                    iconCountBlock.Text = $"{filteredItemsCount} icons";
+
                     UIHelper.AnnounceActionForAccessibility(searchBox, outputString, "AutoSuggestBoxNumberIconsFoundId");
 
                     loadingRing.Visibility = Visibility.Collapsed;
