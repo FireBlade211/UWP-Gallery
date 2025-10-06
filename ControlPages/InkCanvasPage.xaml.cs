@@ -137,7 +137,8 @@ namespace UWPGallery.ControlPages
                             Title = "Ink analysis nodes not found",
                             Content = "The ink analysis nodes were not found, meaning none of your strokes were recognized as text or drawings. Please try again.",
                             CloseButtonText = "OK",
-                            DefaultButton = ContentDialogButton.Close
+                            DefaultButton = ContentDialogButton.Close,
+                            RequestedTheme = MainPage.Current?.RequestedTheme ?? ElementTheme.Default
                         }.ShowAsync();
                     }
                 }
@@ -149,7 +150,8 @@ namespace UWPGallery.ControlPages
                         Content = "The ink analysis status was not updated, which means that some error may've occured." +
                         $" The current status is: {inkAnalysisResults.Status}",
                         CloseButtonText = "OK",
-                        DefaultButton = ContentDialogButton.Close
+                        DefaultButton = ContentDialogButton.Close,
+                        RequestedTheme = MainPage.Current?.RequestedTheme ?? ElementTheme.Default
                     }.ShowAsync();
                 }
             }
@@ -269,7 +271,8 @@ namespace UWPGallery.ControlPages
                         Content = str,
                         Title = "Ink Recognition Results: " + c,
                         CloseButtonText = "OK",
-                        DefaultButton = ContentDialogButton.Close
+                        DefaultButton = ContentDialogButton.Close,
+                        RequestedTheme = MainPage.Current?.RequestedTheme ?? ElementTheme.Default
                     };
                     _ = dlg.ShowAsync();
                 }
@@ -289,7 +292,8 @@ namespace UWPGallery.ControlPages
                     "Would you like to clear the ink canvas?",
                     PrimaryButtonText = "Clear canvas",
                     SecondaryButtonText = "No",
-                    DefaultButton = ContentDialogButton.Primary
+                    DefaultButton = ContentDialogButton.Primary,
+                    RequestedTheme = MainPage.Current?.RequestedTheme ?? ElementTheme.Default
                 }.ShowAsync();
 
                 if (btn == ContentDialogResult.Primary)
