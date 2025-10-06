@@ -95,7 +95,7 @@ namespace UWPGallery.ControlPages
                     CodePointBlock.Text = icod.Code;
                     TextGlyphBlock.Text = $"&#x{icod.Code};";
                     CodeGlyphBlock.Text = $"\\u{icod.Code}";
-                    XAMLCodePresenter.Text = $"<FontIcon Glyph=\"&#x{icod.Code}\"/>";
+                    XAMLCodePresenter.Text = $"<FontIcon Glyph=\"&#x{icod.Code};\"/>";
                     CSharpCodePresenter.Text = $"FontIcon icon = new FontIcon();\nicon.Glyph = \"\\u{icod.Code}\";";
                 }
             }
