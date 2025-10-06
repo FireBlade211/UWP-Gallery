@@ -113,8 +113,8 @@ namespace UWPGallery.Controls
 
         private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is HyperlinkButton hlb && hlb.DataContext is Uri uri)
-                _ = Launcher.LaunchUriAsync(uri);
+            if (sender is HyperlinkButton hlb && hlb.DataContext is string uri)
+                _ = Launcher.LaunchUriAsync(new Uri(uri));
         }
     }
 }
