@@ -52,7 +52,7 @@
                     Text="{x:Bind Item.Description}"
                     Visibility="{x:Bind Item.Description, Converter={StaticResource stringVisibilityConverter}}"
                     TextWrapping="WrapWholeWords"/>
-                <Frame x:Name="contentFrame" Grid.Row="1" x:FieldModifier="public" />
+                <Frame x:Name="contentFrame" Grid.Row="1" x:FieldModifier="public" Margin="0,15,0,0" />
 
                 <TextBlock Margin="0,12,0,0" Grid.Row="2" Style="{StaticResource SubtitleTextBlockStyle}">Related Controls</TextBlock>
                 
