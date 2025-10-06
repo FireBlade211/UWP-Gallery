@@ -1,0 +1,20 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.ContentDialogPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <StackPanel>
+        <controls:GallerySample HeaderTitle="Simple ContentDialog">
+            <StackPanel Orientation="Horizontal" Spacing="16">
+                <Button Content="Show ContentDialog" Click="Button_Click"/>
+                <TextBlock Text="You clicked: None" x:Name="simpleDlgButtonOutputBlock" VerticalAlignment="Center"/>
+            </StackPanel>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>
