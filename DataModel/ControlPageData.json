@@ -93,7 +93,6 @@
           "ApiNamespace": "Windows.UI.Xaml.Controls",
           "Subtitle": "A control that responds to user input and raises a Click event.",
           "Description": "The Button control provides a Click event to respond to user input from a touch, mouse, keyboard, stylus, or other input device. You can put different kinds of content in a button, such as text or an image, or you can restyle a button to give it a new look.",
-          "Content": "<p>The main purpose of a <b>Button</b> is to make something happen when a user clicks it. There are two ways you can make something happen:</p><ul><li>Handle the <b>Click</b> event.</li><li>Bind the <b>Command</b> property to an ICommand implementation that describes the command logic.</li></ul><p>Buttons often have only simple string content, but you can use any object as content. You can also change the style and template to give them any look you want.</p>",
           "Docs": [
             {
               "Title": "Button - API",
@@ -414,7 +413,7 @@
             }
           ],
           "BaseClasses": [ "Object" ]
-        }
+        },
         //{
         //  "Title": "SearchPane",
         //  "UniqueId": "SearchPane",
@@ -435,6 +434,39 @@
         //    "AutoSuggestBox"
         //  ]
         //}
+        {
+          "UniqueId": "ContentDialog",
+          "Title": "ContentDialog",
+          "UrlName": "contentdlg",
+          "BaseClasses": [
+            "Object",
+            "DependencyObject",
+            "UIElement",
+            "FrameworkElement",
+            "Control",
+            "ContentControl"
+          ],
+          "ApiNamespace": "Windows.UI.Xaml.Controls",
+          "Subtitle": "A dialog box that can be customized to contain any XAML content.",
+          "Description": "Use a ContentDialog to show relavant information or to provide a modal dialog experience that can show any XAML content.",
+          "Docs": [
+            {
+              "Title": "ContentDialog - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.contentdialog"
+            },
+            {
+              "Title": "Guidelines",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/dialogs-and-flyouts/dialogs"
+            }
+          ],
+          "RelatedControls": [
+            "Flyout",
+            "MenuFlyout",
+            "ToolTip"
+          ],
+          "UseGlyph": true,
+          "IconGlyph": ""
+        }
       ]
     },
     {
