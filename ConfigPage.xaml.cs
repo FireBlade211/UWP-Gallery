@@ -36,7 +36,8 @@ namespace UWPGallery
                     Title = "Can't open the configuration file",
                     Content = "We can't open the configuration file because it does not exist yet. Please try updating some settings or marking some samples as favorite and try again.",
                     CloseButtonText = "OK",
-                    DefaultButton = ContentDialogButton.Close
+                    DefaultButton = ContentDialogButton.Close,
+                    RequestedTheme = MainPage.Current?.RequestedTheme ?? ElementTheme.Default
                 }
                 .ShowAsync();
             }
@@ -47,7 +48,8 @@ namespace UWPGallery
                     Title = "An error occured opening the configuration file",
                     Content = $"An error has occured while opening the configuration file. Please try again later.\n\n\"{ex.Message}\"",
                     CloseButtonText = "OK",
-                    DefaultButton = ContentDialogButton.Close
+                    DefaultButton = ContentDialogButton.Close,
+                    RequestedTheme = MainPage.Current?.RequestedTheme ?? ElementTheme.Default
                 }
                 .ShowAsync();
             }
@@ -61,7 +63,8 @@ namespace UWPGallery
                 Content = "All your settings and other data will be lost. This includes settings and favorited samples. Are you sure?",
                 PrimaryButtonText = "Restore",
                 SecondaryButtonText = "No",
-                DefaultButton = ContentDialogButton.Primary
+                DefaultButton = ContentDialogButton.Primary,
+                RequestedTheme = MainPage.Current?.RequestedTheme ?? ElementTheme.Default
             }
             .ShowAsync() != ContentDialogResult.Primary) return;
 
@@ -74,7 +77,8 @@ namespace UWPGallery
                     Title = "Settings restored!",
                     Content = "The settings have been restored to defaults.",
                     CloseButtonText = "OK",
-                    DefaultButton = ContentDialogButton.Close
+                    DefaultButton = ContentDialogButton.Close,
+                    RequestedTheme = MainPage.Current?.RequestedTheme ?? ElementTheme.Default
                 }
                 .ShowAsync();
 
@@ -91,7 +95,8 @@ namespace UWPGallery
                     Title = "Can't delete the configuration file",
                     Content = "We can't delete the settings file to clear your settings as no settings have been changed, so the file doesn't exist yet.",
                     CloseButtonText = "OK",
-                    DefaultButton = ContentDialogButton.Close
+                    DefaultButton = ContentDialogButton.Close,
+                    RequestedTheme = MainPage.Current?.RequestedTheme ?? ElementTheme.Default
                 }
                 .ShowAsync();
             }
@@ -102,7 +107,8 @@ namespace UWPGallery
                     Title = "An error occured deleting the configuration file",
                     Content = $"An error has occured while deleting the configuration file. Please try again later.\n\n\"{ex.Message}\"",
                     CloseButtonText = "OK",
-                    DefaultButton = ContentDialogButton.Close
+                    DefaultButton = ContentDialogButton.Close,
+                    RequestedTheme = MainPage.Current?.RequestedTheme ?? ElementTheme.Default
                 }
                 .ShowAsync();
             }
