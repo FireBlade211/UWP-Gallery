@@ -1,21 +1,25 @@
 ﻿using FireBlade.CsTools;
 using System;
 using System.Diagnostics;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using UWPGallery.Controls;
 using UWPGallery.DataModel;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.Storage;
+using Windows.UI.ApplicationSettings;
+using Windows.UI.Popups;
+using Windows.UI.WindowManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Markup;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Windows.UI.ApplicationSettings;
-using Windows.UI.Popups;
-using Windows.ApplicationModel.DataTransfer;
 
 namespace UWPGallery
 {
@@ -249,14 +253,41 @@ namespace UWPGallery
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    // TODO: Load state from previously suspended application
+                    NavigatedEventHandler onNavig = (s, e) =>
+                    {
+                        if (e.Content is MainPage mp)
+                        {
+                            if (ApplicationData.Current.LocalSettings.Values.TryGetValue("SuspensionLastUid", out object? gStoredUid)
+                                && gStoredUid is string storedUid)
+                            {
+                                var findDelegate = bool (object x) =>
+                                {
+                                    if (x is NavigationViewItem navitem)
+                                    {
+                                        if (navitem.Tag is string uid)
+                                        {
+                                            if (uid.Equals(storedUid, StringComparison.InvariantCulture))
+                                                return true;
+                                        }
+                                    }
+
+                                    return false;
+                                };
+
+                                if (mp.AreNavItemsReady) mp.NavBar.SelectedItem = mp.NavBar.MenuItems.FirstOrDefault(findDelegate, mp.NavBar.MenuItems.First());
+                                else mp.NavItemsReady += (s, e) => mp.NavBar.SelectedItem = mp.NavBar.MenuItems.FirstOrDefault(findDelegate, mp.NavBar.MenuItems.First());
+                            }
+                        }
+                    };
+
+                    rootFrame.Navigated += onNavig;
                 }
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
 
-            if (e.PrelaunchActivated == false)
+            if (!e.PrelaunchActivated)
             {
                 if (rootFrame.Content == null)
                 {
@@ -320,7 +351,16 @@ namespace UWPGallery
         {
             SuspendingDeferral deferral = e.SuspendingOperation.GetDeferral();
 
-            // TODO: Save application state and stop any background activity
+            // Save application state and stop any background activity
+            var selectedItem = MainPage.Current?.NavBar.SelectedItem;
+            if (selectedItem is NavigationViewItem nvi)
+            {
+                if (nvi.Tag is string uid)
+                {
+                    ApplicationData.Current.LocalSettings.Values["SuspensionLastUid"] = uid;
+                }
+            }
+
             deferral.Complete();
         }
     }
