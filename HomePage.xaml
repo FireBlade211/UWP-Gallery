@@ -9,10 +9,6 @@
     Loaded="Page_Loaded"
     xmlns:converters="using:CommunityToolkit.WinUI.Converters">
 
-    <Page.Resources>
-        <converters:CollectionVisibilityConverter x:Key="collectionVisibilityConverter"/>
-    </Page.Resources>
-
     <ScrollViewer>
         <Grid RowSpacing="6">
             <Grid.RowDefinitions>
@@ -76,7 +72,7 @@
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
 
-                <StackPanel Orientation="Horizontal" Spacing="8" Visibility="{x:Bind FavoriteItems, Converter={StaticResource collectionVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal" Spacing="8" x:Name="favoritesBlock" Visibility="{x:Bind IsEmpty(FavoriteItems), Mode=OneWay}">
                     <TextBlock Text="Favorite samples" x:Name="favoriteSamplesBlock" Style="{StaticResource SubtitleTextBlockStyle}"/>
                     <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Foreground="{StaticResource SystemColorGrayTextBrush}"
                                Text="{x:Bind FavoriteItems.Count, Mode=OneWay}"/>
@@ -86,40 +82,39 @@
             x:Name="favoritesGridView"
             Padding="24,16,24,0"
             AutomationProperties.LabeledBy="{x:Bind favoriteSamplesBlock}"
-            Visibility="{x:Bind FavoriteItems, Converter={StaticResource collectionVisibilityConverter}}"
             IsItemClickEnabled="True"
             IsSwipeEnabled="False"
             ItemContainerStyle="{StaticResource IndentedGridViewItemStyle}"
             ItemTemplate="{StaticResource ControlItemTemplate}"
             SelectionMode="None"
+            Visibility="{x:Bind IsEmpty(FavoriteItems), Mode=OneWay}"
             Grid.Row="1"
             ItemsSource="{x:Bind FavoriteItems, Mode=OneWay}"
             ItemClick="GVItemClick">
                 </GridView>
 
-                <StackPanel Orientation="Horizontal" Spacing="8" Grid.Row="2" Visibility="{x:Bind NewSamples, Converter={StaticResource collectionVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal" Spacing="8" Grid.Row="2" Visibility="{x:Bind IsEmpty(NewSamples), Mode=OneWay}">
                     <TextBlock x:Name="newSamplesBlock" Text="New samples" Style="{StaticResource SubtitleTextBlockStyle}"/>
                     <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Foreground="{StaticResource SystemColorGrayTextBrush}"
                                Text="{x:Bind NewSamples.Count, Mode=OneWay}"/>
                 </StackPanel>
                 
-
                 <GridView
             x:Name="newSamplesGridView"
             Padding="24,16,24,0"
             IsItemClickEnabled="True"
             IsSwipeEnabled="False"
             AutomationProperties.LabeledBy="{x:Bind newSamplesBlock}"
-            Visibility="{x:Bind NewSamples, Converter={StaticResource collectionVisibilityConverter}}"
             ItemContainerStyle="{StaticResource IndentedGridViewItemStyle}"
             ItemTemplate="{StaticResource ControlItemTemplate}"
             SelectionMode="None"
             Grid.Row="3"
             ItemsSource="{x:Bind NewSamples, Mode=OneWay}"
+            Visibility="{x:Bind IsEmpty(NewSamples), Mode=OneWay}"
             ItemClick="GVItemClick">
                 </GridView>
 
-                <StackPanel Orientation="Horizontal" Spacing="8" Grid.Row="4" Visibility="{x:Bind UpdatedSamples, Converter={StaticResource collectionVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal" Spacing="8" Grid.Row="4" Visibility="{x:Bind IsEmpty(UpdatedSamples), Mode=OneWay}">
                     <TextBlock x:Name="updatedSamplesBlock" Text="Updated samples" Style="{StaticResource SubtitleTextBlockStyle}"/>
                     <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Foreground="{StaticResource SystemColorGrayTextBrush}"
                                Text="{x:Bind UpdatedSamples.Count, Mode=OneWay}"/>
@@ -136,12 +131,12 @@
             ItemTemplate="{StaticResource ControlItemTemplate}"
             SelectionMode="None"
             Grid.Row="5"
-            Visibility="{x:Bind UpdatedSamples, Converter={StaticResource collectionVisibilityConverter}}"
+            Visibility="{x:Bind IsEmpty(UpdatedSamples), Mode=OneWay}"
             ItemsSource="{x:Bind UpdatedSamples, Mode=OneWay}"
             ItemClick="GVItemClick">
                 </GridView>
 
-                <StackPanel Orientation="Horizontal" Spacing="8" Grid.Row="6" Visibility="{x:Bind AllItems, Converter={StaticResource collectionVisibilityConverter}}">
+                <StackPanel Orientation="Horizontal" Spacing="8" Grid.Row="6" Visibility="{x:Bind IsEmpty(AllItems), Mode=OneWay}">
                     <TextBlock Text="All samples" x:Name="allSamplesBlock" Style="{StaticResource SubtitleTextBlockStyle}"/>
                     <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Foreground="{StaticResource SystemColorGrayTextBrush}"
                                Text="{x:Bind AllItems.Count, Mode=OneWay}"/>
@@ -153,7 +148,7 @@
             IsItemClickEnabled="True"
             IsSwipeEnabled="False"
             AutomationProperties.LabeledBy="{x:Bind allSamplesBlock}"
-            Visibility="{x:Bind AllItems, Converter={StaticResource collectionVisibilityConverter}}"
+            Visibility="{x:Bind IsEmpty(AllItems), Mode=OneWay}"
             ItemContainerStyle="{StaticResource IndentedGridViewItemStyle}"
             ItemTemplate="{StaticResource ControlItemTemplate}"
             SelectionMode="None"

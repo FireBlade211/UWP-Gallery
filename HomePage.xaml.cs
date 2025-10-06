@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -33,6 +34,8 @@ namespace UWPGallery
 
             InitializeComponent();
         }
+
+        public Visibility IsEmpty(IEnumerable<ControlInfoDataItem> col) => col.Any() ? Visibility.Visible : Visibility.Collapsed;
 
         private async Task LoadItems()
         {
