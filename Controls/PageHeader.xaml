@@ -70,7 +70,7 @@
                                 Text="{x:Bind Item.ApiNamespace}" />
                             </StackPanel>
                             <MenuFlyoutSeparator Margin="-12" Visibility="{x:Bind Item.BaseClasses, Converter={StaticResource collectionConverter}}" />
-                            <StackPanel x:Name="InheritanceSourcePanel" Visibility="{x:Bind Item.BaseClasses, Converter={StaticResource collectionConverter}}">
+                            <StackPanel x:Name="InheritanceSourcePanel" Visibility="{x:Bind Item.BaseClasses, Converter={StaticResource collectionConverter}}" Spacing="8">
                                 <TextBlock
                                 VerticalAlignment="Center"
                                 Style="{StaticResource CaptionTextBlockStyle}"
