@@ -1,0 +1,224 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.IconsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:datamodel="using:UWPGallery.DataModel"
+    xmlns:controls="using:UWPGallery.Controls"
+    Loaded="Page_Loaded"
+    xmlns:toolkit="using:CommunityToolkit.WinUI.Controls">
+
+    <Page.Resources>
+        <DataTemplate x:Key="IconTemplate" x:DataType="datamodel:IconData">
+            <Grid AutomationProperties.Name="{x:Bind DisplayName}" ToolTipService.ToolTip="{x:Bind DisplayName}" Width="96"
+                Height="96"
+                Margin="4">
+                <!--  Icon  -->
+                <Viewbox
+                        Grid.Row="1"
+                        Width="32"
+                        Height="32"
+                        Margin="0,0,0,10">
+                    <FontIcon
+                            x:Name="IconGlyph"
+                            Grid.Row="1"
+                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                            Glyph="{x:Bind Character}" />
+                </Viewbox>
+
+                <!--  Icon name/descriptor  -->
+                <TextBlock
+                        x:Name="IconName"
+                        Grid.Row="2"
+                        Margin="6,0,6,8"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Text="{x:Bind DisplayName}"
+                        TextTrimming="CharacterEllipsis"
+                        TextWrapping="NoWrap" />
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    
+    <Grid RowSpacing="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Spacing="6">
+            <TextBlock TextWrapping="WrapWholeWords">
+                With the release of Windows 10, the <Hyperlink NavigateUri="https://learn.microsoft.com/windows/apps/design/style/segoe-ui-symbol-font">Segoe MDL2 Assets</Hyperlink>
+                font replaced the Windows 8/8.1 <Bold>Segoe UI Symbol</Bold> icon font.
+            </TextBlock>
+            <TextBlock TextWrapping="WrapWholeWords">
+                Most of the icons included in the Segoe MDL2 Assets font are mapped to the <Bold>Private Use Area</Bold> of Unicode (PUA). The PUA allows font developers
+                to assign private Unicode values to glyphs that don't map to existing code points. This is useful when creating a symbol font, but it creates
+                an interoperability problem. If the font is not available, the glyphs won't show up. Use these glyphs only when you can explicitly specify the
+                Segoe MDL2 Assets font. If you are working with tiles, you can't use these glyphs because you can't specify the tile font and PUA glyphs are not
+                available via font-fallback.
+            </TextBlock>
+            <TextBlock TextWrapping="WrapWholeWords">
+                Unlike with <Bold>Segoe UI Symbol</Bold>, the icons in the Segoe MDL2 Assets font are not intended for use in-line with text. This means that
+                some older "tricks" like the progressive disclosure arrows no longer apply. Likewise, since all of the new icons are sized and positioned
+                the same, they do not have to be made with zero width; we have just made sure they work as a set. Ideally, you can overlay two icons that
+                were designed as a set and they will fall into place. This allows colorization in the code. For example,
+                <Hyperlink Click="Hyperlink_Click">U+EA3A (CircleRing)</Hyperlink> and <Hyperlink Click="Hyperlink_Click_1">U+EA3B (CircleFill)</Hyperlink> were created for
+                the Start tile Badge status. Because these are already centered the circle fill can be colored for different states.
+            </TextBlock>
+        </StackPanel>
+
+        <Grid Style="{ThemeResource GalleryTileGridStyle}" Grid.Row="1" MaxHeight="671" x:Name="rootGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="380" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Margin="16,16,0,16" ColumnSpacing="6" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <AutoSuggestBox
+        MinWidth="320"
+        PlaceholderText="Search icons by name, code, or tags"
+        QueryIcon="Find"
+        x:Name="searchBox"
+        TextChanged="SearchBox_TextChanged"
+        QuerySubmitted="searchBox_QuerySubmitted"/>
+
+                <ToggleButton Background="Transparent" x:Name="themeToggleButton" Checked="themeToggleButton_Checked" Unchecked="themeToggleButton_Unchecked"
+                              Grid.Column="1">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <FontIcon Glyph="&#xE793;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                        <TextBlock>Toggle theme</TextBlock>
+                    </StackPanel>
+                </ToggleButton>
+
+                <TextBlock Grid.Column="2" x:Name="iconCountBlock" Text="Loading icon count..." HorizontalTextAlignment="Right" TextAlignment="Right"
+                           Margin="0,0,15,0"/>
+            </Grid>
+
+            <GridView x:Name="mainGV" ItemTemplate="{StaticResource IconTemplate}" SelectionMode="Single"
+              SelectionChanged="mainGV_SelectionChanged" Grid.Row="1"/>
+
+            <ProgressRing Width="32" x:Name="loadingRing" Visibility="Collapsed" Grid.Row="1" IsActive="False"/>
+
+            <Grid
+        Grid.Column="1"
+        Padding="16"
+        BorderThickness="1,0,0,0"
+        Grid.Row="1">
+                <StackPanel>
+                    <TextBlock
+VerticalAlignment="Center"
+Style="{StaticResource SubtitleTextBlockStyle}"
+x:Name="IconNameLargeBlock"/>
+                    <FontIcon
+Margin="0,12,0,32"
+HorizontalAlignment="Left"
+VerticalAlignment="Center"
+FontFamily="{StaticResource SymbolThemeFontFamily}"
+x:Name="PreviewIcon"
+FontSize="32"/>
+
+                    <TextBlock Text="Icon name" Style="{StaticResource CaptionTextBlockStyle}"/>
+                    <TextBlock x:Name="IconNameBlock" IsTextSelectionEnabled="True" FontFamily="Consolas,Courier New" Margin="0,0,0,15"/>
+                    <TextBlock Text="Unicode code point" x:Name="CodePointTitleBlock" Style="{StaticResource CaptionTextBlockStyle}"  Margin="0,15,0,0"/>
+                    <TextBlock x:Name="CodePointBlock" IsTextSelectionEnabled="True" FontFamily="Consolas,Courier New" Margin="0,0,0,15"/>
+                    <TextBlock Text="Text glyph" x:Name="TextGlyphTitleBlock" Style="{StaticResource CaptionTextBlockStyle}"/>
+                    <TextBlock x:Name="TextGlyphBlock" IsTextSelectionEnabled="True" FontFamily="Consolas,Courier New" Margin="0,0,0,15"/>
+                    <TextBlock Text="Code glyph" x:Name="CodeGlyphTitleBlock" Style="{StaticResource CaptionTextBlockStyle}"/>
+                    <TextBlock x:Name="CodeGlyphBlock" IsTextSelectionEnabled="True" FontFamily="Consolas,Courier New" Margin="0,0,0,15"/>
+                    <TextBlock Text="Symbol" x:Name="SymbolTitleBlock" Style="{StaticResource CaptionTextBlockStyle}"/>
+                    <TextBlock x:Name="SymbolBlock" IsTextSelectionEnabled="True" FontFamily="Consolas,Courier New" Margin="0,0,0,15"/>
+                    <TextBlock Text="XAML" Style="{StaticResource CaptionTextBlockStyle}" />
+                    <TextBlock x:Name="XAMLCodePresenter" IsTextSelectionEnabled="True" FontFamily="Consolas,Courier New" Margin="0,0,0,15" TextTrimming="CharacterEllipsis"/>
+                    <TextBlock Text="C#" Style="{StaticResource CaptionTextBlockStyle}" />
+                    <TextBlock x:Name="CSharpCodePresenter" TextTrimming="CharacterEllipsis" IsTextSelectionEnabled="True" FontFamily="Consolas,Courier New" Margin="0,0,0,15"/>
+                    <TextBlock Text="Tags" Style="{StaticResource CaptionTextBlockStyle}" />
+                    <ListView x:Name="TagsItemsControl" IsItemClickEnabled="True" SelectionMode="None" Margin="0,8,0,0" ItemClick="TagsItemsControl_ItemClick">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <toolkit:WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="MinWidth" Value="0"/>
+                                <Setter Property="MinHeight" Value="0"/>
+                                <Setter Property="MaxHeight" Value="24"/>
+                                <Setter Property="Padding" Value="0"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="x:String">
+                                <Grid
+                            MaxHeight="24"
+                            Padding="8,2"
+                            BorderThickness="1"
+                            HorizontalAlignment="Stretch"
+                            AutomationProperties.Name="{x:Bind}"
+                            Background="{ThemeResource BackgroundSecondaryBrush}"
+                            ToolTipService.ToolTip="{x:Bind}">
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        Style="{StaticResource CaptionTextBlockStyle}"
+                                        Text="{x:Bind}"
+                                        TextTrimming="CharacterEllipsis" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                    <!--<StackPanel Orientation="Vertical" Visibility="Collapsed">
+                <TextBlock
+    Grid.Row="1"
+    VerticalAlignment="Center"
+    Text="Color" />
+                <controls1:InlineColorPicker
+    x:Name="IconColorPicker"
+    Grid.Row="1"
+    Grid.Column="1"
+    Color="Black" />
+
+                <TextBlock
+    Grid.Row="2"
+    Padding="0,10,0,0"
+    VerticalAlignment="Center"
+    Text="FontSize" />
+                <Grid
+    Grid.Row="2"
+    Grid.Column="1"
+    Padding="0,10,0,0"
+    ColumnSpacing="8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ComboBox
+        x:Name="FontsizeComboBox"
+        Width="100"
+        ItemsSource="{x:Bind FontSizes}"
+        SelectedIndex="3" />
+                </Grid>
+            </StackPanel>-->
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

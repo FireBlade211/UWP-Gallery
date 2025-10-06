@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "Code": {
+        "type": "string",
+        "description": "Glyph code"
+      },
+      "Name": {
+        "type": "string",
+        "description": "Name of the glyph"
+      },
+      "Tags": {
+        "type": "array",
+        "description": "Array of tags related to this glyph",
+        "uniqueItems": true,
+        "items": {
+          "type": "string"
+        }
+      },
+      "IsSymbolIcon": {
+        "type": "boolean",
+        "description": "Whether the icon is a SymbolIcon",
+        "default": false
+      },
+      "Symbol": {
+        "type": "string",
+        "description": "The name of the symbol from the Symbol enumeration when IsSymbolIcon is true"
+      }
+    }
+  }
+}

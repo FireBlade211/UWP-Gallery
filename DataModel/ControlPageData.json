@@ -33,6 +33,41 @@
               "Uri": "https://learn.microsoft.com/windows/apps/design/signature-experiences/typography"
             }
           ]
+        },
+        {
+          "Title": "Icons",
+          "UniqueId": "Icons",
+          "UrlName": "icons",
+          "Description": "Icons are a visual design language that can be used to quickly communicate actions.",
+          "Subtitle": "Icons are a visual design language that can be used to quickly communicate actions.",
+          "UseGlyph": true,
+          "IconGlyph": "",
+          "Docs": [
+            {
+              "Title": "Segoe MDL2 icons",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/style/segoe-ui-symbol-font"
+            },
+            {
+              "Title": "Iconography",
+              "Uri": "https://learn.microsoft.com/windows/apps/design/signature-experiences/iconography#system-icons"
+            },
+            {
+              "Title": "SymbolIcon - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.symbolicon"
+            },
+            {
+              "Title": "SymbolIconSource - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.symboliconsource"
+            },
+            {
+              "Title": "FontIcon - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.fonticon"
+            },
+            {
+              "Title": "FontIconSource - API",
+              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.fonticonsource"
+            }
+          ]
         }
       ]
     },

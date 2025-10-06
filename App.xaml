@@ -185,16 +185,19 @@
                     <SolidColorBrush x:Key="HomePageBackgroundBrush" Color="Transparent" />
                     <StaticResource x:Key="GalleryBackgroundBrush" ResourceKey="AppBarBackgroundThemeBrush" />
                     <StaticResource x:Key="GalleryBorderBrush" ResourceKey="AppBarBorderThemeBrush" />
+                    <StaticResource x:Key="BackgroundSecondaryBrush" ResourceKey="ButtonDisabledBackgroundThemeBrush"/>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="Dark">
                     <SolidColorBrush x:Key="HomePageBackgroundBrush" Color="Transparent" />
                     <StaticResource x:Key="GalleryBackgroundBrush" ResourceKey="AppBarBackgroundThemeBrush" />
                     <StaticResource x:Key="GalleryBorderBrush" ResourceKey="AppBarBorderThemeBrush" />
+                    <StaticResource x:Key="BackgroundSecondaryBrush" ResourceKey="AppBarItemPointerOverBackgroundThemeBrush"/>
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="HighContrast">
                     <SolidColorBrush x:Key="HomePageBackgroundBrush" Color="{ThemeResource SystemColorWindowColor}" />
                     <SolidColorBrush x:Key="GalleryBackgroundBrush" Color="{ThemeResource SystemColorWindowColor}" />
                     <SolidColorBrush x:Key="GalleryBorderBrush" Color="{ThemeResource SystemColorWindowColor}" />
+                    <SolidColorBrush x:Key="BackgroundSecondaryBrush" Color="{ThemeResource SystemColorWindowColor}"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 
