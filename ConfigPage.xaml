@@ -80,7 +80,7 @@
                     <StackPanel Spacing="6">
                         <TextBlock Style="{StaticResource HeaderTextBlockStyle}" AutomationProperties.HeadingLevel="Level1" Text="UWP Gallery"/>
                         <StackPanel>
-                            <TextBlock Text="Version v1.0"/>
+                            <TextBlock Text="Version v1.1"/>
                             <HyperlinkButton NavigateUri="https://github.com/FireBlade211/UWP-Gallery/issues/new/choose"
                                              ToolTipService.ToolTip="https://github.com/FireBlade211/UWP-Gallery/issues/new/choose">File a bug or request a sample</HyperlinkButton>
                             <HyperlinkButton NavigateUri="https://github.com/FireBlade211/UWP-Gallery"

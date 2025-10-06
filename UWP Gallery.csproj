@@ -23,6 +23,8 @@
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <Version>1.1.0</Version>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="DataModel\ControlPageData.json" />
@@ -46,6 +48,10 @@
     <EditorConfigFiles Remove="C:\Users\Piotr\Projects\Visual Studio Repos\UWP Gallery\.editorconfig" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\WinInteropUtils\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="C:\Users\Piotr\Projects\Visual Studio Repos\UWP Gallery\.editorconfig" />
   </ItemGroup>
 </Project>
