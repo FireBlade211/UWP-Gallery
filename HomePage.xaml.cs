@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using UWPGallery.DataModel;
 using Windows.System.Profile;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
-using WinRT;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -35,14 +30,36 @@ namespace UWPGallery
             InitializeComponent();
         }
 
-        public Visibility IsEmpty(IEnumerable<ControlInfoDataItem> col) => col.Any() ? Visibility.Visible : Visibility.Collapsed;
+        private void AddRange<T>(ICollection<T> target, IEnumerable<T> source)
+        {
+            foreach (var item in source)
+            {
+                target.Add(item);
+            }
+        }
 
         private async Task LoadItems()
         {
-            AllItems = [.. (await ControlInfoDataSource.Instance.GetGroupsAsync()).SelectMany(g => g.Items).Where(i => i.IncludedInBuild).OrderBy(i => i.Title)];
-            FavoriteItems = [.. await ConfigurationStorageManager.GetFavoriteSamples()];
-            NewSamples = [.. ControlInfoDataSource.Instance.Groups.SelectMany(g => g.Items).Where(i => i.IsNew && i.IncludedInBuild).OrderBy(i => i.Title)];
-            UpdatedSamples = [.. ControlInfoDataSource.Instance.Groups.SelectMany(g => g.Items).Where(i => i.IsUpdated && i.IncludedInBuild).OrderBy(i => i.Title)];
+            AddRange(AllItems,
+                (await ControlInfoDataSource.Instance.GetGroupsAsync()).SelectMany(g => g.Items).Where(i => i.IncludedInBuild).OrderBy(i => i.Title).ToList());
+
+            AddRange(FavoriteItems, await ConfigurationStorageManager.GetFavoriteSamples());
+
+            AddRange(NewSamples, ControlInfoDataSource.Instance.Groups.SelectMany(g => g.Items).Where(i => i.IsNew && i.IncludedInBuild).OrderBy(i => i.Title).ToList());
+
+            AddRange(UpdatedSamples, ControlInfoDataSource.Instance.Groups.SelectMany(g => g.Items).Where(i => i.IsUpdated && i.IncludedInBuild).OrderBy(i => i.Title).ToList());
+
+            favoritesBlock.Visibility = FavoriteItems.Any() ? Visibility.Visible : Visibility.Collapsed;
+            favoritesGridView.Visibility = FavoriteItems.Any() ? Visibility.Visible : Visibility.Collapsed;
+
+            newSamplesPanel.Visibility = NewSamples.Any() ? Visibility.Visible : Visibility.Collapsed;
+            newSamplesGridView.Visibility = NewSamples.Any() ? Visibility.Visible : Visibility.Collapsed;
+
+            updatedSamplesPanel.Visibility = UpdatedSamples.Any() ? Visibility.Visible : Visibility.Collapsed;
+            updatedGridView.Visibility = UpdatedSamples.Any() ? Visibility.Visible : Visibility.Collapsed;
+
+            allSamplesPanel.Visibility = AllItems.Any() ? Visibility.Visible : Visibility.Collapsed;
+            allGridView.Visibility = AllItems.Any() ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
