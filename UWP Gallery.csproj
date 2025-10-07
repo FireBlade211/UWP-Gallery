@@ -16,7 +16,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <SupportedOSPlatformVersion>10.0.18362.0</SupportedOSPlatformVersion>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
@@ -25,6 +25,7 @@
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <Version>1.1.0</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageCertificateThumbprint>4F0DB7AAFA49D68D87D4268682E6DB9202CE5089</PackageCertificateThumbprint>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="DataModel\ControlPageData.json" />

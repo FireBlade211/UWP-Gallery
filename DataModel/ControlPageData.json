@@ -67,7 +67,8 @@
               "Title": "FontIconSource - API",
               "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.fonticonsource"
             }
-          ]
+          ],
+          "IsNew": true
         }
       ]
     },
@@ -218,7 +219,8 @@
             "AppBarButton"
           ],
           "UseGlyph": true,
-          "IconGlyph": ""
+          "IconGlyph": "",
+          "IsNew": true
         }
       ]
     },
@@ -465,7 +467,8 @@
             "ToolTip"
           ],
           "UseGlyph": true,
-          "IconGlyph": ""
+          "IconGlyph": "",
+          "IsNew": true
         }
       ]
     },
@@ -564,13 +567,13 @@
           "UseGlyph": true,
           "IconGlyph": "",
           "RelatedControls": [
-            "NumberBox",
             "TextBlock",
             "RichTextBlock",
             "PasswordBox",
             "RichEditBox",
             "AutoSuggestBox"
-          ]
+          ],
+          "IsNew": true
         }
       ]
     },
