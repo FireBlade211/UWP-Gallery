@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UWPGallery.Controls;
 using UWPGallery.DataModel;
@@ -11,6 +10,7 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Automation.Peers;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Controls;
 
 namespace UWPGallery
 {
@@ -162,5 +162,35 @@ namespace UWPGallery
                 return false;
             }
         }
+    }
+
+    /// <summary>
+    /// Provides methods to track the focus state of controls that do not work with the <see cref="Control.FocusState"/> property.
+    /// </summary>
+    public static class FocusHelper
+    {
+        private static Dictionary<Control, bool> FocusStates = [];
+
+        /// <summary>
+        /// Starts tracking the focus state of the specified control.
+        /// </summary>
+        /// <param name="c">The control to track.</param>
+        public static void StartTrackFocusState(Control c)
+        {
+            if (!FocusStates.ContainsKey(c))
+            {
+                FocusStates[c] = false;
+
+                c.GotFocus += (s, e) => FocusStates[c] = true;
+                c.LostFocus += (s, e) => FocusStates[c] = false;
+            }
+        }
+
+        /// <summary>
+        /// Retrieves whether the control is focused.
+        /// </summary>
+        /// <param name="c">The control to retrieve the focus state for.</param>
+        /// <returns><see langword="true"/> if the control is tracked and focused; otherwise, <see langword="false"/>.</returns>
+        public static bool IsFocused(Control c) => FocusStates.ContainsKey(c) ? FocusStates[c] : false;
     }
 }
