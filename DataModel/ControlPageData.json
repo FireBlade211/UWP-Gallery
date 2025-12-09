@@ -67,8 +67,7 @@
               "Title": "FontIconSource - API",
               "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.fonticonsource"
             }
-          ],
-          "IsNew": true
+          ]
         }
       ]
     },
@@ -219,8 +218,7 @@
             "AppBarButton"
           ],
           "UseGlyph": true,
-          "IconGlyph": "",
-          "IsNew": true
+          "IconGlyph": ""
         }
       ]
     },
@@ -298,28 +296,45 @@
       "Title": "Styles",
       "Items": [
         {
-          "UrlName": "reveal",
-          "UniqueId": "Reveal",
-          "Title": "Reveal",
-          "ApiNamespace": "Windows.UI.Xaml",
-          "Subtitle": "A new transparent material introduced in Windows 10.",
-          "Description": "Reveal is a new transparent material introduced in Windows 10.",
-          "Docs": [
-            {
-              "Title": "Application.FocusVisualKind - API",
-              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.application.focusvisualkind"
-            },
-            {
-              "Title": "FocusVisualKind enum - API",
-              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.focusvisualkind"
-            },
-            {
-              "Title": "Reveal Focus",
-              "Uri": "https://learn.microsoft.com/windows/uwp/ui-input/reveal-focus"
-            }
-          ],
-          "UseGlyph": true,
-          "IconGlyph": ""
+            "UrlName": "reveal",
+            "UniqueId": "Reveal",
+            "Title": "Reveal",
+            "ApiNamespace": "Windows.UI.Xaml",
+            "Subtitle": "A new material introduced in Windows 10 that changes color near the mouse.",
+            "Description": "Reveal is a new material introduced in Windows 10 that changes color near the mouse.",
+            "Docs": [
+                {
+                    "Title": "RevealBrush - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.media.revealbrush"
+                },
+                {
+                    "Title": "RevealBackgroundBrush - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.media.revealbackgroundbrush"
+                },
+                {
+                    "Title": "RevealBorderBrush - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.media.revealborderbrush"
+                },
+                {
+                    "Title": "Reveal - Guidelines",
+                    "Uri": "https://learn.microsoft.com/windows/uwp/design/style/reveal"
+                },
+                {
+                    "Title": "Application.FocusVisualKind - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.application.focusvisualkind"
+                },
+                {
+                    "Title": "FocusVisualKind enum - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.focusvisualkind"
+                },
+                {
+                    "Title": "Reveal Focus - Guidelines",
+                    "Uri": "https://learn.microsoft.com/windows/uwp/ui-input/reveal-focus"
+                }
+            ],
+            "UseGlyph": true,
+            "IconGlyph": "",
+            "IsUpdated": true
         }
       ]
     },
@@ -467,8 +482,7 @@
             "ToolTip"
           ],
           "UseGlyph": true,
-          "IconGlyph": "",
-          "IsNew": true
+          "IconGlyph": ""
         }
       ]
     },
@@ -572,8 +586,7 @@
             "PasswordBox",
             "RichEditBox",
             "AutoSuggestBox"
-          ],
-          "IsNew": true
+          ]
         }
       ]
     },

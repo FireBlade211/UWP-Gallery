@@ -8,32 +8,249 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:controls="using:UWPGallery.Controls"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    xmlns:media="using:Windows.UI.Xaml.Media">
 
     <Page.Resources>
-        <Style x:Key="RevealSampleButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
-            <Setter Target="Width" Value="100"/>
-            <Setter Target="Height" Value="100"/>
-            <Setter Target="VerticalAlignment" Value="Center"/>
-            <Setter Target="Margin" Value="10"/>
+        <Style x:Key="RevealFocusSampleButtonStyle" TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10"/>
         </Style>
+
+        <RevealBorderBrush x:Key="LightBorders" TargetTheme="Dark" Color="Transparent"/>
+        <media:AcrylicBrush x:Key="CustomAcrylicInAppBrush" BackgroundSource="Backdrop" TintOpacity="0.45" TintColor="#ff8ff0fb" FallbackColor="#ff8ff0fb"/>
+        <media:AcrylicBrush x:Key="CustomAcrylicInAppBrush_dark" BackgroundSource="Backdrop" TintOpacity="0.45" TintColor="#ff0E5A5C" FallbackColor="#ff0E5A5C"/>
+
+        <SolidColorBrush x:Key="SystemControlRevealFocusVisualBrush" Color="{ThemeResource SystemAccentColorLight1}"/>
+
+        <!--<Flyout x:Key="myPrimaryColorPickerFlyout">
+            <RelativePanel>
+                <ColorPicker x:Name="myPrimaryColorPicker"
+                         IsColorChannelTextInputVisible="False"
+                         IsHexInputVisible="False"
+                         Color="{StaticResource SystemAltHighColor}"/>
+
+                <Grid RelativePanel.Below="myPrimaryColorPicker"
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignRightWithPanel="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Close" Click="confirmColor_Click"
+                        Margin="0,12,2,0" HorizontalAlignment="Stretch"/>
+                </Grid>
+            </RelativePanel>
+        </Flyout>
+
+        <Flyout x:Key="mySecondaryColorPickerFlyout">
+            <RelativePanel>
+                <ColorPicker x:Name="mySecondaryColorPicker"
+                         IsColorChannelTextInputVisible="False"
+                         IsHexInputVisible="False"
+                                 Color="{StaticResource SystemBaseHighColor}"/>
+
+                <Grid RelativePanel.Below="mySecondaryColorPicker"
+                          RelativePanel.AlignLeftWithPanel="True"
+                          RelativePanel.AlignRightWithPanel="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="Close" Click="confirmColor_Click"
+                        Margin="0,12,2,0" HorizontalAlignment="Stretch"/>
+                </Grid>
+            </RelativePanel>
+        </Flyout>-->
+
+        <local:ColorToBrushConverter x:Name="colorToBrushCvt"/>
     </Page.Resources>
     
     <StackPanel Margin="0,16,0,0" Orientation="Vertical" Spacing="6">
 
+        <controls:GallerySample HeaderTitle="Built-in Reveal">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                <Grid BorderThickness="0,0,0,1" BorderBrush="{ThemeResource ButtonBackground}" Margin="0,10,10,10">
+                    <TextBlock Margin="5" TextWrapping="WrapWholeWords" Text="Reveal is on by default for many controls. For those controls, no enabling of Reveal is required. Please see the guidance documention for a full list."/>
+                </Grid>
+                <CommandBar OverflowButtonVisibility="Visible" DefaultLabelPosition="Right" HorizontalAlignment="Left">
+                    <AppBarButton Icon="Admin" Label="Admin"/>
+                    <AppBarButton Icon="AllApps" Label="All Apps"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Icon="CellPhone" Label="Call"/>
+                    <AppBarButton Icon="FullScreen" Label="Fullscreen"/>
+                    <AppBarButton Icon="Upload" Label="Upload"/>
+                </CommandBar>
+            </StackPanel>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;StackPanel Orientation="Vertical" HorizontalAlignment="Left"&gt;
+    &lt;Grid BorderThickness="0,0,0,1" BorderBrush="{ThemeResource ButtonBackground}" Margin="0,10,10,10"&gt;
+        &lt;TextBlock Margin="5" TextWrapping="WrapWholeWords" Text="Reveal is on by default for many controls. For those controls, no enabling of Reveal is required. Please see the guidance documention for a full list."/&gt;
+    &lt;/Grid&gt;
+    &lt;CommandBar OverflowButtonVisibility="Visible" DefaultLabelPosition="Right" HorizontalAlignment="Left"&gt;
+        &lt;AppBarButton Icon="Admin" Label="Admin"/&gt;
+        &lt;AppBarButton Icon="AllApps" Label="All Apps"/&gt;
+        &lt;AppBarSeparator/&gt;
+        &lt;AppBarButton Icon="CellPhone" Label="Call"/&gt;
+        &lt;AppBarButton Icon="FullScreen" Label="Fullscreen"/&gt;
+        &lt;AppBarButton Icon="Upload" Label="Upload"/&gt;
+    &lt;/CommandBar&gt;
+&lt;/StackPanel&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="Reveal on Custom Surfaces" x:Name="customSurfaceSample" MinHeight="600">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Margin="5" TextWrapping="WrapWholeWords" Text="Reveal adjusts depending on the Theme. However, setting RequestedTheme on a container ensures that Reveal's borders stay light or dark depending on what you need."/>
+                <Grid x:Name="switchTheme" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Image Width="533" Height="400" Source="/Assets/Branding/background.png" Stretch="Uniform"/>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource SystemControlAcrylicElementBrush}">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0" AutomationProperties.Name="world 1"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0" AutomationProperties.Name="cell phone 1"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2" AutomationProperties.Name="delete 1"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2" AutomationProperties.Name="comment 1"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource CustomAcrylicInAppBrush}" RequestedTheme="Light">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0" AutomationProperties.Name="world 2"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0" AutomationProperties.Name="cell phone 2"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2" AutomationProperties.Name="delete 2"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2" AutomationProperties.Name="comment 2"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource CustomAcrylicInAppBrush_dark}" RequestedTheme="Dark">
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0" AutomationProperties.Name="world 3"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0" AutomationProperties.Name="cell phone 3"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2" AutomationProperties.Name="delete 3"/>
+                                        <AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2" AutomationProperties.Name="comment 3"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Page
+    xmlns:media="using:Windows.UI.Xaml.Media"
+    ...
+&gt;
+
+&lt;Page.Resources&gt;
+    &lt;RevealBorderBrush x:Key="LightBorders" TargetTheme="Dark" Color="Transparent"/&gt;
+    &lt;media:AcrylicBrush x:Key="CustomAcrylicInAppBrush" BackgroundSource="Backdrop" TintOpacity="0.45" TintColor="#ff8ff0fb" FallbackColor="#ff8ff0fb"/&gt;
+    &lt;media:AcrylicBrush x:Key="CustomAcrylicInAppBrush_dark" BackgroundSource="Backdrop" TintOpacity="0.45" TintColor="#ff0E5A5C" FallbackColor="#ff0E5A5C"/&gt;
+&lt;/Page.Resources&gt;
+                    
+&lt;StackPanel Orientation="Vertical"&gt;
+    &lt;StackPanel Orientation="Vertical" BorderThickness="0,0,0,1" BorderBrush="{ThemeResource ButtonBackground}" Margin="0,10,10,10"&gt;
+        &lt;TextBlock Margin="5" TextWrapping="WrapWholeWords" Text="Reveal adjusts depending on the Theme. However, setting RequestedTheme on a container ensures that Reveal's borders stay light or dark depending on what you need."/&gt;
+        &lt;TextBlock Margin="5" TextWrapping="WrapWholeWords" FontWeight="Bold" Text="ToggleTheme in the upper right corner to test this example."/&gt;
+    &lt;/StackPanel&gt;
+    &lt;Grid x:Name="switchTheme" HorizontalAlignment="Left" VerticalAlignment="Center"&gt;
+        &lt;Image x:Name="userWallpaper" Width="512" Height="275"/&gt;
+        &lt;StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch"&gt;
+            &lt;StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"&gt;
+                &lt;Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource SystemControlAcrylicElementBrush}"&gt;
+                    &lt;StackPanel Orientation="Vertical"&gt;
+                        &lt;StackPanel Orientation="Horizontal"&gt;
+                            &lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0" AutomationProperties.Name="world 1"/&gt;
+                            &lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0" AutomationProperties.Name="cell phone 1"/&gt;
+                        &lt;/StackPanel&gt;
+                        &lt;StackPanel Orientation="Horizontal"&gt;
+                            &lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2" AutomationProperties.Name="delete 1"/&gt;
+                            &lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2" AutomationProperties.Name="comment 1"/&gt;
+                        &lt;/StackPanel&gt;
+                    &lt;/StackPanel&gt;
+                &lt;/Grid&gt;
+                &lt;Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource CustomAcrylicInAppBrush}" RequestedTheme="Light"&gt;
+                    &lt;StackPanel Orientation="Vertical"&gt;
+                        &lt;StackPanel Orientation="Horizontal"&gt;
+                            &lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0" AutomationProperties.Name="world 2"/&gt;
+                            &lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0" AutomationProperties.Name="cell phone 2"/&gt;
+                        &lt;/StackPanel&gt;
+                        &lt;StackPanel Orientation="Horizontal"&gt;
+                            &lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2" AutomationProperties.Name="delete 2"/&gt;
+                            &lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2" AutomationProperties.Name="comment 2"/&gt;
+                        &lt;/StackPanel&gt;
+                    &lt;/StackPanel&gt;
+                &lt;/Grid&gt;
+                &lt;Grid HorizontalAlignment="Center" Margin="5" Background="{ThemeResource CustomAcrylicInAppBrush_dark}" RequestedTheme="Dark"&gt;
+                    &lt;StackPanel Orientation="Vertical"&gt;
+                        &lt;StackPanel Orientation="Horizontal"&gt;
+                            &lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="World" Margin="1, 2, 0, 0" AutomationProperties.Name="world 3"/&gt;
+                            &lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="CellPhone" Margin="0, 2, 1, 0" AutomationProperties.Name="cell phone 3"/&gt;
+                        &lt;/StackPanel&gt;
+                        &lt;StackPanel Orientation="Horizontal"&gt;
+                            &lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Delete" Margin="1, 2, 0, 2" AutomationProperties.Name="delete 3"/&gt;
+                            &lt;AppBarButton Style="{ThemeResource AppBarButtonRevealStyle}" Icon="Comment" Margin="0, 2, 1, 2" AutomationProperties.Name="comment 3"/&gt;
+                        &lt;/StackPanel&gt;
+                    &lt;/StackPanel&gt;
+                &lt;/Grid&gt;
+            &lt;/StackPanel&gt;
+        &lt;/StackPanel&gt;
+    &lt;/Grid&gt;
+&lt;/StackPanel&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+        
+        <controls:GallerySample HeaderTitle="Reveal Brush applied on Grid" MinHeight="210">
+            <controls:GallerySample.Sample>
+                <Grid BorderThickness="3" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}">
+                    <TextBlock Text="SystemControlBackgroundListMediumRevealBorderBrush" HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}"
+                               VerticalAlignment="Center" IsTextSelectionEnabled="True" Foreground="{ThemeResource SystemControlBackgroundBaseLowRevealBorderBrush}"/>
+                </Grid>
+            </controls:GallerySample.Sample>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Grid BorderThickness="3" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"&gt;
+    &lt;TextBlock Text="SystemControlBackgroundListMediumRevealBorderBrush" HorizontalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}"
+            VerticalAlignment="Center" IsTextSelectionEnabled="True" Foreground="{ThemeResource SystemControlBackgroundBaseLowRevealBorderBrush}" /&gt;
+&lt;/Grid&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+        </controls:GallerySample>
+
+        <TextBlock Text="Reveal Focus" Style="{StaticResource SubtitleTextBlockStyle}" AutomationProperties.HeadingLevel="Level2"/>
+        
         <TextBlock TextWrapping="WrapWholeWords">
-            <Bold>Reveal</Bold> is a lighting effect for 10-foot experiences, such as game consoles on television screens. It animates
+            <Bold>Reveal Focus</Bold> is a lighting effect for 10-foot experiences, such as game consoles on television screens. It animates
             the border of focusable elements, such as buttons, when the user moves gamepad or keyboard focus to them.
         </TextBlock>
         
-        <controls:GallerySample HeaderTitle="Change the appearance of the focus rectangles" MinHeight="232">
+        <controls:GallerySample HeaderTitle="Change the appearance of the focus rectangles" MinHeight="240">
             <controls:GallerySample.Sample>
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <Button Style="{StaticResource RevealSampleButtonStyle}" AutomationProperties.Name="Square button 1" x:Name="Button1"/>
-                        <Button Style="{StaticResource RevealSampleButtonStyle}" AutomationProperties.Name="Square button 2"/>
-                        <Button Style="{StaticResource RevealSampleButtonStyle}" AutomationProperties.Name="Square button 3"/>
-                        <Button Style="{StaticResource RevealSampleButtonStyle}" AutomationProperties.Name="Square button 4"/>
+                        <Button Style="{StaticResource RevealFocusSampleButtonStyle}" AutomationProperties.Name="Square button 1" x:Name="Button1"/>
+                        <Button Style="{StaticResource RevealFocusSampleButtonStyle}" AutomationProperties.Name="Square button 2"/>
+                        <Button Style="{StaticResource RevealFocusSampleButtonStyle}" AutomationProperties.Name="Square button 3"/>
+                        <Button Style="{StaticResource RevealFocusSampleButtonStyle}" AutomationProperties.Name="Square button 4"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
@@ -114,30 +331,151 @@ private void Button_Click(object sender, RoutedEventArgs e)
         </controls:GallerySample>
 
         <TextBlock Margin="0,16,0,0" TextWrapping="WrapWholeWords">
-            <Bold>NOTE:</Bold> Changing the focus visual kind will change the focus visuals that "UseSystemFocusVisuals" in the entire UWP Gallery app.
+            <Bold>NOTE:</Bold> Changing the focus visual kind will change the focus visuals that "UseSystemFocusVisuals" in the entire <Bold>UWP Gallery</Bold> app.
             Reveal focus should be used on Xbox only. Apps should use high visibility focus rectangles across all other form factors. Dotted line is obsolete.
         </TextBlock>
 
-        <controls:GallerySample HeaderTitle="Using Reveal Brushes" MinHeight="210">
-            <controls:GallerySample.Sample>
-                <StackPanel Spacing="6">
-                    <TextBlock TextWrapping="WrapWholeWords">If you're making custom controls, you can use reveal brushes to use the reveal material on your control.</TextBlock>
+        <!--<controls:GallerySample HeaderTitle="Change the size of the focus rectangles" x:Name="Example2" MinHeight="500">
+            <Grid ActualThemeChanged="Example2_ActualThemeChanged">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions> 
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                        <Button x:Name="exampleButton" 
+                        AutomationProperties.Name="Square button 4"
+                        Style="{StaticResource RevealFocusSampleButtonStyle}"
+                        FocusVisualPrimaryThickness="{x:Bind RevealFocusThickness1, Mode=OneWay}"
+                        FocusVisualSecondaryThickness="{x:Bind RevealFocusThickness2, Mode=OneWay}"
+                        FocusVisualPrimaryBrush="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}"
+                        FocusVisualSecondaryBrush="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}" />
+                        <Button
+                        Style="{StaticResource RevealFocusSampleButtonStyle}"
+                        AutomationProperties.Name="Square button 5"
+                        FocusVisualPrimaryThickness="{x:Bind RevealFocusThickness1, Mode=OneWay}"
+                        FocusVisualSecondaryThickness="{x:Bind RevealFocusThickness2, Mode=OneWay}"
+                        FocusVisualPrimaryBrush="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}"
+                        FocusVisualSecondaryBrush="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}"
+                        Grid.Column="1"/>
+                        <Button
+                        Style="{StaticResource RevealFocusSampleButtonStyle}"
+                        AutomationProperties.Name="Square button 6"
+                        FocusVisualPrimaryThickness="{x:Bind RevealFocusThickness1, Mode=OneWay}"
+                        FocusVisualSecondaryThickness="{x:Bind RevealFocusThickness2, Mode=OneWay}"
+                        FocusVisualPrimaryBrush="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}"
+                        FocusVisualSecondaryBrush="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}" 
+                        Grid.Column="2" />
+                    </Grid>
 
-                    <AppBarButton Width="96" Height="96" Background="{ThemeResource SystemControlBackgroundBaseLowRevealBackgroundBrush}"
-                            BorderBrush="{ThemeResource SystemControlBackgroundBaseLowRevealBorderBrush}"/>
-                </StackPanel>
-            </controls:GallerySample.Sample>
+                <Button Content="Move keyboard focus" Margin="0,24" Click="MoveFocusBtn_Click" Grid.Row="1"/>
 
-            <controls:GallerySample.XamlSource>
-                <x:String xml:space="preserve">
-&lt;StackPanel Spacing="6"&gt;
-    &lt;TextBlock TextWrapping="WrapWholeWords"&gt;If you're making custom controls, you can use reveal brushes to use the reveal material on your control.&lt;/TextBlock&gt;
+                <TextBox MinWidth="300" Margin="0,16,0,0" AutomationProperties.Name="Sample textBox" Grid.Row="2"
+                    FocusVisualPrimaryThickness="{x:Bind RevealFocusThickness1, Mode=OneWay}"
+                    FocusVisualSecondaryThickness="{x:Bind RevealFocusThickness2, Mode=OneWay}"
+                    FocusVisualPrimaryBrush="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}"
+                    FocusVisualSecondaryBrush="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}"/>
 
-    &lt;AppBarButton Width="96" Height="96" Background="{ThemeResource SystemControlBackgroundBaseLowRevealBackgroundBrush}"
-            BorderBrush="{ThemeResource SystemControlBackgroundBaseLowRevealBorderBrush}"/&gt;
-&lt;/StackPanel&gt;
-                </x:String>
-            </controls:GallerySample.XamlSource>
-        </controls:GallerySample>
+                    <ComboBox MinWidth="300" Margin="0,16,0,0"  Grid.Row="3"
+                          AutomationProperties.Name="Sample ComboBox"
+                          SelectedIndex="0"
+                          FocusVisualPrimaryThickness="{x:Bind RevealFocusThickness1, Mode=OneWay}"
+                          FocusVisualSecondaryThickness="{x:Bind RevealFocusThickness2, Mode=OneWay}"
+                          FocusVisualPrimaryBrush="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}"
+                          FocusVisualSecondaryBrush="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}">
+                        <ComboBoxItem>Apples</ComboBoxItem>
+                        <ComboBoxItem>Bananas</ComboBoxItem>
+                        <ComboBoxItem>Oranges</ComboBoxItem>
+                        <ComboBoxItem>Strawberries</ComboBoxItem>
+                    </ComboBox>
+
+                    <Slider MinWidth="300" Margin="5,16,0,0" IsFocusEngagementEnabled="True" 
+                    AutomationProperties.Name="Sample slider"
+                    FocusVisualMargin="{x:Bind RevealFocusMargin, Mode=OneWay}"
+                    FocusVisualPrimaryThickness="{x:Bind RevealFocusThickness1, Mode=OneWay}"
+                    FocusVisualSecondaryThickness="{x:Bind RevealFocusThickness2, Mode=OneWay}"
+                    FocusVisualPrimaryBrush="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}"
+                    FocusVisualSecondaryBrush="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}"
+                    Grid.Row="4"/>
+
+                <TimePicker MinWidth="300" Margin="5,16,0,0" AutomationProperties.Name="Sample TimePicker" Grid.Row="5"/>
+            </Grid>
+
+            <controls:GallerySample.OptionsFlyout>
+                <Flyout>
+                    <StackPanel>
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="Bold">Primary Thickness</TextBlock>
+                            <Slider x:Name="primaryLeftSlider" Header="Left" MinWidth="50" Minimum="0"  Maximum="10" Value="2" ValueChanged="primaryLeftSlider_ValueChanged"/>
+                            <Slider x:Name="primaryRightSlider" Header="Right" MinWidth="50" Minimum="0"  Maximum="10" Value="2" ValueChanged="primaryRightSlider_ValueChanged"/>
+                            <Slider x:Name="primaryTopSlider" Header="Top" MinWidth="50" Minimum="0"  Maximum="10" Value="2" ValueChanged="primaryTopSlider_ValueChanged"/>
+                            <Slider x:Name="primaryBottomSlider" Header="Bottom" MinWidth="50" Minimum="0"  Maximum="10" Value="2" ValueChanged="primaryBottomSlider_ValueChanged"/>
+                        </StackPanel>
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="Bold">Secondary Thickness</TextBlock>
+                            <Slider x:Name="secondaryLeftSlider" Header="Left" MinWidth="50" Minimum="0"  Maximum="10" Value="1" ValueChanged="secondaryLeftSlider_ValueChanged"/>
+                            <Slider x:Name="secondaryRightSlider" Header="Right" MinWidth="50" Minimum="0"  Maximum="10" Value="1" ValueChanged="secondaryRightSlider_ValueChanged"/>
+                            <Slider x:Name="secondaryTopSlider" Header="Top" MinWidth="50" Minimum="0"  Maximum="10" Value="1" ValueChanged="secondaryTopSlider_ValueChanged"/>
+                            <Slider x:Name="secondaryBottomSlider" Header="Bottom" MinWidth="50" Minimum="0"  Maximum="10" Value="1" ValueChanged="secondaryBottomSlider_ValueChanged"/>
+                        </StackPanel>
+                        <StackPanel Spacing="6">
+                            <TextBlock FontWeight="Bold">Margin</TextBlock>
+                            <Slider x:Name="marginTopSlider" Header="Top" MinWidth="50" Minimum="-20"  Maximum="20" Value="-3" ValueChanged="marginTopSlider_ValueChanged"/>
+                            <Slider x:Name="marginLeftSlider" Header="Left" MinWidth="50" Minimum="-20"  Maximum="20" Value="-3" ValueChanged="marginLeftSlider_ValueChanged"/>
+                            <Slider x:Name="marginRightSlider" Header="Right" MinWidth="50" Minimum="-20"  Maximum="20" Value="-3" ValueChanged="marginRightSlider_ValueChanged"/>
+                            <Slider x:Name="marginBottomSlider" Header="Bottom" MinWidth="50" Minimum="-20"  Maximum="20" Value="-3" ValueChanged="marginBottomSlider_ValueChanged"/>
+                        </StackPanel>
+                        <Button Content="Reset margin" Click="MarginResetButton_Click" Margin="0,10"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock
+                            Text="Primary focus color:"
+                            VerticalAlignment="Center"/>
+                            <Button x:Name="primaryColorPickerButton"
+                                Grid.Column="1"
+                                AutomationProperties.Name="{x:Bind myPrimaryColorPicker.Color}"
+                                Background="{x:Bind myPrimaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}"
+                                Flyout="{StaticResource myPrimaryColorPickerFlyout}"
+                                Height="40"
+                                Width="40"
+                                Margin="10"
+                                HorizontalAlignment="Right"/>
+
+                            <TextBlock Grid.Row="1"
+                            Text="Secondary focus color:"
+                            VerticalAlignment="Center"/>
+                            <Button x:Name="secondaryColorPickerButton" 
+                                Grid.Column="1" Grid.Row="1"
+                                AutomationProperties.Name="{x:Bind myPrimaryColorPicker.Color}"
+                                Background="{x:Bind mySecondaryColorPicker.Color, Mode=OneWay, Converter={StaticResource colorToBrushCvt}}"
+                                Flyout="{StaticResource mySecondaryColorPickerFlyout}"
+                                Height="40"
+                                Width="40"
+                                Margin="10"
+                                HorizontalAlignment="Right"/>
+                        </Grid>
+                    </StackPanel>
+                </Flyout>
+            </controls:GallerySample.OptionsFlyout>
+        </controls:GallerySample>-->
     </StackPanel>
 </Page>
