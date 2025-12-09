@@ -18,14 +18,16 @@
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <Version>1.1.0</Version>
+    <Version>1.2.0</Version>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageCertificateThumbprint>4F0DB7AAFA49D68D87D4268682E6DB9202CE5089</PackageCertificateThumbprint>
+	<CsWin32RunAsBuildTask>true</CsWin32RunAsBuildTask>
+	<DisableRuntimeMarshalling>true</DisableRuntimeMarshalling>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="DataModel\ControlPageData.json" />
@@ -39,6 +41,10 @@
     <PackageReference Include="CommunityToolkit.Uwp.Controls.Primitives" Version="8.2.250402" />
     <PackageReference Include="CommunityToolkit.Uwp.Converters" Version="8.2.250402" />
     <PackageReference Include="CommunityToolkit.Uwp.Triggers" Version="8.2.250402" />
+    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.259">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CsTools">
