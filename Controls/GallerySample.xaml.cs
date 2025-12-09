@@ -8,6 +8,7 @@ using Windows.UI;
 using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Markup;
@@ -81,6 +82,13 @@ namespace UWPGallery.Controls
             new PropertyMetadata(null));
 
         public string SampleUrl => UrlNameOverride ?? HeaderTitle.Replace(' ', '-');
+        public FlyoutBase? OptionsFlyout { get; set; }
+
+        public static readonly DependencyProperty OptionsFlyoutProperty = DependencyProperty.Register(
+            "OptionsFlyout",
+            typeof(FlyoutBase),
+            typeof(GallerySample),
+            new PropertyMetadata(null));
 
         public GallerySample()
         {
@@ -114,7 +122,7 @@ namespace UWPGallery.Controls
             SampleGrid.FlowDirection = RtlAppBarButton.IsChecked == true ? FlowDirection.RightToLeft : FlowDirection.LeftToRight;
         }
 
-        private void SourceAppBarButton_Click(object sender, RoutedEventArgs e)
+        private async void SourceAppBarButton_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new SampleSourceCodeDialog();
 
@@ -135,23 +143,39 @@ namespace UWPGallery.Controls
 
             string cachedRtf = string.Empty;
 
-            dlg.SourcePivot.SelectionChanged += (s, e) =>
+            dlg.XamlRichEdit.LostFocus += (s, e) =>
             {
-                if ((PivotItem)dlg.SourcePivot.SelectedItem == dlg.SourcePivotXamlItem)
-                {
-                    dlg.XamlRichEdit.IsReadOnly = false;
-                    dlg.XamlRichEdit.Document.SetText(TextSetOptions.FormatRtf, cachedRtf);
-                    dlg.XamlRichEdit.FontFamily = new FontFamily("Consolas,Courier New,Segoe UI");
-                    dlg.XamlRichEdit.IsReadOnly = true;
-                }
+                dlg.XamlRichEdit.IsReadOnly = false;
+                dlg.XamlRichEdit.Document.SetText(TextSetOptions.FormatRtf, cachedRtf);
+                dlg.XamlRichEdit.FontFamily = new FontFamily("Consolas,Courier New,Segoe UI");
+                dlg.XamlRichEdit.IsReadOnly = true;
             };
 
-            new XamlTextFormatter(dlg.XamlRichEdit).ApplyColors();
+            var f = new XamlTextFormatter(dlg.XamlRichEdit);
+            var theme = await ConfigurationStorageManager.GetAppTheme();
+            dlg.RequestedTheme = theme;
+
+            if (theme == ElementTheme.Light || (theme == ElementTheme.Default && Application.Current.RequestedTheme == ApplicationTheme.Light))
+            {
+                f.ForceTheme = ElementTheme.Light;
+            }
+
+            f.ApplyColors();
+
             dlg.XamlRichEdit.IsReadOnly = true;
 
             dlg.XamlRichEdit.Document.GetText(TextGetOptions.FormatRtf, out cachedRtf);
 
+
             dlg.CSharpSource = CSharpSource;
+
+            dlg.Loaded += (s, e) =>
+            {
+                dlg.XamlRichEdit.IsReadOnly = false;
+                dlg.XamlRichEdit.Document.SetText(TextSetOptions.FormatRtf, cachedRtf);
+                dlg.XamlRichEdit.FontFamily = new FontFamily("Consolas,Courier New,Segoe UI");
+                dlg.XamlRichEdit.IsReadOnly = true;
+            };
 
             _ = dlg.ShowAsync();
         }
@@ -192,6 +216,15 @@ namespace UWPGallery.Controls
                 }
             }
         }
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            // use this as a workaround to hide the flyout arrow
+            OptionsFlyout?.ShowAt(sender as FrameworkElement, new FlyoutShowOptions
+            {
+                Placement = FlyoutPlacementMode.Left
+            });
+        }
     }
 
     public partial class NullableConverter : IValueConverter
@@ -207,9 +240,24 @@ namespace UWPGallery.Controls
         }
     }
 
-    public class XamlTextFormatter(RichEditBox richEditBox)
+    public partial class NullableObjectToBoolConverter : IValueConverter
     {
-        private readonly RichEditBox m_richEditBox = richEditBox;
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            return value != null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotSupportedException("Converting a bool to an object is impossible. Do not use TwoWay bindings with this converter.");
+        }
+    }
+
+    public class XamlTextFormatter
+    {
+        private readonly RichEditBox m_richEditBox;
+
+        public ElementTheme? ForceTheme;
 
         enum ZoneType
         {
@@ -222,6 +270,12 @@ namespace UWPGallery.Controls
             Whitespace,
             Comment,
             Content
+        }
+
+        public XamlTextFormatter(RichEditBox richEditBox)
+        {
+            m_richEditBox = richEditBox;
+            FocusHelper.StartTrackFocusState(m_richEditBox);
         }
 
         public void ApplyColors()
@@ -344,11 +398,11 @@ namespace UWPGallery.Controls
                 return;
             }
 
-            bool lightTheme = m_richEditBox.ActualTheme != ElementTheme.Dark;
+            bool lightTheme = (ForceTheme ?? m_richEditBox.ActualTheme) != ElementTheme.Dark;
 
             var doc = m_richEditBox.Document;
             var range = doc.GetRange(startIndex, endIndexExclusive);
-            Windows.UI.Color foregroundColor = lightTheme ? Colors.Black : Colors.White;
+            Color foregroundColor = lightTheme ? Colors.Black : Colors.White;
             switch (zoneType)
             {
                 case ZoneType.OpenTag:

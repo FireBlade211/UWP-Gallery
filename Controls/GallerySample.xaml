@@ -8,10 +8,22 @@
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400"
-    xmlns:controls="using:UWPGallery.Controls"
     MaxHeight="200"
-    HorizontalAlignment="Stretch">
+    HorizontalAlignment="Stretch"
+    xmlns:converters="using:CommunityToolkit.WinUI.Converters">
 
+    <UserControl.Resources>
+        <converters:EmptyObjectToObjectConverter x:Key="emptyObjectToVisibilityConverter">
+            <converters:EmptyObjectToObjectConverter.EmptyValue>
+                <Visibility>Collapsed</Visibility>
+            </converters:EmptyObjectToObjectConverter.EmptyValue>
+
+            <converters:EmptyObjectToObjectConverter.NotEmptyValue>
+                <Visibility>Visible</Visibility>
+            </converters:EmptyObjectToObjectConverter.NotEmptyValue>
+        </converters:EmptyObjectToObjectConverter>
+    </UserControl.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -45,6 +57,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -57,7 +70,14 @@
             <AppBarToggleButton VerticalAlignment="Top" Grid.Row="1" Label="RTL" ToolTipService.ToolTip="Toggle right-to-left" Icon="AlignRight" x:Name="RtlAppBarButton"
                                 Checked="RtlAppBarButton_Checked" Unchecked="RtlAppBarButton_Checked"/>
 
-            <AppBarButton VerticalAlignment="Bottom" Label="Source" Grid.Row="3" ToolTipService.ToolTip="Source code" x:Name="SourceAppBarButton" Click="SourceAppBarButton_Click">
+            <AppBarButton Visibility="{x:Bind OptionsFlyout, Mode=OneWay, Converter={StaticResource emptyObjectToVisibilityConverter}}" Click="AppBarButton_Click"
+                          Grid.Row="2" Label="Options" ToolTipService.ToolTip="Configure options for this sample" VerticalAlignment="Top">
+                <AppBarButton.Icon>
+                    <FontIcon FontSize="16" Glyph="&#xE713;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+
+            <AppBarButton VerticalAlignment="Bottom" Label="Source" Grid.Row="4" ToolTipService.ToolTip="Source code" x:Name="SourceAppBarButton" Click="SourceAppBarButton_Click">
                 <AppBarButton.Icon>
                     <FontIcon Glyph="&#xE943;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
                 </AppBarButton.Icon>
