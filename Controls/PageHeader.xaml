@@ -17,6 +17,30 @@
             x:Name="collectionConverter"
             EmptyValue="Collapsed"
             NotEmptyValue="Visible" />
+
+        <converters:EmptyObjectToObjectConverter
+            x:Name="objectBoolConverter">
+            <converters:EmptyObjectToObjectConverter.EmptyValue>
+                <x:Boolean>False</x:Boolean>
+            </converters:EmptyObjectToObjectConverter.EmptyValue>
+
+            <converters:EmptyObjectToObjectConverter.NotEmptyValue>
+                <x:Boolean>True</x:Boolean>
+            </converters:EmptyObjectToObjectConverter.NotEmptyValue>
+        </converters:EmptyObjectToObjectConverter>
+
+        <converters:EmptyObjectToObjectConverter
+            x:Name="objectVisibilityConverter">
+            <converters:EmptyObjectToObjectConverter.EmptyValue>
+                <Visibility>Collapsed</Visibility>
+            </converters:EmptyObjectToObjectConverter.EmptyValue>
+
+            <converters:EmptyObjectToObjectConverter.NotEmptyValue>
+                <Visibility>Visible</Visibility>
+            </converters:EmptyObjectToObjectConverter.NotEmptyValue>
+        </converters:EmptyObjectToObjectConverter>
+
+        <converters:StringFormatConverter x:Key="stringFormatConverter" />
     </UserControl.Resources>
     <Grid x:Name="headerGrid">
         <Grid.RowDefinitions>
@@ -27,7 +51,7 @@
             <TextBlock
                 AutomationProperties.AutomationId="PageHeader"
                 Style="{StaticResource TitleTextBlockStyle}"
-                Text="{x:Bind Item.Title}"
+                Text="{x:Bind Item.Title, Mode=OneWay}"
                 TextTrimming="CharacterEllipsis"
                 TextWrapping="NoWrap"
                 AutomationProperties.HeadingLevel="Level1" />
@@ -37,7 +61,7 @@
                 Padding="4"
                 VerticalAlignment="Bottom"
                 AutomationProperties.Name="API details"
-                ToolTipService.ToolTip="API namespace and inheritance"
+                ToolTipService.ToolTip="API details"
                 Background="Transparent">
                 <FontIcon
                     FontSize="14"
@@ -57,27 +81,61 @@
                             <StackPanel
                             x:Name="APISourcePanel"
                             Spacing="8"
-                            Visibility="{x:Bind Item.ApiNamespace, Converter={StaticResource emptyStringToVisibilityConverter}}">
+                            Visibility="{x:Bind Item.ApiNamespace, Converter={StaticResource emptyStringToVisibilityConverter}, Mode=OneWay}">
                                 <TextBlock
                                 VerticalAlignment="Center"
-                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Style="{StaticResource BaseTextBlockStyle}"
                                 Text="Namespace" />
                                 <TextBlock
                                 VerticalAlignment="Center"
                                 FontFamily="Consolas"
                                 IsTextSelectionEnabled="True"
                                 Style="{StaticResource CaptionTextBlockStyle}"
-                                Text="{x:Bind Item.ApiNamespace}" />
+                                Text="{x:Bind Item.ApiNamespace, Mode=OneWay}" />
                             </StackPanel>
-                            <MenuFlyoutSeparator Margin="-12" Visibility="{x:Bind Item.BaseClasses, Converter={StaticResource collectionConverter}}" />
-                            <StackPanel x:Name="InheritanceSourcePanel" Visibility="{x:Bind Item.BaseClasses, Converter={StaticResource collectionConverter}}" Spacing="8">
+                            <MenuFlyoutSeparator Margin="-12" Visibility="{x:Bind Item.BaseClasses, Converter={StaticResource collectionConverter}, Mode=OneWay}" />
+                            <StackPanel x:Name="InheritanceSourcePanel" Visibility="{x:Bind Item.BaseClasses, Converter={StaticResource collectionConverter}, Mode=OneWay}"
+                                        Spacing="8">
                                 <TextBlock
                                 VerticalAlignment="Center"
-                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Style="{StaticResource BaseTextBlockStyle}"
                                 Text="Inheritance" />
 
                                 <TextBlock FontFamily="Consolas" TextTrimming="CharacterEllipsis" Style="{StaticResource CaptionTextBlockStyle}"
-                                        IsTextSelectionEnabled="True" Text="{x:Bind GetInheritanceString()}"/>
+                                        IsTextSelectionEnabled="True" Text="{x:Bind GetInheritanceString(), Mode=OneWay}"/>
+                            </StackPanel>
+                            <MenuFlyoutSeparator Margin="-12"
+                                                 Visibility="{x:Bind Item.Requirements, Converter={StaticResource objectVisibilityConverter}, Mode=OneWay}" />
+                            <StackPanel x:Name="RequirementsSourcePanel"
+                                        Visibility="{x:Bind Item.Requirements, Converter={StaticResource objectVisibilityConverter}, Mode=OneWay}"
+                                        Spacing="8">
+                                <TextBlock
+                                VerticalAlignment="Center"
+                                Style="{StaticResource BaseTextBlockStyle}"
+                                Text="Requirements" />
+
+                                <TextBlock
+                                VerticalAlignment="Center"
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Text="Minimum OS Build"
+                                Visibility="{x:Bind Item.Requirements.OSBuild, Converter={StaticResource objectVisibilityConverter}, Mode=OneWay}"/>
+                                
+                                <TextBlock
+                                VerticalAlignment="Center"
+                                Visibility="{x:Bind Item.Requirements.OSBuild, Converter={StaticResource objectVisibilityConverter}, Mode=OneWay}"
+                                Text="{x:Bind Item.Requirements.OSBuild, Converter={StaticResource stringFormatConverter}, ConverterParameter='{}{0}', Mode=OneWay}"
+                                FontFamily="Consolas" TextTrimming="CharacterEllipsis"
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                IsTextSelectionEnabled="True"/>
+
+                                <TextBlock
+                                VerticalAlignment="Center"
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Text="Required API Contracts"
+                                Visibility="{x:Bind Item.Requirements.ApiContracts, Converter={StaticResource collectionConverter}, Mode=OneWay}"/>
+
+                                <TextBlock FontFamily="Consolas" TextTrimming="CharacterEllipsis" Style="{StaticResource CaptionTextBlockStyle}"
+                                        IsTextSelectionEnabled="True" Text="{x:Bind GetApiContractString(), Mode=OneWay}"/>
                             </StackPanel>
                         </StackPanel>
                     </Flyout>
@@ -89,7 +147,7 @@
                 <DropDownButton
                     AutomationProperties.Name="Documentation"
                     ToolTipService.ToolTip="Documentation"
-                    Visibility="{x:Bind Item.Docs, Converter={StaticResource collectionConverter}}">
+                    Visibility="{x:Bind Item.Docs, Converter={StaticResource collectionConverter}, Mode=OneWay}">
                     <DropDownButton.Content>
                         <StackPanel Orientation="Horizontal" Spacing="8">
                             <FontIcon FontSize="16" Glyph="&#xE7C3;" FontFamily="{StaticResource SymbolThemeFontFamily}" />
@@ -102,7 +160,7 @@
                                 x:Name="DocsList"
                                 Margin="6"
                                 IsTabStop="False"
-                                ItemsSource="{x:Bind Item.Docs}">
+                                ItemsSource="{x:Bind Item.Docs, Mode=OneWay}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
                                         <StackPanel Orientation="Vertical" />
@@ -113,10 +171,10 @@
                                         <HyperlinkButton
                                             HorizontalAlignment="Stretch"
                                             HorizontalContentAlignment="Left"
-                                            DataContext="{x:Bind Uri}"
+                                            DataContext="{x:Bind Uri, Mode=OneWay}"
                                             Click="HyperlinkButton_Click"
-                                            ToolTipService.ToolTip="{x:Bind Uri}">
-                                            <TextBlock Text="{x:Bind Title}" />
+                                            ToolTipService.ToolTip="{x:Bind Uri, Mode=OneWay}">
+                                            <TextBlock Text="{x:Bind Title, Mode=OneWay}" />
                                         </HyperlinkButton>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -135,7 +193,7 @@
                     </DropDownButton.Content>
                     <DropDownButton.Flyout>
                         <Flyout Placement="Bottom">
-                            <StackPanel x:Name="SourcePanel" Margin="0,-8,0,-12">
+                            <StackPanel x:Name="SourcePanel" Margin="0,-8,0,-12" Padding="0,0,0,12">
                                 <StackPanel
                                     Margin="0,8,0,0"
                                     Orientation="Horizontal"

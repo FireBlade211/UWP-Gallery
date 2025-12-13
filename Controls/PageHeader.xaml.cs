@@ -48,7 +48,10 @@ namespace UWPGallery.Controls
             PageMarkupGitHubLink.Click += (s, e) => _ = Launcher.LaunchUriAsync(new Uri(markup));
         }
 
-        public string GetInheritanceString() => Item.BaseClasses != null ? string.Join(" > ", Item.BaseClasses) : string.Empty;
+        public string GetInheritanceString() => Item?.BaseClasses != null ? string.Join(" > ", Item.BaseClasses) : string.Empty;
+
+        public string GetApiContractString() => (Item != null && Item.Requirements != null && Item.Requirements.ApiContracts != null && Item.Requirements.ApiContracts.Any())
+            ? string.Join('\n', Item.Requirements.ApiContracts) : string.Empty;
 
         private void OnCopyLinkButtonClick(object sender, RoutedEventArgs e)
         {

@@ -75,6 +75,11 @@ namespace UWPGallery
             {
                 Item = item;
 
+                // For some reason this is the only workaround to the issue
+                // where in top navigation pane mode the pageHeader.Item is null
+                // for some reason even though it's x:Bound with Mode=OneWay in XAML
+                pageHeader.Item = item;
+
                 if (group != null)
                 {
                     var pageName = string.IsNullOrEmpty(group.Folder) ? item.PageType?.Name : $"{group.Folder}/{item.PageType?.Name}";

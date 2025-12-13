@@ -30,7 +30,7 @@
         <controls:PageHeader
             x:Name="pageHeader"
             Margin="36,24,36,0"
-            Item="{x:Bind Item}" />
+            Item="{x:Bind Item, Mode=OneWay}" />
 
         <!--  Content Region  -->
         <ScrollViewer
