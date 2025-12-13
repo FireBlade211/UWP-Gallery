@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using UWPGallery.DataModel;
 using Windows.Storage;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace UWPGallery
 {
@@ -189,6 +190,48 @@ namespace UWPGallery
 
             await SerializeAndSaveDataObjectAsync(dobj);
         }
+        /// <summary>
+        /// Gets the most recently loaded Scratch Pad XAML content.
+        /// </summary>
+        /// <returns>The most recently loaded Scratch Pad XAML content.</returns>
+        public async static Task<string> GetLastScratchPadXaml()
+        {
+            var dobj = await DeserializeDataObjectAsync();
+            return dobj.LastScratchPadXaml;
+        }
+
+        /// <summary>
+        /// Sets the most recently loaded Scratch Pad XAML content in the configuration file.
+        /// </summary>
+        /// <param name="xaml">The XAML content.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous write operation.</returns>
+        public async static Task SetLastScratchPadXaml(string xaml)
+        {
+            var dobj = await DeserializeDataObjectAsync();
+            dobj.LastScratchPadXaml = xaml;
+            await SerializeAndSaveDataObjectAsync(dobj);
+        }
+        /// <summary>
+        /// Gets the currently set navigation pane mode in the configuration file.
+        /// </summary>
+        /// <returns>The currently set navigation pane mode in the configuration file.</returns>
+        public async static Task<NavigationViewPaneDisplayMode> GetNavigationPaneMode()
+        {
+            var dobj = await DeserializeDataObjectAsync();
+            return dobj.NavigationPaneMode;
+        }
+
+        /// <summary>
+        /// Sets the navigation pane mode in the configuration file.
+        /// </summary>
+        /// <param name="mode">The new mode.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous write operation.</returns>
+        public async static Task SetNavigationPaneMode(NavigationViewPaneDisplayMode mode)
+        {
+            var dobj = await DeserializeDataObjectAsync();
+            dobj.NavigationPaneMode = mode;
+            await SerializeAndSaveDataObjectAsync(dobj);
+        }
     }
 
     /// <summary>
@@ -215,6 +258,14 @@ namespace UWPGallery
         /// Specifies the sound properties.
         /// </summary>
         public ConfigurationSoundProperties SoundProperties { get; set; } = new();
+        /// <summary>
+        /// Specifies the most recently loaded Scratch Pad XAML content.
+        /// </summary>
+        public string LastScratchPadXaml { get; set; } = string.Empty;
+        /// <summary>
+        /// Specifies the current NavigationView pane mode.
+        /// </summary>
+        public NavigationViewPaneDisplayMode NavigationPaneMode { get; set; } = NavigationViewPaneDisplayMode.Auto;
     }
 
     /// <summary>

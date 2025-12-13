@@ -39,6 +39,18 @@
                             </StackPanel>
                         </DataTemplate>
                     </HubSection>
+
+                    <HubSection Header="Navigation Style" x:Name="NavPaneModeHubSection">
+                        <DataTemplate>
+                            <ComboBox x:Name="NavPaneModeCombo" Loaded="NavPaneModeCombo_Loaded" SelectionChanged="NavPaneModeCombo_SelectionChanged">
+                                       <ComboBoxItem Tag="Auto">Left (auto)</ComboBoxItem>
+                                       <ComboBoxItem Tag="Left">Left</ComboBoxItem>
+                                <ComboBoxItem Tag="LeftCompact">Left (overlay)</ComboBoxItem>
+                                <ComboBoxItem Tag="LeftMinimal">Left (compact)</ComboBoxItem>
+                                        <ComboBoxItem Tag="Top">Top</ComboBoxItem>
+                            </ComboBox>
+                        </DataTemplate>
+                    </HubSection>
                 </Hub>
             </PivotItem>
             <PivotItem Header="Other">

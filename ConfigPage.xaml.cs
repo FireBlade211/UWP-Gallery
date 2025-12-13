@@ -235,5 +235,38 @@ namespace UWPGallery
                 _ = MainPage.Current?.LoadConfig();
             }
         }
+
+        private async void NavPaneModeCombo_Loaded(object sender, RoutedEventArgs e)
+        {
+            var mode = await ConfigurationStorageManager.GetNavigationPaneMode();
+
+            if (sender is ComboBox cb)
+            {
+                foreach (ComboBoxItem item in cb.Items)
+                {
+                    if (mode.ToString().Equals(item.Tag.ToString()))
+                    {
+                        cb.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private async void NavPaneModeCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ComboBox cb)
+            {
+                if (cb.SelectedItem is ComboBoxItem cbi)
+                {
+                    if (Enum.TryParse<NavigationViewPaneDisplayMode>(cbi.Tag.ToString(), true, out var mode))
+                    {
+                        await ConfigurationStorageManager.SetNavigationPaneMode(mode);
+
+                        MainPage.Current?.LoadConfig();
+                    }
+                }
+            }
+        }
     }
 }
