@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UWPGallery.DataModel;
+using UWPGallery.SamplePages;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace UWPGallery.ControlPages
 {
@@ -161,19 +162,19 @@ namespace UWPGallery.ControlPages
         /// </summary>
         /// <param name="sender">The AutoSuggestBox whose text got changed.</param>
         /// <param name="args">The event arguments.</param>
-        private void Control2_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        private async void Control2_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
-            //We only want to get results when it was a user typing,
-            //otherwise we assume the value got filled in by TextMemberPath
-            //or the handler for SuggestionChosen
+            // We only want to get results when it was a user typing,
+            // otherwise we assume the value got filled in by TextMemberPath
+            // or the handler for SuggestionChosen
             if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
             {
-                var suggestions = SearchControls(sender.Text);
+                var suggestions = await GallerySearchManager.SearchGallery(sender.Text);
 
-                if (suggestions.Count > 0)
-                    sender.ItemsSource = suggestions;
+                if (suggestions.Items.Count > 0)
+                    sender.ItemsSource = sender == Control2 ? suggestions.Items.Select(x => x.Title).ToArray() : suggestions.Items;
                 else
-                    sender.ItemsSource = new string[] { "No results found" };
+                    sender.ItemsSource = sender == Control2 ? new string[] { "No results found" } : null;
             }
         }
 
@@ -186,21 +187,35 @@ namespace UWPGallery.ControlPages
         /// <param name="sender">The AutoSuggestBox that fired the event.</param>
         /// <param name="args">The args contain the QueryText, which is the text in the TextBox,
         /// and also ChosenSuggestion, which is only non-null when a user selects an item in the list.</param>
-        private void Control2_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        private async void Control2_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            if (args.ChosenSuggestion != null && args.ChosenSuggestion is ControlInfoDataItem)
+            if (sender == Control2)
             {
-                //User selected an item, take an action
-                SelectControl(args.ChosenSuggestion as ControlInfoDataItem);
-            }
-            else if (!string.IsNullOrEmpty(args.QueryText))
-            {
-                //Do a fuzzy search based on the text
-                var suggestions = SearchControls(sender.Text);
-                if (suggestions.Count > 0)
+                if (args.ChosenSuggestion is string item)
                 {
-                    SelectControl(suggestions.FirstOrDefault());
+                    var suggest = await GallerySearchManager.SearchGallery(item);
+
+                    if (suggest.Items.Any())
+                    {
+                        // User selected an item, take an action
+                        SelectControl(sender, suggest.Items.First());
+                    }
                 }
+                else if (!string.IsNullOrEmpty(args.QueryText))
+                {
+                    var suggestions = await GallerySearchManager.SearchGallery(args.QueryText);
+                    if (suggestions.Items.Count > 0)
+                    {
+                        if (suggestions.Items.FirstOrDefault() is ControlInfoDataItem c)
+                        {
+                            SelectControl(sender, c);
+                        }
+                    }
+                }
+            }
+            else if (args.ChosenSuggestion is ControlInfoDataItem control)
+            {
+                SelectControl(sender, control);
             }
         }
 
@@ -218,26 +233,140 @@ namespace UWPGallery.ControlPages
             {
                 sender.Text = control.Title;
             }
-        }
-
-        /// <summary>
-        /// This
-        /// </summary>
-        /// <param name="contact"></param>
-        private void SelectControl(ControlInfoDataItem control)
-        {
-            if (control != null)
+            else if (args.SelectedItem is string s)
             {
-                ControlDetails.Visibility = Visibility.Visible;
-
-
-                BitmapImage image = control.ImagePath == null ? null : new BitmapImage(new Uri(control.ImagePath));
-                ControlImage.Source = image;
-
-                ControlTitle.Text = control.Title;
-                ControlSubtitle.Text = control.Subtitle;
+                if (!s.Equals("No results found", StringComparison.OrdinalIgnoreCase))
+                {
+                    sender.Text = s;
+                }
             }
         }
 
+        private void SelectControl(AutoSuggestBox sender, ControlInfoDataItem control)
+        {
+            if (control != null)
+            {
+                if (sender == Control2)
+                {
+                    ControlDetails.Visibility = Visibility.Visible;
+
+                    ControlImage.Glyph = control.IconGlyph;
+
+                    ControlTitle.Text = control.Title;
+                    ControlSubtitle.Text = control.Subtitle;
+                }
+                else
+                {
+                    ControlDetails2.Visibility = Visibility.Visible;
+
+                    ControlImage2.Glyph = control.IconGlyph;
+
+                    ControlTitle2.Text = control.Title;
+                    ControlSubtitle2.Text = control.Subtitle;
+                }
+            }
+        }
+
+
+        private void NavViewSearchBoxSample_Loaded(object sender, RoutedEventArgs e)
+        {
+            var items = NavViewSearchBoxSample.MenuItems.Select(string (object navItem) =>
+            {
+                if (navItem is NavigationViewItem item)
+                {
+                    return item.Content.ToString() ?? string.Empty;
+                }
+
+                return string.Empty;
+            }).ToList();
+
+            items.Add("Settings");
+
+            SearchBox.ItemsSource = items;
+        }
+
+        private void NavViewSearchBoxSample_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            if (args.IsSettingsSelected)
+                NavViewSearchBoxSampleFrame.Navigate(typeof(SampleSettingsPage), null, args.RecommendedNavigationTransitionInfo);
+            else
+            {
+                if (NavViewSearchBoxSample.SelectedItem is NavigationViewItem item)
+                {
+                    if (item.Tag is string s)
+                    {
+                        Type? pageType = Type.GetType("UWPGallery.SamplePages.SamplePage" + s);
+
+                        if (pageType != null)
+                        {
+                            NavViewSearchBoxSampleFrame.Navigate(pageType, null, args.RecommendedNavigationTransitionInfo);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void SearchBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            var querySplit = SearchBox.Text.ToLower().Split(" ");
+
+            var items = NavViewSearchBoxSample.MenuItems.Select(string (object navItem) =>
+            {
+                if (navItem is NavigationViewItem item)
+                {
+                    return item.Content.ToString() ?? string.Empty;
+                }
+
+                return string.Empty;
+            }).ToList();
+
+            items.Add("Settings");
+
+            SearchBox.ItemsSource = items.Where(x =>
+            {
+                // Idea: check for every word entered (separated by space) if it is in the name,
+                // e.g. for query "split button" the only result should "SplitButton" since its the only query to contain "split" and "button"
+                // If any of the sub tokens is not in the string, we ignore the item. So the search gets more precise with more words
+                bool flag = true;
+                foreach (string queryToken in querySplit)
+                {
+                    // Check if token is in name
+                    if (!x.Contains(queryToken, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // The title doesn't contain one of the tokens so we discard this item!
+                        flag = false;
+                    }
+                }
+                return flag;
+            }).ToList();
+        }
+
+        private void SearchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (args.ChosenSuggestion is string s)
+            {
+                if (s.Equals("Settings", StringComparison.Ordinal))
+                {
+                    NavViewSearchBoxSample.SelectedItem = NavViewSearchBoxSample.SettingsItem;
+                }
+                else
+                {
+                    foreach (var item in NavViewSearchBoxSample.MenuItems)
+                    {
+                        if (item is NavigationViewItem navItem)
+                        {
+                            if (navItem.Content is string ss)
+                            {
+                                if (s.Equals(ss, StringComparison.Ordinal))
+                                {
+                                    NavViewSearchBoxSample.SelectedItem = navItem;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
