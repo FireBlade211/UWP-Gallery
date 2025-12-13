@@ -119,12 +119,63 @@
                   "description": "Add a link to the doc in the Documentation dropdown on the detail page of this control"
                 },
                 "RelatedControls": {
-                  "type": "array",
-                  "items": {
-                    "type": "string",
-                    "description": "ID of the related control"
-                  },
-                  "description": "Array of names of the related control"
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "description": "ID of the related control"
+                    },
+                    "description": "Array of names of the related controls"
+                },
+                "BaseClasses": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "description": "Name of the base class"
+                    },
+                    "description": "Array of names of the classes this control inherits from"
+                },
+                "Requirements": {
+                    "type": "object",
+                    "description": "The requirements for this control.",
+                    "properties": {
+                        "ApiContracts": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "Name": {
+                                        "type": "string",
+                                        "description": "The name of the API contract. This enum can be extended for the other contracts if needed, since the enum is only provided for autocomplete.",
+                                        "enum": [
+                                            "Windows.Foundation.UniversalApiContract"
+                                        ],
+                                        "default": true
+                                    },
+                                    "Version": {
+                                        "type": "object",
+                                        "properties": {
+                                            "Major": {
+                                                "type": "integer",
+                                                "description": "The major version of the API contract required."
+                                            },
+                                            "Minor": {
+                                                "type": "integer",
+                                                "description": "The minor version of the API contract required."
+                                            }
+                                        },
+                                        "description": "The version of the API required.",
+                                        "required": [ "Major" ]
+                                    }
+                                },
+                                "required": [ "Name", "Version" ]
+                            },
+                            "description": "The API contracts that this API requires."
+                        },
+                        "OSBuild": {
+                            "type": "integer",
+                            "description": "The minimum OS build that the API requires."
+                        }
+                    }
                 }
               },
               "required": [ "UniqueId", "Title" ]

@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Windows.Foundation.Metadata;
 using Windows.UI.Xaml.Shapes;
 
 #pragma warning disable CS8618
@@ -61,6 +62,15 @@ namespace UWPGallery.DataModel
         public ControlInfoDataItem Self => this;
 
         public Uri GetUrl() => ProtocolActivationClipboardHelper.GetUri(this);
+
+        public ControlInfoRequirements Requirements { get; set; }
+    }
+
+    public class ControlInfoRequirements
+    {
+        public ObservableCollection<ControlInfoApiContract> ApiContracts { get; set; }
+
+        public int? OSBuild { get; set; }
     }
 
     public class ControlInfoDocLink
@@ -72,6 +82,22 @@ namespace UWPGallery.DataModel
         }
         public string Title { get; set; }
         public string Uri { get; set; }
+    }
+
+    public class ControlInfoApiContract
+    {
+        public string Name { get; set; }
+        public ControlInfoVersion Version { get; set; }
+
+        public override string ToString() => $"{Name} >= {Version.Major}.{Version.Minor ?? 0}" +
+            $"{((Version.Minor != null ? ApiInformation.IsApiContractPresent(Name, (ushort)Version.Major, (ushort)Version.Minor)
+                : ApiInformation.IsApiContractPresent(Name, (ushort)Version.Major)) ? " ✓" : string.Empty)}";
+    }
+
+    public class ControlInfoVersion
+    {
+        public int Major { get; set; }
+        public int? Minor { get; set; }
     }
 
 
