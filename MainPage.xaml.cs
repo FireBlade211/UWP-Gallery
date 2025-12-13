@@ -172,7 +172,7 @@ namespace UWPGallery
             MainFrame.Margin = args.DisplayMode switch
             {
                 NavigationViewDisplayMode.Minimal => new(0, 32, 0, 0),
-                _ => new(0),
+                _ => new(0)
             };
         }
 
@@ -261,6 +261,8 @@ namespace UWPGallery
             ElementSoundPlayer.State = soundProps.IsSoundEnabled ? ElementSoundPlayerState.On : ElementSoundPlayerState.Off;
             ElementSoundPlayer.Volume = soundProps.Volume;
             ElementSoundPlayer.SpatialAudioMode = soundProps.UseSpatialAudio ? ElementSpatialAudioMode.On : ElementSpatialAudioMode.Off;
+
+            NavBar.PaneDisplayMode = await ConfigurationStorageManager.GetNavigationPaneMode();
         }
 
         private void MainFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
