@@ -1,0 +1,128 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.ScratchPadPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <ScrollViewer
+                    x:Name="scratchPad"
+                    HorizontalScrollBarVisibility="Visible"
+                    HorizontalScrollMode="Auto"
+                    VerticalScrollMode="Auto"
+                    BorderThickness="3"
+                    BorderBrush="{ThemeResource SystemControlBackgroundListLowRevealBorderBrush}"
+                    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+
+            <CommandBar Grid.Row="1">
+                <CommandBar.PrimaryCommands>
+                    <!-- Some buttons have additional spaces in their labels to trigger word wrapping (because you can't do newlines \r\n (CRLF) or \n (LF) in XAML) -->
+                    <AppBarButton Label="Load  XAML" ToolTipService.ToolTip="Load the XAML content from the edit box into the view box (F5)" Click="LoadClick">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE896;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                        </AppBarButton.Icon>
+
+                        <AppBarButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Key="F5"/>
+                        </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+                    <AppBarSeparator/>
+                    <AppBarToggleButton Label="Toggle Theme" ToolTipService.ToolTip="Toggle the theme of the XAML content (Ctrl + T)" x:Name="toggleThemeButton"
+                                        Checked="toggleThemeButton_Checked" Unchecked="toggleThemeButton_Unchecked">
+                        <AppBarToggleButton.Icon>
+                            <FontIcon Glyph="&#xE793;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                        </AppBarToggleButton.Icon>
+
+                        <AppBarToggleButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="T"/>
+                        </AppBarToggleButton.KeyboardAccelerators>
+                    </AppBarToggleButton>
+                    <AppBarToggleButton Label="Right to Left" Icon="AlignRight"
+                                        ToolTipService.ToolTip="Show how the XAML content would look like for languages that use a right-to-left (RTL) layout (Ctrl + L)"
+                                        x:Name="rtlToggle" Checked="rtlToggle_Checked" Unchecked="rtlToggle_Unchecked">
+                        <AppBarToggleButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="L"/>
+                        </AppBarToggleButton.KeyboardAccelerators>
+                    </AppBarToggleButton>
+                    <AppBarButton Label="Reset XAML" ToolTipService.ToolTip="Reset the XAML content back to default." Click="ResetToDefaultClick">
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE72C;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                    <AppBarSeparator/>
+                    <AppBarButton Label="Save to  File" x:Name="saveButton" Click="saveButton_Click">
+                        <AppBarButton.Command>
+                            <StandardUICommand Kind="Save"/>
+                        </AppBarButton.Command>
+                        
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE792;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                    <AppBarButton Label="Open from File" x:Name="openButton" Click="openButton_Click">
+                        <AppBarButton.Command>
+                            <StandardUICommand Kind="Open"/>
+                        </AppBarButton.Command>
+
+                        <AppBarButton.Icon>
+                            <FontIcon Glyph="&#xE8DA;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                        </AppBarButton.Icon>
+                    </AppBarButton>
+                    <AppBarSeparator/>
+                    <AppBarToggleButton Label="Auto Pretty Print" IsChecked="True" ToolTipService.ToolTip="Automatically format and pretty-print XAML code while typing (Ctrl + R)"
+                                        x:Name="prettyPrintToggle">
+                        <AppBarToggleButton.Icon>
+                            <FontIcon Glyph="&#xE8A4;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                        </AppBarToggleButton.Icon>
+
+                        <AppBarToggleButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="R"/>
+                        </AppBarToggleButton.KeyboardAccelerators>
+                    </AppBarToggleButton>
+                    <AppBarToggleButton Label="Color Coding" IsChecked="True" ToolTipService.ToolTip="Automatically color-code XAML (Ctrl + Shift + C)"
+                                        x:Name="colorCodeToggle" Checked="colorCodeToggle_Checked" Unchecked="colorCodeToggle_Checked">
+                        <AppBarToggleButton.Icon>
+                            <FontIcon Glyph="&#xE790;" FontFamily="{StaticResource SymbolThemeFontFamily}"/>
+                        </AppBarToggleButton.Icon>
+
+                        <AppBarToggleButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control,Shift" Key="C"/>
+                        </AppBarToggleButton.KeyboardAccelerators>
+                    </AppBarToggleButton>
+                </CommandBar.PrimaryCommands>
+            </CommandBar>
+
+            <RichEditBox Grid.Row="2" DisabledFormattingAccelerators="All" PlaceholderText="Enter XAML here and press the Load button above..."
+                        x:Name="textbox"
+                        AcceptsReturn="True"
+                        ActualThemeChanged="textbox_ActualThemeChanged"
+                        AutomationProperties.Name="XAML markup textbox"
+                        FontFamily="Consolas"
+                        FontSize="13"
+                        IsSpellCheckEnabled="False"
+                        KeyDown="textbox_KeyDown"
+                        PreviewKeyUp="textbox_PreviewKeyUp"
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        TextChanged="textbox_TextChanged"
+                        GotFocus="textbox_GotFocus"
+                        LostFocus="textbox_LostFocus"
+                        ClipboardCopyFormat="PlainText"/>
+
+            <TextBlock x:Name="loadStatus" Grid.Row="3" />
+        </Grid>
+    </Grid>
+</Page>

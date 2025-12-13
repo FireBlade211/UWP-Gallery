@@ -1,0 +1,95 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.AutoSuggestBoxPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <StackPanel Spacing="12">
+        <controls:GallerySample HeaderTitle="Basic AutoSuggestBox">
+            <AutoSuggestBox TextChanged="AutoSuggestBox_TextChanged"
+                SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+                Width="300" PlaceholderText="Search cats"/>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;AutoSuggestBox TextChanged="AutoSuggestBox_TextChanged"
+    SuggestionChosen="AutoSuggestBox_SuggestionChosen"
+    Width="300" PlaceholderText="Search cats"/&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private List&lt;string&gt; Cats = new List&lt;string&gt;()
+{
+    "Abyssinian",
+    "Aegean",
+    "American Bobtail",
+    "American Curl",
+    "American Ringtail",
+    "American Shorthair",
+    "American Wirehair",
+    "Aphrodite Giant",
+    "Arabian Mau",
+    "Asian cat",
+    "Asian Semi-longhair",
+    "Australian Mist",
+    ...
+};
+                    
+private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+{
+    // Since selecting an item will also change the text,
+    // only listen to changes caused by user entering text.
+    if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+    {
+        var suitableItems = new List&lt;string&gt;();
+        var splitText = sender.Text.ToLower().Split(' ');
+        foreach (var cat in Cats)
+        {
+            var found = splitText.All((key) =>
+            {
+                return cat.ToLower().Contains(key);
+            });
+            if (found)
+            {
+                suitableItems.Add(cat);
+            }
+        }
+        if (suitableItems.Count == 0)
+        {
+            suitableItems.Add("No results found");
+        }
+        sender.ItemsSource = suitableItems;
+    }
+}
+
+private void AutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+{
+    var f = new Flyout();
+    f.Content = new TextBlock
+    {
+        Style = (Style)Application.Current.Resources["BaseTextBlockStyle"],
+        Text = "You chose: " + args.SelectedItem.ToString()
+    };
+
+    f.ShowAt(sender);
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="A Search-style AutoSuggestBox">
+            <AutoSuggestBox PlaceholderText="Type a control name"
+                TextChanged="Control2_TextChanged"
+                QueryIcon="Find"
+                QuerySubmitted="Control2_QuerySubmitted"
+                SuggestionChosen="Control2_SuggestionChosen"/>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>

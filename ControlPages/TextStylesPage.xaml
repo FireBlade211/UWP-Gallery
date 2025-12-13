@@ -35,8 +35,8 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Style="{StaticResource BodyTextBlockStyle}">Body</TextBlock>
-            <TextBlock Grid.Column="1" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">BodyTextBlockStyle</TextBlock>
+            <TextBlock Style="{StaticResource BaseTextBlockStyle}">Base</TextBlock>
+            <TextBlock Grid.Column="1" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">BaseTextBlockStyle</TextBlock>
         </Grid>
 
         <Grid Margin="0,15,0,0">
@@ -45,8 +45,8 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Style="{StaticResource BaseTextBlockStyle}">Base</TextBlock>
-            <TextBlock Grid.Column="1" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">BaseTextBlockStyle</TextBlock>
+            <TextBlock Style="{StaticResource BodyTextBlockStyle}">Body</TextBlock>
+            <TextBlock Grid.Column="1" FontFamily="Consolas" IsTextSelectionEnabled="True" VerticalAlignment="Center">BodyTextBlockStyle</TextBlock>
         </Grid>
 
         <Grid Margin="0,15,0,0">

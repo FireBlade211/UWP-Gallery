@@ -27,47 +27,68 @@
           "RelatedControls": [
             "TextBlock"
           ],
-          "Docs": [
-            {
-              "Title": "Guidelines (Windows 11)",
-              "Uri": "https://learn.microsoft.com/windows/apps/design/signature-experiences/typography"
-            }
-          ]
+            "Docs": [
+                {
+                    "Title": "Guidelines",
+                    "Uri": "https://learn.microsoft.com/windows/apps/design/signature-experiences/typography"
+                }
+            ],
+            "IsUpdated": true
         },
         {
-          "Title": "Icons",
-          "UniqueId": "Icons",
-          "UrlName": "icons",
-          "Description": "Icons are a visual design language that can be used to quickly communicate actions.",
-          "Subtitle": "Icons are a visual design language that can be used to quickly communicate actions.",
-          "UseGlyph": true,
-          "IconGlyph": "",
-          "Docs": [
-            {
-              "Title": "Segoe MDL2 icons",
-              "Uri": "https://learn.microsoft.com/windows/apps/design/style/segoe-ui-symbol-font"
-            },
-            {
-              "Title": "Iconography",
-              "Uri": "https://learn.microsoft.com/windows/apps/design/signature-experiences/iconography#system-icons"
-            },
-            {
-              "Title": "SymbolIcon - API",
-              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.symbolicon"
-            },
-            {
-              "Title": "SymbolIconSource - API",
-              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.symboliconsource"
-            },
-            {
-              "Title": "FontIcon - API",
-              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.fonticon"
-            },
-            {
-              "Title": "FontIconSource - API",
-              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.fonticonsource"
-            }
-          ]
+            "Title": "Icons",
+            "UniqueId": "Icons",
+            "UrlName": "icons",
+            "Description": "Icons are a visual design language that can be used to quickly communicate actions.",
+            "Subtitle": "Icons are a visual design language that can be used to quickly communicate actions.",
+            "UseGlyph": true,
+            "IconGlyph": "",
+            "Docs": [
+                {
+                    "Title": "Segoe MDL2 icons",
+                    "Uri": "https://learn.microsoft.com/windows/apps/design/style/segoe-ui-symbol-font"
+                },
+                {
+                    "Title": "Iconography",
+                    "Uri": "https://learn.microsoft.com/windows/apps/design/signature-experiences/iconography#system-icons"
+                },
+                {
+                    "Title": "SymbolIcon - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.symbolicon"
+                },
+                {
+                    "Title": "SymbolIconSource - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.symboliconsource"
+                },
+                {
+                    "Title": "FontIcon - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.fonticon"
+                },
+                {
+                    "Title": "FontIconSource - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.fonticonsource"
+                }
+            ]
+        },
+        {
+            "Title": "Scratch Pad",
+            "UniqueId": "ScratchPad",
+            "UrlName": "xamlpad",
+            "UseGlyph": true,
+            "IconGlyph": "",
+            "Subtitle": "Scratch pad for testing simple XAML markup.",
+            "Description": "Provides an edit box where you can type in some markup and load it to see how it looks and behaves.",
+            "IsNew": true,
+            "Docs": [
+                {
+                    "Title": "XamlReader - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.markup.xamlreader"
+                }
+            ],
+            "ApiNamespace": "Windows.UI.Xaml.Markup",
+            "BaseClasses": [
+                "Object"
+            ]
         }
       ]
     },
@@ -335,6 +356,43 @@
             "UseGlyph": true,
             "IconGlyph": "",
             "IsUpdated": true
+        },
+        {
+            "UniqueId": "ThemeShadow",
+            "UrlName": "thshadow",
+            "Title": "ThemeShadow",
+            "ApiNamespace": "Windows.UI.Xaml.Media",
+            "Subtitle": "Adds a depth-aware shadow to UI using system lighting.",
+            "Description": "Adds a realistic shadow effect to UI elements using the system's lighting and depth to enhance visual hierarchy.",
+            "Docs": [
+                {
+                    "Title": "Guidelines",
+                    "Uri": "https://learn.microsoft.com/windows/apps/design/layout/depth-shadow"
+                },
+                {
+                    "Title": "ThemeShadow - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.media.themeshadow"
+                }
+            ],
+            "UseGlyph": true,
+            "IconGlyph": "",
+            "IsNew": true,
+            "Requirements": {
+                "ApiContracts": [
+                    {
+                        "Name": "Windows.Foundation.UniversalApiContract",
+                        "Version": {
+                            "Major": 8
+                        }
+                    }
+                ],
+                "OSBuild": 18362
+            },
+            "BaseClasses": [
+                "Shadow",
+                "DependencyObject",
+                "Object"
+            ]
         }
       ]
     },
@@ -555,38 +613,82 @@
           ]
         },
         {
-          "Title": "TextBox",
-          "UniqueId": "TextBox",
-          "UrlName": "textbox",
-          "BaseClasses": [
-            "Object",
-            "DependencyObject",
-            "UIElement",
-            "FrameworkElement",
-            "Control"
-          ],
-          "ApiNamespace": "Windows.UI.Xaml.Controls",
-          "Subtitle": "A single-line or multi-line plain text field.",
-          "Description": "Use a TextBox to let a user enter simple text input in your app. You can add a header and placeholder text to let the user know what the TextBox is for, and you can customize it in other ways.",
-          "Docs": [
-            {
-              "Title": "TextBox - API",
-              "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.textbox"
-            },
-            {
-              "Title": "Guidelines",
-              "Uri": "https://learn.microsoft.com/windows/apps/design/controls/text-controls"
+            "Title": "TextBox",
+            "UniqueId": "TextBox",
+            "UrlName": "textbox",
+            "BaseClasses": [
+                "Object",
+                "DependencyObject",
+                "UIElement",
+                "FrameworkElement",
+                "Control"
+            ],
+            "ApiNamespace": "Windows.UI.Xaml.Controls",
+            "Subtitle": "A single-line or multi-line plain text field.",
+            "Description": "Use a TextBox to let a user enter simple text input in your app. You can add a header and placeholder text to let the user know what the TextBox is for, and you can customize it in other ways.",
+            "Docs": [
+                {
+                    "Title": "TextBox - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.textbox"
+                },
+                {
+                    "Title": "Guidelines",
+                    "Uri": "https://learn.microsoft.com/windows/apps/design/controls/text-controls"
+                }
+            ],
+            "UseGlyph": true,
+            "IconGlyph": "",
+            "RelatedControls": [
+                "TextBlock",
+                "RichTextBlock",
+                "PasswordBox",
+                "RichEditBox",
+                "AutoSuggestBox"
+            ]
+        },
+        {
+            "Title": "AutoSuggestBox",
+            "UniqueId": "AutoSuggestBox",
+            "UrlName": "autosbox",
+            "BaseClasses": [
+                "ItemsControl",
+                "Control",
+                "FrameworkElement",
+                "UIElement",
+                "DependencyObject",
+                "Object"
+            ],
+            "Subtitle": "Represents a text control that makes suggestions to users as they enter text using a keyboard or pen.",
+            "Description": "An AutoSuggestBox is a text control that makes suggestions to users as they enter text using a keyboard or pen (using ink and handwriting recognition). The app is notified when text has been changed by the user and is responsible for providing relevant suggestions for this control to display.",
+            "Docs": [
+                {
+                    "Title": "Guidelines",
+                    "Uri": "https://learn.microsoft.com/windows/uwp/design/controls-and-patterns/auto-suggest-box"
+                },
+                {
+                    "Title": "AutoSuggestBox - API",
+                    "Uri": "https://learn.microsoft.com/uwp/api/windows.ui.xaml.controls.autosuggestbox"
+                }
+            ],
+            "ApiNamespace": "Windows.UI.Xaml.Controls",
+            "IsNew": true,
+            "RelatedControls": [
+                "SearchBox",
+                "TextBox"
+            ],
+            "UseGlyph": true,
+            "IconGlyph": "",
+            "Requirements": {
+                "ApiContracts": [
+                    {
+                        "Name": "Windows.Foundation.UniversalApiContract",
+                        "Version": {
+                            "Major": 1
+                        }
+                    }
+                ],
+                "OSBuild": 10240
             }
-          ],
-          "UseGlyph": true,
-          "IconGlyph": "",
-          "RelatedControls": [
-            "TextBlock",
-            "RichTextBlock",
-            "PasswordBox",
-            "RichEditBox",
-            "AutoSuggestBox"
-          ]
         }
       ]
     },

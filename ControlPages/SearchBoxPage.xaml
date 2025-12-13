@@ -12,9 +12,9 @@
     <StackPanel Spacing="6">
         <TextBlock>Not recommended for UWP apps; see <Hyperlink Click="Hyperlink_Click">AutoSuggestBox</Hyperlink>.</TextBlock>
 
-        <controls:GallerySample HeaderTitle="Simple SearchBox" MinHeight="50">
+        <controls:GallerySample HeaderTitle="Simple SearchBox">
             <controls:GallerySample.Sample>
-                <SearchBox/>
+                <SearchBox VerticalAlignment="Center"/>
             </controls:GallerySample.Sample>
 
             <controls:GallerySample.XamlSource>

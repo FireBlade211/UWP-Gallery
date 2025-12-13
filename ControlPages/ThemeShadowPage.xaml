@@ -1,0 +1,65 @@
+﻿<Page
+    x:Class="UWPGallery.ControlPages.ThemeShadowPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <Page.Resources>
+        <local:ZTranslationConverter x:Name="zTranslationConverter"/>
+    </Page.Resources>
+    
+    <StackPanel>
+        <controls:GallerySample HeaderTitle="ThemeShadow applied to a Border" MinHeight="500">
+            <Grid RowSpacing="6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock TextWrapping="WrapWholeWords">Note: The shadow may be hard to see in Dark mode. Click the Theme button to toggle Light mode.</TextBlock>
+                <Grid Grid.Row="1">
+                    <Grid x:Name="ShadowCastGrid"/>
+                    <Border x:Name="ShadowRect" Translation="{x:Bind shadowZSlider.Value, Mode=OneWay, Converter={StaticResource zTranslationConverter}}"
+                        Loaded="ShadowRect_Loaded" Width="200" Height="200" Background="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"/>
+                </Grid>
+            </Grid>
+
+            <controls:GallerySample.OptionsFlyout>
+                <Flyout>
+                    <Slider x:Name="shadowZSlider" Value="32">
+                        <Slider.Header>
+                            <TextBlock Style="{StaticResource BaseTextBlockStyle}">Z Translation</TextBlock>
+                        </Slider.Header>
+                    </Slider>
+                </Flyout>
+            </controls:GallerySample.OptionsFlyout>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Grid&gt;
+    &lt;Grid x:Name="ShadowCastGrid"/&gt;
+    &lt;Border x:Name="ShadowRect" Translation="0,0,32"
+        Loaded="ShadowRect_Loaded" Width="200" Height="200" Background="{ThemeResource ApplicationSecondaryForegroundThemeBrush}"/&gt;
+&lt;/Grid&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8)
+    &amp;&amp; OperatingSystem.IsWindowsVersionAtLeast(10, 0, 18362))
+{
+    var shadow = new ThemeShadow();
+    shadow.Receivers.Add(ShadowCastGrid);
+    ShadowRect.Shadow = shadow;
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>
