@@ -54,4 +54,8 @@
       </Extensions>
     </Application>
   </Applications>
+
+	<Capabilities>
+		<uap:Capability Name="documentsLibrary"/>
+	</Capabilities>
 </Package>
