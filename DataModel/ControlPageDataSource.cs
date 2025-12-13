@@ -71,6 +71,8 @@ namespace UWPGallery.DataModel
         public ObservableCollection<ControlInfoApiContract> ApiContracts { get; set; }
 
         public int? OSBuild { get; set; }
+
+        public List<string> AppCapabilities { get; set; }
     }
 
     public class ControlInfoDocLink

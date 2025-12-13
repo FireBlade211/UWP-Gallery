@@ -136,6 +136,15 @@
 
                                 <TextBlock FontFamily="Consolas" TextTrimming="CharacterEllipsis" Style="{StaticResource CaptionTextBlockStyle}"
                                         IsTextSelectionEnabled="True" Text="{x:Bind GetApiContractString(), Mode=OneWay}"/>
+                                
+                                <TextBlock
+                                VerticalAlignment="Center"
+                                Style="{StaticResource CaptionTextBlockStyle}"
+                                Text="Required app capabilities"
+                                Visibility="{x:Bind Item.Requirements.AppCapabilities, Converter={StaticResource collectionConverter}, Mode=OneWay}"/>
+
+                                <TextBlock FontFamily="Consolas" TextTrimming="CharacterEllipsis" Style="{StaticResource CaptionTextBlockStyle}"
+                                        IsTextSelectionEnabled="True" Text="{x:Bind GetAppCapabililitiesString(), Mode=OneWay}"/>
                             </StackPanel>
                         </StackPanel>
                     </Flyout>

@@ -53,6 +53,10 @@ namespace UWPGallery.Controls
         public string GetApiContractString() => (Item != null && Item.Requirements != null && Item.Requirements.ApiContracts != null && Item.Requirements.ApiContracts.Any())
             ? string.Join('\n', Item.Requirements.ApiContracts) : string.Empty;
 
+        public string GetAppCapabililitiesString() => (Item != null && Item.Requirements != null && Item.Requirements.AppCapabilities != null
+            && Item.Requirements.AppCapabilities.Any())
+            ? string.Join('\n', Item.Requirements.AppCapabilities) : string.Empty;
+
         private void OnCopyLinkButtonClick(object sender, RoutedEventArgs e)
         {
             CopyLinkAction?.Invoke();
