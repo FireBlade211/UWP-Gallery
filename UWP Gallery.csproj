@@ -41,10 +41,6 @@
     <PackageReference Include="CommunityToolkit.Uwp.Controls.Primitives" Version="8.2.250402" />
     <PackageReference Include="CommunityToolkit.Uwp.Converters" Version="8.2.250402" />
     <PackageReference Include="CommunityToolkit.Uwp.Triggers" Version="8.2.250402" />
-    <PackageReference Include="Microsoft.Windows.CsWin32" Version="0.3.259">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="CsTools">

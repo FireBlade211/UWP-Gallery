@@ -20,7 +20,7 @@ namespace UWPGallery.ControlPages
 
         private async void Hyperlink_Click(Hyperlink sender, HyperlinkClickEventArgs args)
         {
-            await Launcher.LaunchUriAsync(new Uri("uwp-gallery:///page/autosuggestbox"));
+            await Launcher.LaunchUriAsync(new Uri("uwp-gallery:///page/autosbox"));
         }
     }
 }

@@ -39,5 +39,30 @@
                 </x:String>
             </controls:GallerySample.XamlSource>
         </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="Determinate ProgressBar with RepeatButton">
+            <StackPanel Spacing="12" Margin="0,16,0,0">
+                <ProgressBar x:Name="holdProgressBar" Minimum="0" Maximum="100"/>
+                <RepeatButton x:Name="holdRepeatButton" Click="holdRepeatButton_Click" Content="Click and hold!"/>
+            </StackPanel>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;StackPanel Spacing="12" Margin="0,16,0,0"&gt;
+    &lt;ProgressBar x:Name="holdProgressBar" Minimum="0" Maximum="100"/&gt;
+    &lt;RepeatButton x:Name="holdRepeatButton" Click="holdRepeatButton_Click" Content="Click and hold!"/&gt;
+&lt;/StackPanel&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private void holdRepeatButton_Click(object sender, RoutedEventArgs e)
+{
+    holdProgressBar.Value = (holdProgressBar.Value + 1) % (100 + 1);
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
     </StackPanel>
 </Page>

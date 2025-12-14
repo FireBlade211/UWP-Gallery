@@ -1,0 +1,102 @@
+﻿
+    <Page
+    x:Class="UWPGallery.ControlPages.ContactCardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPGallery.ControlPages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:controls="using:UWPGallery.Controls">
+
+    <StackPanel Spacing="6">
+        <controls:GallerySample HeaderTitle="A Standard Contact Card">
+            <Button Content="Pick a contact to show a standard contact card" x:Name="standardShowButton" Click="standardShowButton_Click"/>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Button Content="Pick a contact to show a standard contact card" x:Name="standardShowButton" Click="standardShowButton_Click"/&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private async void standardShowButton_Click(object sender, RoutedEventArgs e)
+{
+    if (ContactManager.IsShowContactCardSupported())
+    {
+        var picker = new ContactPicker();
+
+        Contact contact = await picker.PickContactAsync();
+
+        if (contact != null)
+        {
+            ContactManager.ShowContactCard(contact, standardShowButton
+                .TransformToVisual(null)
+                .TransformBounds(new Rect(0, 0, standardShowButton.ActualWidth, standardShowButton.ActualHeight)),
+                Placement.Default);
+        }
+    }
+    else
+    {
+        new Flyout
+        {
+            Content = new TextBlock
+            {
+                Text = "ShowContactCard is not supported on this device.",
+                Style = (Style)Application.Current.Resources["BaseTextBlockStyle"]
+            },
+            Placement = FlyoutPlacementMode.Top
+        }.ShowAt(standardShowButton);
+    }
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+
+        <controls:GallerySample HeaderTitle="Show a full Contact Card">
+            <Button Content="Pick a contact to show a full contact card" x:Name="fullShowButton" Click="fullShowButton_Click"/>
+
+            <controls:GallerySample.XamlSource>
+                <x:String xml:space="preserve">
+&lt;Button Content="Pick a contact to show a full contact card" x:Name="fullShowButton" Click="fullShowButton_Click"/&gt;
+                </x:String>
+            </controls:GallerySample.XamlSource>
+
+            <controls:GallerySample.CSharpSource>
+                <x:String xml:space="preserve">
+private async void fullShowButton_Click(object sender, RoutedEventArgs e)
+{
+    if (await ContactManager.IsShowFullContactCardSupportedAsync())
+    {
+        var picker = new ContactPicker();
+
+        Contact contact = await picker.PickContactAsync();
+
+        if (contact != null)
+        {
+            var options = new FullContactCardOptions();
+            options.DesiredRemainingView = ViewSizePreference.UseLess;
+
+            ContactManager.ShowFullContactCard(contact, options);
+        }
+    }
+    else
+    {
+        new Flyout
+        {
+            Content = new TextBlock
+            {
+                Text = "ShowContactCard is not supported on this device.",
+                Style = (Style)Application.Current.Resources["BaseTextBlockStyle"]
+            },
+            Placement = FlyoutPlacementMode.Top
+        }.ShowAt(standardShowButton);
+    }
+}
+                </x:String>
+            </controls:GallerySample.CSharpSource>
+        </controls:GallerySample>
+    </StackPanel>
+</Page>
